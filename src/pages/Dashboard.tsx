@@ -13,7 +13,7 @@ export default function Dashboard() {
             <Store className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">1</div>
+            <div className="text-2xl font-bold">2</div>
             <p className="text-xs text-muted-foreground">Total sites available</p>
           </CardContent>
         </Card>

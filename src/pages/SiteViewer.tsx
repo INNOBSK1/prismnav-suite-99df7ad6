@@ -7,6 +7,10 @@ const siteMap: Record<string, { title: string; url: string }> = {
     title: "FBMS Store",
     url: "https://fbmsstore.netlify.app/",
   },
+  "plant-help": {
+    title: "Plant Help",
+    url: "https://planthelp.netlify.app/",
+  },
 };
 
 export default function SiteViewer() {

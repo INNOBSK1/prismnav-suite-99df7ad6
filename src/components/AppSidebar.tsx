@@ -1,4 +1,4 @@
-import { ExternalLink, User, Store } from "lucide-react";
+import { ExternalLink, User, Store, Leaf } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -18,6 +18,12 @@ const siteLinks = [
     url: "/site/fbms-store", 
     icon: Store,
     externalUrl: "https://fbmsstore.netlify.app/"
+  },
+  { 
+    title: "Plant Help", 
+    url: "/site/plant-help", 
+    icon: Leaf,
+    externalUrl: "https://planthelp.netlify.app/"
   },
 ];
 
