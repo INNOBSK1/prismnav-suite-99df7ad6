@@ -9,6 +9,10 @@ const siteMap: Record<string, { title: string; url: string }> = {
     title: "Plant Help",
     url: "https://planthelp.netlify.app/",
   },
+  "farm-tracker": {
+    title: "Farm Tracker",
+    url: "https://fbmsfarmtracker.netlify.app/",
+  },
 };
 
 export default function SiteViewer() {
