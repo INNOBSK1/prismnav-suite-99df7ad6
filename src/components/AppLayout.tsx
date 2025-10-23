@@ -3,6 +3,7 @@ import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { AIChatSidebar } from "@/components/AIChatSidebar";
+import { OfflineIndicator } from "@/components/OfflineIndicator";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -13,6 +14,7 @@ export function AppLayout({ children }: AppLayoutProps) {
 
   return (
     <SidebarProvider>
+      <OfflineIndicator />
       <div className="flex min-h-screen w-full">
         <AppSidebar onAIChatToggle={() => setIsAIChatOpen(!isAIChatOpen)} />
         <div className="flex-1 flex flex-col">
