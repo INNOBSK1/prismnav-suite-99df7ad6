@@ -13,7 +13,7 @@ export function AppLayout({ children }: AppLayoutProps) {
   const [isAIChatOpen, setIsAIChatOpen] = useState(false);
 
   return (
-    <SidebarProvider>
+    <SidebarProvider defaultOpen={false}>
       <OfflineIndicator />
       <div className="flex min-h-screen w-full">
         <AppSidebar onAIChatToggle={() => setIsAIChatOpen(!isAIChatOpen)} />
