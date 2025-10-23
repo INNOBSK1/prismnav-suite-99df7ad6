@@ -1,4 +1,4 @@
-import { ExternalLink, User, Store, Leaf } from "lucide-react";
+import { User, Store, Leaf, Tractor, MessageSquare } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -25,13 +25,23 @@ const siteLinks = [
     icon: Leaf,
     externalUrl: "https://planthelp.netlify.app/"
   },
+  { 
+    title: "Farm Tracker", 
+    url: "/site/farm-tracker", 
+    icon: Tractor,
+    externalUrl: "https://fbmsfarmtracker.netlify.app/"
+  },
 ];
 
 const profileLinks = [
   { title: "Edit Profile", url: "/profile", icon: User },
 ];
 
-export function AppSidebar() {
+interface AppSidebarProps {
+  onAIChatToggle: () => void;
+}
+
+export function AppSidebar({ onAIChatToggle }: AppSidebarProps) {
   const { open } = useSidebar();
 
   return (
@@ -79,6 +89,20 @@ export function AppSidebar() {
                   </SidebarMenuButton>
                 </SidebarMenuItem>
               ))}
+            </SidebarMenu>
+          </SidebarGroupContent>
+        </SidebarGroup>
+
+        <SidebarGroup>
+          <SidebarGroupLabel>AI Assistant</SidebarGroupLabel>
+          <SidebarGroupContent>
+            <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton onClick={onAIChatToggle}>
+                  <MessageSquare className="h-4 w-4" />
+                  {open && <span>Open Chat</span>}
+                </SidebarMenuButton>
+              </SidebarMenuItem>
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { Send } from 'lucide-react';
+import { Send, X } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -10,7 +10,11 @@ interface Message {
   content: string;
 }
 
-export function AIChatSidebar() {
+interface AIChatSidebarProps {
+  onClose: () => void;
+}
+
+export function AIChatSidebar({ onClose }: AIChatSidebarProps) {
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -118,6 +122,13 @@ export function AIChatSidebar() {
       {/* Header */}
       <div className="flex items-center justify-between border-b p-4">
         <h2 className="text-lg font-semibold">AI Assistant</h2>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={onClose}
+        >
+          <X className="h-5 w-5" />
+        </Button>
       </div>
 
       {/* Messages */}

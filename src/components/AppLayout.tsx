@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import { ThemeToggle } from "@/components/ThemeToggle";
@@ -8,10 +9,12 @@ interface AppLayoutProps {
 }
 
 export function AppLayout({ children }: AppLayoutProps) {
+  const [isAIChatOpen, setIsAIChatOpen] = useState(false);
+
   return (
     <SidebarProvider>
       <div className="flex min-h-screen w-full">
-        <AppSidebar />
+        <AppSidebar onAIChatToggle={() => setIsAIChatOpen(!isAIChatOpen)} />
         <div className="flex-1 flex flex-col">
           <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background px-4">
             <SidebarTrigger />
@@ -22,7 +25,7 @@ export function AppLayout({ children }: AppLayoutProps) {
             {children}
           </main>
         </div>
-        <AIChatSidebar />
+        {isAIChatOpen && <AIChatSidebar onClose={() => setIsAIChatOpen(false)} />}
       </div>
     </SidebarProvider>
   );
