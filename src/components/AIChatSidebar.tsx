@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send } from 'lucide-react';
+import { Send } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
@@ -11,7 +11,6 @@ interface Message {
 }
 
 export function AIChatSidebar() {
-  const [isOpen, setIsOpen] = useState(false);
   const [messages, setMessages] = useState<Message[]>([]);
   const [input, setInput] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -115,83 +114,60 @@ export function AIChatSidebar() {
   };
 
   return (
-    <>
-      {/* Floating button */}
-      {!isOpen && (
-        <Button
-          onClick={() => setIsOpen(true)}
-          className="fixed bottom-4 right-4 z-50 h-14 w-14 rounded-full shadow-lg"
-          size="icon"
-        >
-          <MessageSquare className="h-6 w-6" />
-        </Button>
-      )}
+    <div className="flex h-full w-80 flex-col border-l bg-background">
+      {/* Header */}
+      <div className="flex items-center justify-between border-b p-4">
+        <h2 className="text-lg font-semibold">AI Assistant</h2>
+      </div>
 
-      {/* Sidebar */}
-      {isOpen && (
-        <div className="fixed right-0 top-0 z-50 flex h-full w-80 flex-col border-l bg-background shadow-lg">
-          {/* Header */}
-          <div className="flex items-center justify-between border-b p-4">
-            <h2 className="text-lg font-semibold">AI Assistant</h2>
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setIsOpen(false)}
-            >
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
-
-          {/* Messages */}
-          <ScrollArea className="flex-1 p-4" ref={scrollRef}>
-            <div className="space-y-4">
-              {messages.length === 0 && (
-                <div className="text-center text-muted-foreground">
-                  <p>Hi! I'm your AI assistant.</p>
-                  <p className="mt-2 text-sm">Ask me anything!</p>
-                </div>
-              )}
-              {messages.map((message, index) => (
-                <div
-                  key={index}
-                  className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
-                >
-                  <div
-                    className={`max-w-[80%] rounded-lg px-4 py-2 ${
-                      message.role === 'user'
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted'
-                    }`}
-                  >
-                    {message.content}
-                  </div>
-                </div>
-              ))}
+      {/* Messages */}
+      <ScrollArea className="flex-1 p-4" ref={scrollRef}>
+        <div className="space-y-4">
+          {messages.length === 0 && (
+            <div className="text-center text-muted-foreground">
+              <p>Hi! I'm your AI assistant.</p>
+              <p className="mt-2 text-sm">Ask me anything!</p>
             </div>
-          </ScrollArea>
-
-          {/* Input */}
-          <div className="border-t p-4">
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                handleSend();
-              }}
-              className="flex gap-2"
+          )}
+          {messages.map((message, index) => (
+            <div
+              key={index}
+              className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
             >
-              <Input
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                placeholder="Type a message..."
-                disabled={isLoading}
-              />
-              <Button type="submit" size="icon" disabled={isLoading}>
-                <Send className="h-4 w-4" />
-              </Button>
-            </form>
-          </div>
+              <div
+                className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                  message.role === 'user'
+                    ? 'bg-primary text-primary-foreground'
+                    : 'bg-muted'
+                }`}
+              >
+                {message.content}
+              </div>
+            </div>
+          ))}
         </div>
-      )}
-    </>
+      </ScrollArea>
+
+      {/* Input */}
+      <div className="border-t p-4">
+        <form
+          onSubmit={(e) => {
+            e.preventDefault();
+            handleSend();
+          }}
+          className="flex gap-2"
+        >
+          <Input
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
+            placeholder="Type a message..."
+            disabled={isLoading}
+          />
+          <Button type="submit" size="icon" disabled={isLoading}>
+            <Send className="h-4 w-4" />
+          </Button>
+        </form>
+      </div>
+    </div>
   );
 }
