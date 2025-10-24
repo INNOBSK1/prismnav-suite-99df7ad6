@@ -13,6 +13,10 @@ const siteMap: Record<string, { title: string; url: string }> = {
     title: "Farm Tracker",
     url: "https://fbmsfarmtracker.netlify.app/",
   },
+  "fbms-ani": {
+    title: "FBMS Ani",
+    url: "https://ffbmsani.netlify.app/",
+  },
 };
 
 export default function SiteViewer() {
