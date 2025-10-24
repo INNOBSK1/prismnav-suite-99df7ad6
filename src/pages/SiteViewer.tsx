@@ -15,7 +15,7 @@ const siteMap: Record<string, { title: string; url: string }> = {
   },
   "fbms-ani": {
     title: "FBMS Ani",
-    url: "https://ffbmsani.netlify.app/",
+    url: "https://fbmsani.netlify.app/",
   },
 };
 

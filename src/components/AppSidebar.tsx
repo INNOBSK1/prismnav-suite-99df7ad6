@@ -35,7 +35,7 @@ const siteLinks = [
     title: "FBMS Ani", 
     url: "/site/fbms-ani", 
     icon: Building2,
-    externalUrl: "https://ffbmsani.netlify.app/"
+    externalUrl: "https://fbmsani.netlify.app/"
   },
 ];
 
