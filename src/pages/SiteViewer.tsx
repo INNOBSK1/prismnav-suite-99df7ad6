@@ -36,9 +36,6 @@ export default function SiteViewer() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex items-center p-4 border-b bg-card">
-        <h1 className="text-xl font-semibold">{site.title}</h1>
-      </div>
       <div className="flex-1 relative">
         <iframe
           src={site.url}
