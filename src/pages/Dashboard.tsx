@@ -1,10 +1,13 @@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Store, User } from "lucide-react";
+import { TrialBanner } from "@/components/TrialBanner";
 
 export default function Dashboard() {
   return (
     <div className="container py-8">
       <h1 className="text-3xl font-bold mb-6">Dashboard</h1>
+      
+      <TrialBanner />
       
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
         <Card>

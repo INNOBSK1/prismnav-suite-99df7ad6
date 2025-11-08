@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/components/ThemeProvider";
 import { AuthProvider } from "@/hooks/useAuth";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AppLayout } from "@/components/AppLayout";
+import { TrialGate } from "@/components/TrialGate";
 import Dashboard from "./pages/Dashboard";
 import Profile from "./pages/Profile";
 import SiteViewer from "./pages/SiteViewer";
@@ -29,9 +30,11 @@ const App = () => (
                 path="/"
                 element={
                   <ProtectedRoute>
-                    <AppLayout>
-                      <Dashboard />
-                    </AppLayout>
+                    <TrialGate>
+                      <AppLayout>
+                        <Dashboard />
+                      </AppLayout>
+                    </TrialGate>
                   </ProtectedRoute>
                 }
               />
@@ -39,9 +42,11 @@ const App = () => (
                 path="/profile"
                 element={
                   <ProtectedRoute>
-                    <AppLayout>
-                      <Profile />
-                    </AppLayout>
+                    <TrialGate>
+                      <AppLayout>
+                        <Profile />
+                      </AppLayout>
+                    </TrialGate>
                   </ProtectedRoute>
                 }
               />
@@ -49,9 +54,11 @@ const App = () => (
                 path="/site/:siteId"
                 element={
                   <ProtectedRoute>
-                    <AppLayout>
-                      <SiteViewer />
-                    </AppLayout>
+                    <TrialGate>
+                      <AppLayout>
+                        <SiteViewer />
+                      </AppLayout>
+                    </TrialGate>
                   </ProtectedRoute>
                 }
               />
