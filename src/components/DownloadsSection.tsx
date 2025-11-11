@@ -96,6 +96,15 @@ export function DownloadsSection() {
     );
   }
 
+  // Group downloads by site
+  const downloadsBySite = downloads.reduce((acc, download) => {
+    if (!acc[download.site_name]) {
+      acc[download.site_name] = [];
+    }
+    acc[download.site_name].push(download);
+    return acc;
+  }, {} as Record<string, DownloadRecord[]>);
+
   return (
     <Card>
       <CardHeader>
@@ -121,37 +130,42 @@ export function DownloadsSection() {
             No downloads yet. Downloads from embedded sites will appear here.
           </p>
         ) : (
-          <div className="rounded-md border">
-            <Table>
-              <TableHeader>
-                <TableRow>
-                  <TableHead>Date</TableHead>
-                  <TableHead>Site</TableHead>
-                  <TableHead>File Name</TableHead>
-                  <TableHead>Action</TableHead>
-                </TableRow>
-              </TableHeader>
-              <TableBody>
-                {downloads.map((download) => (
-                  <TableRow key={download.id}>
-                    <TableCell>
-                      {new Date(download.download_date).toLocaleDateString()}
-                    </TableCell>
-                    <TableCell>{download.site_name}</TableCell>
-                    <TableCell className="font-medium">{download.file_name}</TableCell>
-                    <TableCell>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        onClick={() => window.open(download.file_url, '_blank')}
-                      >
-                        <Download className="h-4 w-4" />
-                      </Button>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
+          <div className="space-y-6">
+            {Object.entries(downloadsBySite).map(([siteName, siteDownloads]) => (
+              <div key={siteName}>
+                <h3 className="font-semibold text-lg mb-3">{siteName}</h3>
+                <div className="rounded-md border">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Date</TableHead>
+                        <TableHead>File Name</TableHead>
+                        <TableHead>Action</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {siteDownloads.map((download) => (
+                        <TableRow key={download.id}>
+                          <TableCell>
+                            {new Date(download.download_date).toLocaleDateString()}
+                          </TableCell>
+                          <TableCell className="font-medium">{download.file_name}</TableCell>
+                          <TableCell>
+                            <Button
+                              variant="ghost"
+                              size="sm"
+                              onClick={() => window.open(download.file_url, '_blank')}
+                            >
+                              <Download className="h-4 w-4" />
+                            </Button>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
+              </div>
+            ))}
           </div>
         )}
       </CardContent>
