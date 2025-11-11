@@ -1,4 +1,7 @@
 import { useParams } from "react-router-dom";
+import { useEffect } from "react";
+import { supabase } from "@/integrations/supabase/client";
+import { useAuth } from "@/hooks/useAuth";
 
 const siteMap: Record<string, { title: string; url: string }> = {
   "fbms-store": {
@@ -25,7 +28,35 @@ const siteMap: Record<string, { title: string; url: string }> = {
 
 export default function SiteViewer() {
   const { siteId } = useParams<{ siteId: string }>();
+  const { user } = useAuth();
   const site = siteId ? siteMap[siteId] : null;
+
+  useEffect(() => {
+    // Listen for download events from embedded sites
+    const handleMessage = async (event: MessageEvent) => {
+      // Verify the message is from one of our trusted sites
+      const trustedOrigins = Object.values(siteMap).map(s => new URL(s.url).origin);
+      if (!trustedOrigins.includes(event.origin)) return;
+
+      // Handle download tracking
+      if (event.data.type === 'download' && user && siteId) {
+        try {
+          await supabase.from('downloads').insert({
+            user_id: user.id,
+            site_id: siteId,
+            site_name: site?.title || 'Unknown',
+            file_name: event.data.fileName,
+            file_url: event.data.fileUrl,
+          });
+        } catch (error) {
+          console.error('Error tracking download:', error);
+        }
+      }
+    };
+
+    window.addEventListener('message', handleMessage);
+    return () => window.removeEventListener('message', handleMessage);
+  }, [user, siteId, site]);
 
   if (!site) {
     return (

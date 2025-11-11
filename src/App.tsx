@@ -9,7 +9,6 @@ import { ProtectedRoute } from "@/components/ProtectedRoute";
 import { AppLayout } from "@/components/AppLayout";
 import { TrialGate } from "@/components/TrialGate";
 import Dashboard from "./pages/Dashboard";
-import Profile from "./pages/Profile";
 import SiteViewer from "./pages/SiteViewer";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
@@ -33,18 +32,6 @@ const App = () => (
                     <TrialGate>
                       <AppLayout>
                         <Dashboard />
-                      </AppLayout>
-                    </TrialGate>
-                  </ProtectedRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <ProtectedRoute>
-                    <TrialGate>
-                      <AppLayout>
-                        <Profile />
                       </AppLayout>
                     </TrialGate>
                   </ProtectedRoute>

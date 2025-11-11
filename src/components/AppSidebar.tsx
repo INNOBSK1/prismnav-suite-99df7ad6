@@ -46,7 +46,7 @@ const siteLinks = [
 ];
 
 const profileLinks = [
-  { title: "Edit Profile", url: "/profile", icon: User },
+  { title: "Dashboard", url: "/", icon: User },
 ];
 
 interface AppSidebarProps {
