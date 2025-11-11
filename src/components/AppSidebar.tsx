@@ -1,4 +1,4 @@
-import { User, Store, Leaf, Tractor, MessageSquare, Dog } from "lucide-react";
+import { User, Store, Leaf, Tractor, MessageSquare, Dog, BookOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import {
   Sidebar,
@@ -36,6 +36,12 @@ const siteLinks = [
     url: "/site/fbms-ani", 
     icon: Dog,
     externalUrl: "https://fbmsani.netlify.app/"
+  },
+  { 
+    title: "FBMS Blog", 
+    url: "/site/fbms-blog", 
+    icon: BookOpen,
+    externalUrl: "https://fbmsblog.netlify.app/"
   },
 ];
 

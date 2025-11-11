@@ -17,6 +17,10 @@ const siteMap: Record<string, { title: string; url: string }> = {
     title: "FBMS Ani",
     url: "https://fbmsani.netlify.app/",
   },
+  "fbms-blog": {
+    title: "FBMS Blog",
+    url: "https://fbmsblog.netlify.app/",
+  },
 };
 
 export default function SiteViewer() {
