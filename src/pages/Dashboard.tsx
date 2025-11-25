@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Store, Download } from "lucide-react";
-import { TrialBanner } from "@/components/TrialBanner";
 import { ProfileSection } from "@/components/ProfileSection";
 import { DownloadsSection } from "@/components/DownloadsSection";
 import { supabase } from "@/integrations/supabase/client";
@@ -56,8 +55,6 @@ export default function Dashboard() {
         <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
         <p className="text-muted-foreground">Manage your account and track your activity</p>
       </div>
-      
-      <TrialBanner />
       
       <div className="grid gap-4 md:grid-cols-2">
         <Card>
