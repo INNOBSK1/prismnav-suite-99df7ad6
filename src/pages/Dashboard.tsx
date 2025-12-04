@@ -31,7 +31,6 @@ export default function Dashboard() {
 
       if (error) throw error;
 
-      // Group by site and count
       const stats = (data || []).reduce((acc, download) => {
         const existing = acc.find(s => s.site_name === download.site_name);
         if (existing) {
@@ -50,38 +49,46 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="container py-8 space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold mb-2">Dashboard</h1>
-        <p className="text-muted-foreground">Manage your account and track your activity</p>
-      </div>
+    <div className="container py-10 space-y-8">
+      <header className="animate-in">
+        <h1 className="text-4xl font-semibold mb-3 text-balance">
+          Welcome back
+        </h1>
+        <p className="text-muted-foreground text-lg">
+          Here's what's happening with your account
+        </p>
+      </header>
       
-      <div className="grid gap-4 md:grid-cols-2">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Sites</CardTitle>
-            <Store className="h-4 w-4 text-muted-foreground" />
+      <div className="grid gap-5 md:grid-cols-2 animate-in stagger-1">
+        <Card className="card-hover border-0 shadow-soft">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">Available Sites</CardTitle>
+            <div className="h-9 w-9 rounded-lg bg-primary/10 flex items-center justify-center">
+              <Store className="h-4 w-4 text-primary" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">5</div>
-            <p className="text-xs text-muted-foreground">Total sites available</p>
+            <div className="text-3xl font-display font-semibold">5</div>
+            <p className="text-sm text-muted-foreground mt-1">Sites you can access</p>
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Downloads</CardTitle>
-            <Download className="h-4 w-4 text-muted-foreground" />
+        <Card className="card-hover border-0 shadow-soft">
+          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-3">
+            <CardTitle className="text-base font-medium">Downloads</CardTitle>
+            <div className="h-9 w-9 rounded-lg bg-accent/20 flex items-center justify-center">
+              <Download className="h-4 w-4 text-accent-foreground" />
+            </div>
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{totalDownloads}</div>
-            <p className="text-xs text-muted-foreground">Files downloaded</p>
+            <div className="text-3xl font-display font-semibold">{totalDownloads}</div>
+            <p className="text-sm text-muted-foreground mt-1">Total files downloaded</p>
             {downloadStats.length > 0 && (
-              <div className="mt-4 space-y-1">
+              <div className="mt-5 pt-4 border-t border-border/50 space-y-2">
                 {downloadStats.map((stat) => (
-                  <div key={stat.site_name} className="flex justify-between text-xs">
+                  <div key={stat.site_name} className="flex justify-between text-sm">
                     <span className="text-muted-foreground">{stat.site_name}</span>
-                    <span className="font-medium">{stat.count}</span>
+                    <span className="font-medium tabular-nums">{stat.count}</span>
                   </div>
                 ))}
               </div>
@@ -90,9 +97,13 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      <DownloadsSection />
+      <div className="animate-in stagger-2">
+        <DownloadsSection />
+      </div>
 
-      <ProfileSection />
+      <div className="animate-in stagger-3">
+        <ProfileSection />
+      </div>
     </div>
   );
 }
