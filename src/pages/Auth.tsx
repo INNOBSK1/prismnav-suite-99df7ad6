@@ -4,7 +4,6 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
@@ -103,91 +102,158 @@ export default function Auth() {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-muted/20 p-4">
-      <Card className="w-full max-w-md shadow-lg animate-fade-in">
-        <CardHeader className="space-y-1">
-          <CardTitle className="text-2xl font-bold text-center">Welcome Back</CardTitle>
-          <CardDescription className="text-center">
-            Sign in to your account or create a new one
-          </CardDescription>
-        </CardHeader>
-        <CardContent>
+    <div className="min-h-screen grid lg:grid-cols-2">
+      {/* Left side - Branding */}
+      <div className="hidden lg:flex flex-col justify-between bg-primary p-12 text-primary-foreground">
+        <div>
+          <h1 className="font-display text-2xl font-semibold tracking-tight">FBMS</h1>
+        </div>
+        
+        <div className="space-y-6">
+          <blockquote className="space-y-4">
+            <p className="text-3xl font-display leading-relaxed opacity-95">
+              "Simplicity is the ultimate sophistication."
+            </p>
+            <footer className="text-sm opacity-70">— Leonardo da Vinci</footer>
+          </blockquote>
+        </div>
+
+        <div className="flex items-center gap-2 text-sm opacity-60">
+          <div className="h-1.5 w-1.5 rounded-full bg-current" />
+          <span>Secure & Private</span>
+        </div>
+      </div>
+
+      {/* Right side - Auth form */}
+      <div className="flex items-center justify-center p-8 bg-background">
+        <div className="w-full max-w-sm space-y-8">
+          <div className="lg:hidden text-center mb-8">
+            <h1 className="font-display text-2xl font-semibold text-primary">FBMS</h1>
+          </div>
+
+          <div className="space-y-2">
+            <h2 className="font-display text-3xl font-semibold tracking-tight">
+              Get started
+            </h2>
+            <p className="text-muted-foreground">
+              Enter your details to continue
+            </p>
+          </div>
+
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2">
-              <TabsTrigger value="signin">Sign In</TabsTrigger>
-              <TabsTrigger value="signup">Sign Up</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 h-11 p-1 bg-muted/50">
+              <TabsTrigger 
+                value="signin" 
+                className="data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md text-sm"
+              >
+                Sign In
+              </TabsTrigger>
+              <TabsTrigger 
+                value="signup"
+                className="data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md text-sm"
+              >
+                Sign Up
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="signin" className="mt-4">
-              <form onSubmit={handleSignIn} className="space-y-4">
+            <TabsContent value="signin" className="mt-6">
+              <form onSubmit={handleSignIn} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="signin-email">Email</Label>
+                  <Label htmlFor="signin-email" className="text-sm font-medium">
+                    Email address
+                  </Label>
                   <Input
                     id="signin-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="name@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors"
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password">Password</Label>
+                  <Label htmlFor="signin-password" className="text-sm font-medium">
+                    Password
+                  </Label>
                   <Input
                     id="signin-password"
                     type="password"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors"
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Signing in...' : 'Sign In'}
+                <Button 
+                  type="submit" 
+                  className="w-full h-11 font-medium shadow-warm hover:shadow-lg transition-all" 
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Signing in...' : 'Continue'}
                 </Button>
               </form>
             </TabsContent>
 
-            <TabsContent value="signup" className="mt-4">
-              <form onSubmit={handleSignUp} className="space-y-4">
+            <TabsContent value="signup" className="mt-6">
+              <form onSubmit={handleSignUp} className="space-y-5">
                 <div className="space-y-2">
-                  <Label htmlFor="signup-name">Full Name</Label>
+                  <Label htmlFor="signup-name" className="text-sm font-medium">
+                    Full name
+                  </Label>
                   <Input
                     id="signup-name"
                     type="text"
-                    placeholder="John Doe"
+                    placeholder="Your name"
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
+                    className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors"
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-email">Email</Label>
+                  <Label htmlFor="signup-email" className="text-sm font-medium">
+                    Email address
+                  </Label>
                   <Input
                     id="signup-email"
                     type="email"
-                    placeholder="you@example.com"
+                    placeholder="name@company.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors"
                     required
                   />
                 </div>
                 <div className="space-y-2">
-                  <Label htmlFor="signup-password">Password</Label>
+                  <Label htmlFor="signup-password" className="text-sm font-medium">
+                    Password
+                  </Label>
                   <Input
                     id="signup-password"
                     type="password"
+                    placeholder="At least 6 characters"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
+                    className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors"
                     required
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
-                  {isLoading ? 'Creating account...' : 'Sign Up'}
+                <Button 
+                  type="submit" 
+                  className="w-full h-11 font-medium shadow-warm hover:shadow-lg transition-all" 
+                  disabled={isLoading}
+                >
+                  {isLoading ? 'Creating account...' : 'Create account'}
                 </Button>
               </form>
             </TabsContent>
           </Tabs>
-        </CardContent>
-      </Card>
+
+          <p className="text-center text-xs text-muted-foreground pt-4">
+            By continuing, you agree to our terms of service
+          </p>
+        </div>
+      </div>
     </div>
   );
 }
