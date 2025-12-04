@@ -18,7 +18,7 @@ export function AppLayout({ children }: AppLayoutProps) {
       <div className="flex min-h-screen w-full">
         <AppSidebar onAIChatToggle={() => setIsAIChatOpen(!isAIChatOpen)} />
         <div className="flex-1 flex flex-col">
-          <header className="sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background px-4">
+          <header className="sticky top-0 z-10 flex h-16 items-center gap-4 border-b border-border/50 bg-background/80 backdrop-blur-sm px-6">
             <SidebarTrigger />
             <div className="flex-1" />
             <ThemeToggle />
