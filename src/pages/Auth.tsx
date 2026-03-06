@@ -107,20 +107,37 @@ export default function Auth() {
       <div className="hidden lg:flex flex-col justify-between bg-primary p-12 text-primary-foreground">
         <div>
           <h1 className="font-display text-2xl font-semibold tracking-tight">FBMS</h1>
+          <p className="text-sm opacity-70 mt-1">Farm Business Management System</p>
         </div>
         
         <div className="space-y-6">
-          <blockquote className="space-y-4">
+          <div className="space-y-4">
             <p className="text-3xl font-display leading-relaxed opacity-95">
-              "Simplicity is the ultimate sophistication."
+              Helping farmers grow smarter, not harder.
             </p>
-            <footer className="text-sm opacity-70">— Leonardo da Vinci</footer>
-          </blockquote>
+            <p className="text-base leading-relaxed opacity-75">
+              FBMS gives you the tools to track your farm's performance, manage resources, and make better decisions — all in one place.
+            </p>
+          </div>
+          <div className="space-y-3 text-sm opacity-70">
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-current" />
+              <span>Track crops, livestock & inventory</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-current" />
+              <span>Monitor expenses & revenue</span>
+            </div>
+            <div className="flex items-center gap-3">
+              <div className="h-1.5 w-1.5 rounded-full bg-current" />
+              <span>Access reports & insights anytime</span>
+            </div>
+          </div>
         </div>
 
         <div className="flex items-center gap-2 text-sm opacity-60">
           <div className="h-1.5 w-1.5 rounded-full bg-current" />
-          <span>Secure & Private</span>
+          <span>Built for farmers, by people who care</span>
         </div>
       </div>
 
