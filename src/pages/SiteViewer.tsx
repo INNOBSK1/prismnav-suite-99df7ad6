@@ -76,7 +76,7 @@ export default function SiteViewer() {
           src={site.url}
           className="absolute inset-0 w-full h-full border-0"
           title={site.title}
-          sandbox="allow-same-origin allow-scripts allow-popups allow-forms"
+          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox"
         />
       </div>
     </div>
