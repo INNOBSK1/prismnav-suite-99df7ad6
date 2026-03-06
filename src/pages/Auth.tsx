@@ -104,40 +104,40 @@ export default function Auth() {
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
       {/* Left side - Branding */}
-      <div className="hidden lg:flex flex-col justify-between bg-primary p-12 text-primary-foreground">
-        <div>
-          <h1 className="font-display text-2xl font-semibold tracking-tight">FBMS</h1>
-          <p className="text-sm opacity-70 mt-1">Farm Business Management System</p>
+      <div className="hidden lg:flex flex-col justify-between p-12 text-primary-foreground relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(195 70% 36%), hsl(152 55% 38%), hsl(185 60% 30%))' }}>
+        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 80%, hsl(142 55% 50% / 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(195 70% 50% / 0.3) 0%, transparent 50%)' }} />
+        <div className="relative z-10">
+          <h1 className="font-display text-3xl font-semibold tracking-tight">🌿 FBMS</h1>
+          <p className="text-sm opacity-80 mt-1">Farm Business Management System</p>
         </div>
         
-        <div className="space-y-6">
+        <div className="relative z-10 space-y-6">
           <div className="space-y-4">
-            <p className="text-3xl font-display leading-relaxed opacity-95">
+            <p className="text-4xl font-display leading-snug">
               Helping farmers grow smarter, not harder.
             </p>
-            <p className="text-base leading-relaxed opacity-75">
+            <p className="text-base leading-relaxed opacity-80">
               FBMS gives you the tools to track your farm's performance, manage resources, and make better decisions — all in one place.
             </p>
           </div>
-          <div className="space-y-3 text-sm opacity-70">
-            <div className="flex items-center gap-3">
-              <div className="h-1.5 w-1.5 rounded-full bg-current" />
-              <span>Track crops, livestock & inventory</span>
+          <div className="grid grid-cols-1 gap-3">
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
+              <span className="text-lg">🌾</span>
+              <span className="text-sm font-medium">Track crops, livestock & inventory</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="h-1.5 w-1.5 rounded-full bg-current" />
-              <span>Monitor expenses & revenue</span>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
+              <span className="text-lg">📊</span>
+              <span className="text-sm font-medium">Monitor expenses & revenue</span>
             </div>
-            <div className="flex items-center gap-3">
-              <div className="h-1.5 w-1.5 rounded-full bg-current" />
-              <span>Access reports & insights anytime</span>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
+              <span className="text-lg">📱</span>
+              <span className="text-sm font-medium">Access reports & insights anytime</span>
             </div>
           </div>
         </div>
 
-        <div className="flex items-center gap-2 text-sm opacity-60">
-          <div className="h-1.5 w-1.5 rounded-full bg-current" />
-          <span>Built for farmers, by people who care</span>
+        <div className="relative z-10 flex items-center gap-2 text-sm opacity-70">
+          <span>Built for farmers, by people who care 💚</span>
         </div>
       </div>
 
