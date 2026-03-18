@@ -5,7 +5,12 @@ export const languageNames: Record<Language, string> = {
   lg: 'Luganda',
 };
 
-export type TranslationKeys = typeof translations.en;
+// Use a recursive mapped type to widen literal strings
+type DeepStringify<T> = {
+  [K in keyof T]: T[K] extends string ? string : DeepStringify<T[K]>;
+};
+
+export type TranslationKeys = DeepStringify<typeof translations.en>;
 
 export const translations = {
   en: {
