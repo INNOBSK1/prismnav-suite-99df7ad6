@@ -1,8 +1,12 @@
-export type Language = 'en' | 'lg';
+export type Language = 'en' | 'lg' | 'nyn' | 'xog' | 'ach' | 'teo';
 
 export const languageNames: Record<Language, string> = {
   en: 'English',
   lg: 'Luganda',
+  nyn: 'Runyankole',
+  xog: 'Lusoga',
+  ach: 'Luo (Acholi)',
+  teo: 'Ateso',
 };
 
 // Use a recursive mapped type to widen literal strings
