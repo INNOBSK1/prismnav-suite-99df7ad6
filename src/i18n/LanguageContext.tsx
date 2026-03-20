@@ -12,7 +12,8 @@ const LanguageContext = createContext<LanguageContextType | undefined>(undefined
 export function LanguageProvider({ children }: { children: ReactNode }) {
   const [language, setLanguageState] = useState<Language>(() => {
     const saved = localStorage.getItem('fbms-language');
-    return (saved === 'lg' ? 'lg' : 'en') as Language;
+    const validLangs: Language[] = ['en', 'lg', 'nyn', 'xog', 'ach', 'teo'];
+    return validLangs.includes(saved as Language) ? (saved as Language) : 'en';
   });
 
   const setLanguage = useCallback((lang: Language) => {
