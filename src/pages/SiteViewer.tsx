@@ -15,7 +15,7 @@ const siteMap: Record<string, { title: string; url: string }> = {
 export default function SiteViewer() {
   const { siteId } = useParams<{ siteId: string }>();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const site = siteId ? siteMap[siteId] : null;
 
   useEffect(() => {
@@ -46,10 +46,16 @@ export default function SiteViewer() {
     );
   }
 
+  const siteUrlWithLang = (() => {
+    const url = new URL(site.url);
+    url.searchParams.set('lang', language);
+    return url.toString();
+  })();
+
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 relative">
-        <iframe src={site.url} className="absolute inset-0 w-full h-full border-0" title={site.title}
+        <iframe src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox" />
       </div>
     </div>
