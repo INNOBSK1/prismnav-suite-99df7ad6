@@ -15,7 +15,7 @@ const siteMap: Record<string, { title: string; url: string }> = {
 export default function SiteViewer() {
   const { siteId } = useParams<{ siteId: string }>();
   const { user } = useAuth();
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
   const site = siteId ? siteMap[siteId] : null;
 
   useEffect(() => {
