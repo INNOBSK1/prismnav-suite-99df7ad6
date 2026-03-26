@@ -8,10 +8,12 @@ import { toast } from "sonner";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useNavigate } from "react-router-dom";
+import { useLanguage } from "@/i18n/LanguageContext";
 
 export default function Profile() {
   const { user } = useAuth();
   const navigate = useNavigate();
+  const { t } = useLanguage();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [fullName, setFullName] = useState("");
@@ -43,7 +45,7 @@ export default function Profile() {
       }
     } catch (error) {
       console.error('Error loading profile:', error);
-      toast.error('Failed to load profile');
+      toast.error(t.profile.loadError);
     } finally {
       setLoading(false);
     }
@@ -62,10 +64,10 @@ export default function Profile() {
         });
 
       if (error) throw error;
-      toast.success("Profile updated successfully!");
+      toast.success(t.profile.updateSuccess);
     } catch (error) {
       console.error('Error updating profile:', error);
-      toast.error('Failed to update profile');
+      toast.error(t.profile.updateError);
     } finally {
       setSaving(false);
     }
@@ -79,7 +81,7 @@ export default function Profile() {
   if (loading) {
     return (
       <div className="container max-w-2xl py-8">
-        <div className="text-center">Loading...</div>
+        <div className="text-center">{t.profile.loading}</div>
       </div>
     );
   }
@@ -88,8 +90,8 @@ export default function Profile() {
     <div className="container max-w-2xl py-8">
       <Card>
         <CardHeader>
-          <CardTitle>Edit Profile</CardTitle>
-          <CardDescription>Update your profile information</CardDescription>
+          <CardTitle>{t.profile.title}</CardTitle>
+          <CardDescription>{t.profile.manageAccount}</CardDescription>
         </CardHeader>
         <CardContent className="space-y-6">
           <div className="flex items-center gap-4">
@@ -102,7 +104,7 @@ export default function Profile() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="email">Email</Label>
+            <Label htmlFor="email">{t.profile.email}</Label>
             <Input
               id="email"
               type="email"
@@ -113,31 +115,31 @@ export default function Profile() {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="name">Full Name</Label>
+            <Label htmlFor="name">{t.profile.fullName}</Label>
             <Input
               id="name"
               value={fullName}
               onChange={(e) => setFullName(e.target.value)}
-              placeholder="Enter your full name"
+              placeholder={t.profile.fullNamePlaceholder}
             />
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="bio">Bio</Label>
+            <Label htmlFor="bio">{t.profile.bio}</Label>
             <Input
               id="bio"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              placeholder="Tell us about yourself"
+              placeholder={t.profile.bioPlaceholder}
             />
           </div>
 
           <div className="flex gap-4">
             <Button onClick={handleSave} disabled={saving}>
-              {saving ? 'Saving...' : 'Save Changes'}
+              {saving ? t.profile.saving : t.profile.saveChanges}
             </Button>
             <Button variant="destructive" onClick={handleSignOut}>
-              Sign Out
+              {t.profile.signOut}
             </Button>
           </div>
         </CardContent>
