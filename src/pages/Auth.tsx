@@ -10,6 +10,8 @@ import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { toast } from 'sonner';
+import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
+import fbmsLogo from '@/assets/fbms.png';
 
 const authSchema = z.object({
   email: z.string().email({ message: 'Please enter a valid email address' }),
@@ -22,6 +24,7 @@ export default function Auth() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -85,96 +88,200 @@ export default function Auth() {
 
   return (
     <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left side - Branding */}
-      <div className="hidden lg:flex flex-col justify-between p-12 text-primary-foreground relative overflow-hidden" style={{ background: 'linear-gradient(135deg, hsl(195 70% 36%), hsl(152 55% 38%), hsl(185 60% 30%))' }}>
-        <div className="absolute inset-0 opacity-10" style={{ backgroundImage: 'radial-gradient(circle at 20% 80%, hsl(142 55% 50% / 0.4) 0%, transparent 50%), radial-gradient(circle at 80% 20%, hsl(195 70% 50% / 0.3) 0%, transparent 50%)' }} />
-        <div className="relative z-10">
-          <h1 className="font-display text-3xl font-semibold tracking-tight">{t.auth.brandName}</h1>
-          <p className="text-sm opacity-80 mt-1">{t.auth.brandSubtitle}</p>
-        </div>
-        <div className="relative z-10 space-y-6">
-          <div className="space-y-4">
-            <p className="text-4xl font-display leading-snug">{t.auth.heroTitle}</p>
-            <p className="text-base leading-relaxed opacity-80">{t.auth.heroDescription}</p>
+      {/* Left side - Green farm background overlay */}
+      <div
+        className="hidden lg:flex flex-col justify-center items-center p-12 text-white relative overflow-hidden"
+        style={{
+          background: 'linear-gradient(135deg, rgba(27, 94, 32, 0.92) 0%, rgba(46, 125, 50, 0.85) 50%, rgba(76, 175, 80, 0.78) 100%)',
+        }}
+      >
+        {/* Decorative circles */}
+        <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.3), transparent)' }} />
+        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.2), transparent)' }} />
+
+        <div className="relative z-10 text-center space-y-6 max-w-md">
+          <img src={fbmsLogo} alt="FBMS Logo" className="w-32 h-32 mx-auto drop-shadow-2xl" />
+          <div>
+            <h1 className="text-4xl font-display font-bold tracking-tight">
+              Farm Based Management System
+            </h1>
+            <p className="mt-3 text-lg opacity-90 font-light">
+              Cultivating Success Through Technology
+            </p>
           </div>
-          <div className="grid grid-cols-1 gap-3">
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
-              <span className="text-lg">🌾</span>
+          <div className="space-y-3 pt-4">
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
+              <span className="text-2xl">🌾</span>
               <span className="text-sm font-medium">{t.auth.feature1}</span>
             </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
-              <span className="text-lg">📊</span>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
+              <span className="text-2xl">📊</span>
               <span className="text-sm font-medium">{t.auth.feature2}</span>
             </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-lg px-4 py-3">
-              <span className="text-lg">📱</span>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
+              <span className="text-2xl">📱</span>
               <span className="text-sm font-medium">{t.auth.feature3}</span>
             </div>
           </div>
-        </div>
-        <div className="relative z-10 flex items-center gap-2 text-sm opacity-70">
-          <span>{t.auth.footerText}</span>
+          <p className="text-xs opacity-60 pt-6">{t.auth.footerText}</p>
         </div>
       </div>
 
       {/* Right side - Auth form */}
-      <div className="flex items-center justify-center p-8 bg-background relative">
+      <div className="flex items-center justify-center p-8 bg-white/95 backdrop-blur-sm relative">
         <div className="absolute top-4 right-4">
           <LanguageSwitcher />
         </div>
-        <div className="w-full max-w-sm space-y-8">
-          <div className="lg:hidden text-center mb-8">
-            <h1 className="font-display text-2xl font-semibold text-primary">FBMS</h1>
+        <div className="w-full max-w-sm space-y-6">
+          {/* Mobile logo */}
+          <div className="lg:hidden text-center mb-4">
+            <img src={fbmsLogo} alt="FBMS Logo" className="w-20 h-20 mx-auto mb-2" />
+            <h1 className="font-display text-xl font-bold" style={{ color: '#2E7D32' }}>Farm Based Management System</h1>
+            <p className="text-sm" style={{ color: '#66BB6A' }}>Cultivating Success Through Technology</p>
           </div>
-          <div className="space-y-2">
-            <h2 className="font-display text-3xl font-semibold tracking-tight">{t.auth.getStarted}</h2>
-            <p className="text-muted-foreground">{t.auth.enterDetails}</p>
+
+          <div className="space-y-1">
+            <h2 className="font-display text-2xl font-semibold tracking-tight" style={{ color: '#2E7D32' }}>
+              {t.auth.getStarted}
+            </h2>
+            <p className="text-muted-foreground text-sm">{t.auth.enterDetails}</p>
           </div>
 
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 h-11 p-1 bg-muted/50">
-              <TabsTrigger value="signin" className="data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md text-sm">{t.auth.signIn}</TabsTrigger>
-              <TabsTrigger value="signup" className="data-[state=active]:bg-background data-[state=active]:shadow-sm rounded-md text-sm">{t.auth.signUp}</TabsTrigger>
+            <TabsList className="grid w-full grid-cols-2 h-11 p-1" style={{ background: 'rgba(76, 175, 80, 0.1)', border: '1px solid rgba(76, 175, 80, 0.2)' }}>
+              <TabsTrigger
+                value="signin"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-[#2E7D32] rounded-md text-sm font-medium"
+              >
+                {t.auth.signIn}
+              </TabsTrigger>
+              <TabsTrigger
+                value="signup"
+                className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-[#2E7D32] rounded-md text-sm font-medium"
+              >
+                {t.auth.signUp}
+              </TabsTrigger>
             </TabsList>
 
-            <TabsContent value="signin" className="mt-6">
-              <form onSubmit={handleSignIn} className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="signin-email" className="text-sm font-medium">{t.auth.emailLabel}</Label>
-                  <Input id="signin-email" type="email" placeholder={t.auth.emailPlaceholder} value={email} onChange={(e) => setEmail(e.target.value)} className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors" required />
+            <TabsContent value="signin" className="mt-5">
+              <form onSubmit={handleSignIn} className="space-y-4 bg-white p-6 rounded-2xl shadow-lg" style={{ border: '1px solid rgba(76, 175, 80, 0.2)' }}>
+                <div className="space-y-1.5">
+                  <Label htmlFor="signin-email" className="text-sm font-medium flex items-center gap-2 text-gray-700">
+                    <Mail className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                    {t.auth.emailLabel}
+                  </Label>
+                  <Input
+                    id="signin-email"
+                    type="email"
+                    placeholder={t.auth.emailPlaceholder}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                    required
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signin-password" className="text-sm font-medium">{t.auth.passwordLabel}</Label>
-                  <Input id="signin-password" type="password" value={password} onChange={(e) => setPassword(e.target.value)} className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors" required />
+                <div className="space-y-1.5">
+                  <Label htmlFor="signin-password" className="text-sm font-medium flex items-center gap-2 text-gray-700">
+                    <Lock className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                    {t.auth.passwordLabel}
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="signin-password"
+                      type={showPassword ? 'text' : 'password'}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg pr-10"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
-                <Button type="submit" className="w-full h-11 font-medium shadow-warm hover:shadow-lg transition-all" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full h-11 font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all"
+                  style={{ background: 'linear-gradient(135deg, #2E7D32, #4CAF50)' }}
+                  disabled={isLoading}
+                >
                   {isLoading ? t.auth.signingIn : t.auth.continueBtn}
                 </Button>
               </form>
             </TabsContent>
 
-            <TabsContent value="signup" className="mt-6">
-              <form onSubmit={handleSignUp} className="space-y-5">
-                <div className="space-y-2">
-                  <Label htmlFor="signup-name" className="text-sm font-medium">{t.auth.fullNameLabel}</Label>
-                  <Input id="signup-name" type="text" placeholder={t.auth.fullNamePlaceholder} value={fullName} onChange={(e) => setFullName(e.target.value)} className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors" />
+            <TabsContent value="signup" className="mt-5">
+              <form onSubmit={handleSignUp} className="space-y-4 bg-white p-6 rounded-2xl shadow-lg" style={{ border: '1px solid rgba(76, 175, 80, 0.2)' }}>
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-name" className="text-sm font-medium flex items-center gap-2 text-gray-700">
+                    <User className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                    {t.auth.fullNameLabel}
+                  </Label>
+                  <Input
+                    id="signup-name"
+                    type="text"
+                    placeholder={t.auth.fullNamePlaceholder}
+                    value={fullName}
+                    onChange={(e) => setFullName(e.target.value)}
+                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-email" className="text-sm font-medium">{t.auth.emailLabel}</Label>
-                  <Input id="signup-email" type="email" placeholder={t.auth.emailPlaceholder} value={email} onChange={(e) => setEmail(e.target.value)} className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors" required />
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-email" className="text-sm font-medium flex items-center gap-2 text-gray-700">
+                    <Mail className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                    {t.auth.emailLabel}
+                  </Label>
+                  <Input
+                    id="signup-email"
+                    type="email"
+                    placeholder={t.auth.emailPlaceholder}
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                    required
+                  />
                 </div>
-                <div className="space-y-2">
-                  <Label htmlFor="signup-password" className="text-sm font-medium">{t.auth.passwordLabel}</Label>
-                  <Input id="signup-password" type="password" placeholder={t.auth.passwordPlaceholder} value={password} onChange={(e) => setPassword(e.target.value)} className="h-11 bg-muted/30 border-border/50 focus:bg-background transition-colors" required />
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-password" className="text-sm font-medium flex items-center gap-2 text-gray-700">
+                    <Lock className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                    {t.auth.passwordLabel}
+                  </Label>
+                  <div className="relative">
+                    <Input
+                      id="signup-password"
+                      type={showPassword ? 'text' : 'password'}
+                      placeholder={t.auth.passwordPlaceholder}
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
+                      className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg pr-10"
+                      required
+                    />
+                    <button
+                      type="button"
+                      onClick={() => setShowPassword(!showPassword)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                    >
+                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                    </button>
+                  </div>
                 </div>
-                <Button type="submit" className="w-full h-11 font-medium shadow-warm hover:shadow-lg transition-all" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full h-11 font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all"
+                  style={{ background: 'linear-gradient(135deg, #2E7D32, #4CAF50)' }}
+                  disabled={isLoading}
+                >
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
               </form>
             </TabsContent>
           </Tabs>
 
-          <p className="text-center text-xs text-muted-foreground pt-4">{t.auth.termsText}</p>
+          <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
         </div>
       </div>
     </div>
