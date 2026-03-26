@@ -11,6 +11,7 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { toast } from 'sonner';
 import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import fbmsLogo from '@/assets/fbms.png';
 
 const authSchema = z.object({
@@ -128,20 +129,21 @@ export default function Auth() {
       </div>
 
       {/* Right side - Auth form */}
-      <div className="flex items-center justify-center p-8 bg-white/95 backdrop-blur-sm relative">
-        <div className="absolute top-4 right-4">
+      <div className="flex items-center justify-center p-8 bg-background relative">
+        <div className="absolute top-4 right-4 flex items-center gap-2">
           <LanguageSwitcher />
+          <ThemeToggle />
         </div>
         <div className="w-full max-w-sm space-y-6">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-4">
             <img src={fbmsLogo} alt="FBMS Logo" className="w-20 h-20 mx-auto mb-2" />
-            <h1 className="font-display text-xl font-bold" style={{ color: '#2E7D32' }}>Farm Based Management System</h1>
-            <p className="text-sm" style={{ color: '#66BB6A' }}>Cultivating Success Through Technology</p>
+            <h1 className="font-display text-xl font-bold text-primary">Farm Based Management System</h1>
+            <p className="text-sm text-primary/70">Cultivating Success Through Technology</p>
           </div>
 
           <div className="space-y-1">
-            <h2 className="font-display text-2xl font-semibold tracking-tight" style={{ color: '#2E7D32' }}>
+            <h2 className="font-display text-2xl font-semibold tracking-tight text-primary">
               {t.auth.getStarted}
             </h2>
             <p className="text-muted-foreground text-sm">{t.auth.enterDetails}</p>
@@ -151,23 +153,23 @@ export default function Auth() {
             <TabsList className="grid w-full grid-cols-2 h-11 p-1" style={{ background: 'rgba(76, 175, 80, 0.1)', border: '1px solid rgba(76, 175, 80, 0.2)' }}>
               <TabsTrigger
                 value="signin"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-[#2E7D32] rounded-md text-sm font-medium"
+                className="data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary rounded-md text-sm font-medium"
               >
                 {t.auth.signIn}
               </TabsTrigger>
               <TabsTrigger
                 value="signup"
-                className="data-[state=active]:bg-white data-[state=active]:shadow-sm data-[state=active]:text-[#2E7D32] rounded-md text-sm font-medium"
+                className="data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary rounded-md text-sm font-medium"
               >
                 {t.auth.signUp}
               </TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSignIn} className="space-y-4 bg-white p-6 rounded-2xl shadow-lg" style={{ border: '1px solid rgba(76, 175, 80, 0.2)' }}>
+              <form onSubmit={handleSignIn} className="space-y-4 bg-card p-6 rounded-2xl shadow-lg border border-primary/20">
                 <div className="space-y-1.5">
-                  <Label htmlFor="signin-email" className="text-sm font-medium flex items-center gap-2 text-gray-700">
-                    <Mail className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                  <Label htmlFor="signin-email" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
+                    <Mail className="w-4 h-4 text-primary" />
                     {t.auth.emailLabel}
                   </Label>
                   <Input
@@ -176,13 +178,13 @@ export default function Auth() {
                     placeholder={t.auth.emailPlaceholder}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
                     required
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="signin-password" className="text-sm font-medium flex items-center gap-2 text-gray-700">
-                    <Lock className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                  <Label htmlFor="signin-password" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
+                    <Lock className="w-4 h-4 text-primary" />
                     {t.auth.passwordLabel}
                   </Label>
                   <div className="relative">
@@ -191,13 +193,13 @@ export default function Auth() {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg pr-10"
+                      className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg pr-10"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
@@ -215,10 +217,10 @@ export default function Auth() {
             </TabsContent>
 
             <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSignUp} className="space-y-4 bg-white p-6 rounded-2xl shadow-lg" style={{ border: '1px solid rgba(76, 175, 80, 0.2)' }}>
+              <form onSubmit={handleSignUp} className="space-y-4 bg-card p-6 rounded-2xl shadow-lg border border-primary/20">
                 <div className="space-y-1.5">
-                  <Label htmlFor="signup-name" className="text-sm font-medium flex items-center gap-2 text-gray-700">
-                    <User className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                  <Label htmlFor="signup-name" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
+                    <User className="w-4 h-4 text-primary" />
                     {t.auth.fullNameLabel}
                   </Label>
                   <Input
@@ -227,12 +229,12 @@ export default function Auth() {
                     placeholder={t.auth.fullNamePlaceholder}
                     value={fullName}
                     onChange={(e) => setFullName(e.target.value)}
-                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="signup-email" className="text-sm font-medium flex items-center gap-2 text-gray-700">
-                    <Mail className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                  <Label htmlFor="signup-email" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
+                    <Mail className="w-4 h-4 text-primary" />
                     {t.auth.emailLabel}
                   </Label>
                   <Input
@@ -241,13 +243,13 @@ export default function Auth() {
                     placeholder={t.auth.emailPlaceholder}
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg"
+                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
                     required
                   />
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="signup-password" className="text-sm font-medium flex items-center gap-2 text-gray-700">
-                    <Lock className="w-4 h-4" style={{ color: '#2E7D32' }} />
+                  <Label htmlFor="signup-password" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
+                    <Lock className="w-4 h-4 text-primary" />
                     {t.auth.passwordLabel}
                   </Label>
                   <div className="relative">
@@ -257,13 +259,13 @@ export default function Auth() {
                       placeholder={t.auth.passwordPlaceholder}
                       value={password}
                       onChange={(e) => setPassword(e.target.value)}
-                      className="h-11 bg-gray-50 border-gray-200 focus:border-[#4CAF50] focus:ring-[#4CAF50]/20 transition-colors rounded-lg pr-10"
+                      className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg pr-10"
                       required
                     />
                     <button
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
                     >
                       {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
                     </button>
