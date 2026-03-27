@@ -112,35 +112,35 @@ export default function Auth() {
           </div>
           <div className="space-y-3 pt-4">
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">🛒</span>
+              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
               <div>
                 <span className="text-sm font-semibold block">FBMS Store</span>
                 <span className="text-xs opacity-80">Buy quality farm inputs, tools & supplies online</span>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">🌿</span>
+              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
               <div>
                 <span className="text-sm font-semibold block">Plant Help</span>
                 <span className="text-xs opacity-80">Diagnose plant diseases & get treatment advice</span>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">🚜</span>
+              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
               <div>
                 <span className="text-sm font-semibold block">Farm Tracker</span>
                 <span className="text-xs opacity-80">Track crops, harvests, expenses & farm performance</span>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">🐄</span>
+              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
               <div>
                 <span className="text-sm font-semibold block">FBMS Ani</span>
                 <span className="text-xs opacity-80">Manage livestock health, breeding & feeding records</span>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">📰</span>
+              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
               <div>
                 <span className="text-sm font-semibold block">FBMS Blog</span>
                 <span className="text-xs opacity-80">Read farming tips, news & community stories</span>
