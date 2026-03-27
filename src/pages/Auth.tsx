@@ -112,19 +112,42 @@ export default function Auth() {
           </div>
           <div className="space-y-3 pt-4">
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">🌾</span>
-              <span className="text-sm font-medium">{t.auth.feature1}</span>
+              <span className="text-2xl">🛒</span>
+              <div>
+                <span className="text-sm font-semibold block">FBMS Store</span>
+                <span className="text-xs opacity-80">Buy quality farm inputs, tools & supplies online</span>
+              </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">📊</span>
-              <span className="text-sm font-medium">{t.auth.feature2}</span>
+              <span className="text-2xl">🌿</span>
+              <div>
+                <span className="text-sm font-semibold block">Plant Help</span>
+                <span className="text-xs opacity-80">Diagnose plant diseases & get treatment advice</span>
+              </div>
             </div>
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <span className="text-2xl">📱</span>
-              <span className="text-sm font-medium">{t.auth.feature3}</span>
+              <span className="text-2xl">🚜</span>
+              <div>
+                <span className="text-sm font-semibold block">Farm Tracker</span>
+                <span className="text-xs opacity-80">Track crops, harvests, expenses & farm performance</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
+              <span className="text-2xl">🐄</span>
+              <div>
+                <span className="text-sm font-semibold block">FBMS Ani</span>
+                <span className="text-xs opacity-80">Manage livestock health, breeding & feeding records</span>
+              </div>
+            </div>
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
+              <span className="text-2xl">📰</span>
+              <div>
+                <span className="text-sm font-semibold block">FBMS Blog</span>
+                <span className="text-xs opacity-80">Read farming tips, news & community stories</span>
+              </div>
             </div>
           </div>
-          <p className="text-xs opacity-60 pt-6">{t.auth.footerText}</p>
+          <p className="text-xs opacity-60 pt-6">All tools in one place — empowering Ugandan farmers</p>
         </div>
       </div>
 
