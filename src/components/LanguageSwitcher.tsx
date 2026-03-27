@@ -27,7 +27,7 @@ export function LanguageSwitcher() {
             onClick={() => setLanguage(lang)}
             className={language === lang ? 'bg-accent' : ''}
           >
-            {lang === 'en' ? '🇬🇧' : lang === 'sw' ? '🇰🇪' : '🇺🇬'} {languageNames[lang]}
+            {lang === 'en' ? '🇬🇧' : lang === 'sw' ? '🇰🇪🇹🇿' : '🇺🇬'} {languageNames[lang]}
           </DropdownMenuItem>
         ))}
       </DropdownMenuContent>
