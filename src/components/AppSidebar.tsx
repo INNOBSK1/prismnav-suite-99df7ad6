@@ -1,4 +1,4 @@
-import { User, Store, Leaf, Tractor, MessageSquare, Dog, BookOpen } from "lucide-react";
+import { User, Store, Leaf, Tractor, Dog, BookOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
 import {
@@ -14,9 +14,7 @@ const siteLinks = [
   { title: "FBMS Blog", url: "/site/fbms-blog", icon: BookOpen, externalUrl: "https://fbmsblog.netlify.app/" },
 ];
 
-interface AppSidebarProps { onAIChatToggle: () => void; }
-
-export function AppSidebar({ onAIChatToggle }: AppSidebarProps) {
+export function AppSidebar() {
   const { open } = useSidebar();
   const { t } = useLanguage();
 
@@ -57,19 +55,6 @@ export function AppSidebar({ onAIChatToggle }: AppSidebarProps) {
           </SidebarGroupContent>
         </SidebarGroup>
 
-        <SidebarGroup>
-          <SidebarGroupLabel>{t.sidebar.aiAssistant}</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton onClick={onAIChatToggle}>
-                  <MessageSquare className="h-4 w-4" />
-                  {open && <span>{t.sidebar.openChat}</span>}
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
       </SidebarContent>
     </Sidebar>
   );
