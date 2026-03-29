@@ -18,7 +18,7 @@ export default function Dashboard() {
   return (
     <div className="container py-10 space-y-8">
       <header className="animate-in text-center">
-        <h1 className="text-4xl font-semibold mb-2 text-balance text-primary">Welcome to FBMS</h1>
+        <h1 className="text-4xl font-semibold mb-2 text-balance text-primary">Welcome to Farm Based Management System</h1>
         <p className="text-lg italic text-muted-foreground">Digitally Ensuring Prosperity</p>
       </header>
 
