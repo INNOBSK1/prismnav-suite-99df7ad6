@@ -32,7 +32,12 @@ export default function Auth() {
 
   useEffect(() => {
     if (user) {
-      navigate('/', { replace: true });
+      const params = new URLSearchParams(window.location.search);
+      if (params.get('admin') === 'true') {
+        navigate('/curricore', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
     }
   }, [user, navigate]);
 
