@@ -54,6 +54,7 @@ export type Database = {
           created_at: string
           full_name: string | null
           id: string
+          is_approved: boolean | null
           is_paid: boolean | null
           subscription_end_date: string | null
           trial_end_date: string | null
@@ -66,6 +67,7 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id: string
+          is_approved?: boolean | null
           is_paid?: boolean | null
           subscription_end_date?: string | null
           trial_end_date?: string | null
@@ -78,6 +80,7 @@ export type Database = {
           created_at?: string
           full_name?: string | null
           id?: string
+          is_approved?: boolean | null
           is_paid?: boolean | null
           subscription_end_date?: string | null
           trial_end_date?: string | null
