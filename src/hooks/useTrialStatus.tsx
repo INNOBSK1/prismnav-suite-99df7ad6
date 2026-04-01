@@ -27,6 +27,7 @@ export function useTrialStatus(): TrialStatus {
       setStatus({
         isTrialActive: false,
         isPaid: false,
+        isApproved: false,
         daysRemaining: 0,
         trialEndDate: null,
         loading: false,
@@ -37,7 +38,7 @@ export function useTrialStatus(): TrialStatus {
     const fetchTrialStatus = async () => {
       const { data, error } = await supabase
         .from('profiles')
-        .select('trial_end_date, is_paid, subscription_end_date')
+        .select('trial_end_date, is_paid, is_approved, subscription_end_date')
         .eq('id', user.id)
         .maybeSingle();
 
@@ -45,6 +46,7 @@ export function useTrialStatus(): TrialStatus {
         setStatus({
           isTrialActive: false,
           isPaid: false,
+          isApproved: false,
           daysRemaining: 0,
           trialEndDate: null,
           loading: false,
