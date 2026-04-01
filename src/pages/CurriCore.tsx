@@ -79,8 +79,79 @@ export default function CurriCore() {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, is_paid: newStatus } : u));
   };
 
-  if (authLoading) return <div className="flex min-h-screen items-center justify-center"><p>Loading...</p></div>;
-  if (!user) return <Navigate to="/auth" replace />;
+  const handleAdminLogin = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
+      setIsAuthenticated(true);
+      toast.success('Welcome to CurriCore');
+    } else {
+      toast.error('Invalid credentials');
+    }
+  };
+
+  if (!isAuthenticated) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-background p-4">
+        <Card className="w-full max-w-sm shadow-lg border-primary/20">
+          <CardHeader className="text-center space-y-3">
+            <img src={fbmsLogo} alt="FBMS" className="w-16 h-16 mx-auto" />
+            <div>
+              <CardTitle className="text-2xl text-primary">CurriCore</CardTitle>
+              <p className="text-sm text-muted-foreground">Admin Access</p>
+            </div>
+          </CardHeader>
+          <CardContent>
+            <form onSubmit={handleAdminLogin} className="space-y-4">
+              <div className="space-y-1.5">
+                <Label htmlFor="admin-user" className="text-sm font-medium flex items-center gap-2">
+                  <Shield className="w-4 h-4 text-primary" />
+                  Username
+                </Label>
+                <Input
+                  id="admin-user"
+                  value={username}
+                  onChange={e => setUsername(e.target.value)}
+                  placeholder="Enter admin username"
+                  className="h-11"
+                  required
+                />
+              </div>
+              <div className="space-y-1.5">
+                <Label htmlFor="admin-pass" className="text-sm font-medium flex items-center gap-2">
+                  <Lock className="w-4 h-4 text-primary" />
+                  Password
+                </Label>
+                <div className="relative">
+                  <Input
+                    id="admin-pass"
+                    type={showPassword ? 'text' : 'password'}
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    placeholder="Enter admin password"
+                    className="h-11 pr-10"
+                    required
+                  />
+                  <button
+                    type="button"
+                    onClick={() => setShowPassword(!showPassword)}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+                  >
+                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
+                  </button>
+                </div>
+              </div>
+              <Button
+                type="submit"
+                className="w-full h-11 font-semibold"
+              >
+                Access CurriCore
+              </Button>
+            </form>
+          </CardContent>
+        </Card>
+      </div>
+    );
+  }
 
   const filtered = users.filter(u =>
     (u.full_name || '').toLowerCase().includes(search.toLowerCase()) ||
