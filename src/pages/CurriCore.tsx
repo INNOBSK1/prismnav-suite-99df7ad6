@@ -112,7 +112,7 @@ export default function CurriCore() {
           </Card>
           <Card>
             <CardContent className="flex items-center gap-3 p-4">
-              <UserCheck className="h-8 w-8 text-green-500" />
+              <UserCheck className="h-8 w-8 text-primary" />
               <div>
                 <p className="text-2xl font-bold">{approvedUsers}</p>
                 <p className="text-xs text-muted-foreground">Approved</p>
