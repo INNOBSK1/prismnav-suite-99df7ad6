@@ -16,6 +16,7 @@ export function useTrialStatus(): TrialStatus {
   const [status, setStatus] = useState<TrialStatus>({
     isTrialActive: false,
     isPaid: false,
+    isApproved: false,
     daysRemaining: 0,
     trialEndDate: null,
     loading: true,
