@@ -32,13 +32,9 @@ export default function Auth() {
 
   useEffect(() => {
     if (user) {
-      if (isAdminLogin) {
-        navigate('/curricore', { replace: true });
-      } else {
-        navigate('/', { replace: true });
-      }
+      navigate('/', { replace: true });
     }
-  }, [user, navigate, isAdminLogin]);
+  }, [user, navigate]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
