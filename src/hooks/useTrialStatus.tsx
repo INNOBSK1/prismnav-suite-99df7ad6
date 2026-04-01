@@ -5,6 +5,7 @@ import { useAuth } from './useAuth';
 interface TrialStatus {
   isTrialActive: boolean;
   isPaid: boolean;
+  isApproved: boolean;
   daysRemaining: number;
   trialEndDate: Date | null;
   loading: boolean;
