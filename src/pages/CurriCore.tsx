@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/hooks/useAuth';
+import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Check, X, Search, Users, UserCheck, UserX, Shield, Lock, Eye, EyeOff } from 'lucide-react';
+import { Check, X, Search, Users, UserCheck, UserX, Shield } from 'lucide-react';
 import { toast } from 'sonner';
-import fbmsLogo from '@/assets/fbms.png';
 
 interface UserProfile {
   id: string;
@@ -19,21 +19,15 @@ interface UserProfile {
   trial_end_date: string | null;
 }
 
-const ADMIN_USERNAME = 'curricore';
-const ADMIN_PASSWORD = 'FBMS@CURRICORE';
-
 export default function CurriCore() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const { user, loading: authLoading } = useAuth();
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (isAuthenticated) fetchUsers();
-  }, [isAuthenticated]);
+    fetchUsers();
+  }, []);
 
   const fetchUsers = async () => {
     const { data, error } = await supabase
@@ -79,79 +73,8 @@ export default function CurriCore() {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, is_paid: newStatus } : u));
   };
 
-  const handleAdminLogin = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
-      setIsAuthenticated(true);
-      toast.success('Welcome to CurriCore');
-    } else {
-      toast.error('Invalid credentials');
-    }
-  };
-
-  if (!isAuthenticated) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-background p-4">
-        <Card className="w-full max-w-sm shadow-lg border-primary/20">
-          <CardHeader className="text-center space-y-3">
-            <img src={fbmsLogo} alt="FBMS" className="w-16 h-16 mx-auto" />
-            <div>
-              <CardTitle className="text-2xl text-primary">CurriCore</CardTitle>
-              <p className="text-sm text-muted-foreground">Admin Access</p>
-            </div>
-          </CardHeader>
-          <CardContent>
-            <form onSubmit={handleAdminLogin} className="space-y-4">
-              <div className="space-y-1.5">
-                <Label htmlFor="admin-user" className="text-sm font-medium flex items-center gap-2">
-                  <Shield className="w-4 h-4 text-primary" />
-                  Username
-                </Label>
-                <Input
-                  id="admin-user"
-                  value={username}
-                  onChange={e => setUsername(e.target.value)}
-                  placeholder="Enter admin username"
-                  className="h-11"
-                  required
-                />
-              </div>
-              <div className="space-y-1.5">
-                <Label htmlFor="admin-pass" className="text-sm font-medium flex items-center gap-2">
-                  <Lock className="w-4 h-4 text-primary" />
-                  Password
-                </Label>
-                <div className="relative">
-                  <Input
-                    id="admin-pass"
-                    type={showPassword ? 'text' : 'password'}
-                    value={password}
-                    onChange={e => setPassword(e.target.value)}
-                    placeholder="Enter admin password"
-                    className="h-11 pr-10"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                  >
-                    {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                  </button>
-                </div>
-              </div>
-              <Button
-                type="submit"
-                className="w-full h-11 font-semibold"
-              >
-                Access CurriCore
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
-      </div>
-    );
-  }
+  if (authLoading) return <div className="flex min-h-screen items-center justify-center"><p>Loading...</p></div>;
+  if (!user) return <Navigate to="/auth" replace />;
 
   const filtered = users.filter(u =>
     (u.full_name || '').toLowerCase().includes(search.toLowerCase()) ||

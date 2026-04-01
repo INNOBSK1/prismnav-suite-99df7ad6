@@ -10,7 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Mail, Shield } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import fbmsLogo from '@/assets/fbms.png';
 
@@ -26,15 +26,20 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
 
   useEffect(() => {
     if (user) {
-      navigate('/', { replace: true });
+      if (isAdminLogin) {
+        navigate('/curricore', { replace: true });
+      } else {
+        navigate('/', { replace: true });
+      }
     }
-  }, [user, navigate]);
+  }, [user, navigate, isAdminLogin]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -308,6 +313,19 @@ export default function Auth() {
 
           <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
 
+          <button
+            type="button"
+            onClick={() => setIsAdminLogin(!isAdminLogin)}
+            className="flex items-center justify-center gap-1.5 mx-auto text-xs text-muted-foreground/60 hover:text-primary transition-colors"
+          >
+            <Shield className="w-3 h-3" />
+            {isAdminLogin ? 'Back to user login' : 'Login as Admin'}
+          </button>
+          {isAdminLogin && (
+            <p className="text-center text-xs text-primary font-medium animate-in fade-in">
+              Admin mode — you'll be redirected to CurriCore after login
+            </p>
+          )}
         </div>
       </div>
     </div>
