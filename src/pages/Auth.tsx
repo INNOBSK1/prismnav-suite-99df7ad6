@@ -33,14 +33,13 @@ export default function Auth() {
 
   useEffect(() => {
     if (user) {
-      const params = new URLSearchParams(window.location.search);
-      if (params.get('admin') === 'true') {
+      if (isAdminLogin) {
         navigate('/curricore', { replace: true });
       } else {
         navigate('/', { replace: true });
       }
     }
-  }, [user, navigate]);
+  }, [user, navigate, isAdminLogin]);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
