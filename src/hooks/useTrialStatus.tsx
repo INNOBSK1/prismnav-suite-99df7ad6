@@ -64,6 +64,7 @@ export function useTrialStatus(): TrialStatus {
       setStatus({
         isTrialActive,
         isPaid: data.is_paid || false,
+        isApproved: (data as any).is_approved || false,
         daysRemaining,
         trialEndDate: trialEnd,
         loading: false,
