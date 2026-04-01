@@ -9,12 +9,30 @@ interface TrialGateProps {
 }
 
 export function TrialGate({ children }: TrialGateProps) {
-  const { isTrialActive, isPaid, loading } = useTrialStatus();
+  const { isTrialActive, isPaid, isApproved, loading } = useTrialStatus();
 
   if (loading) {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="animate-pulse text-muted-foreground">Loading...</div>
+      </div>
+    );
+  }
+
+  if (!isApproved) {
+    return (
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-background via-background to-muted/20 p-4">
+        <Card className="w-full max-w-md shadow-lg">
+          <CardHeader className="text-center">
+            <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-primary/10">
+              <Lock className="h-6 w-6 text-primary" />
+            </div>
+            <CardTitle className="text-2xl">Account Pending</CardTitle>
+            <CardDescription>
+              Your account is awaiting admin approval. You'll be able to access the app once approved.
+            </CardDescription>
+          </CardHeader>
+        </Card>
       </div>
     );
   }
