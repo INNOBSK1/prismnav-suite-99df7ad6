@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
-import { useAuth } from '@/hooks/useAuth';
-import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
-import { Check, X, Search, Users, UserCheck, UserX, Shield } from 'lucide-react';
+import { Label } from '@/components/ui/label';
+import { Check, X, Search, Users, UserCheck, UserX, Shield, Lock, Eye, EyeOff } from 'lucide-react';
 import { toast } from 'sonner';
+import fbmsLogo from '@/assets/fbms.png';
 
 interface UserProfile {
   id: string;
