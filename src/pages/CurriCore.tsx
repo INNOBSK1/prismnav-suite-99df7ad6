@@ -19,15 +19,21 @@ interface UserProfile {
   trial_end_date: string | null;
 }
 
+const ADMIN_USERNAME = 'curricore';
+const ADMIN_PASSWORD = 'FBMS@CURRICORE';
+
 export default function CurriCore() {
-  const { user, loading: authLoading } = useAuth();
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [showPassword, setShowPassword] = useState(false);
   const [users, setUsers] = useState<UserProfile[]>([]);
   const [loading, setLoading] = useState(true);
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    fetchUsers();
-  }, []);
+    if (isAuthenticated) fetchUsers();
+  }, [isAuthenticated]);
 
   const fetchUsers = async () => {
     const { data, error } = await supabase

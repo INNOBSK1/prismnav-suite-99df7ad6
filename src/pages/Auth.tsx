@@ -26,7 +26,6 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isAdminLogin, setIsAdminLogin] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
