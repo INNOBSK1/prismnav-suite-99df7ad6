@@ -10,7 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Mail, Shield } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import fbmsLogo from '@/assets/fbms.png';
 
@@ -328,6 +328,17 @@ export default function Auth() {
 
           <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
 
+          <button
+            type="button"
+            onClick={() => {
+              setEmail('curricore@gmail.com');
+              setPassword('FBMS@CURRICORE');
+            }}
+            className="flex items-center justify-center gap-1.5 mx-auto text-xs text-muted-foreground/60 hover:text-primary transition-colors mt-2"
+          >
+            <Shield className="w-3 h-3" />
+            <span>Sign in as Admin</span>
+          </button>
         </div>
       </div>
     </div>
