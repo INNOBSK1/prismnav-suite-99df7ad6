@@ -49,6 +49,7 @@ export const translations = {
       creatingAccount: 'Creating account...',
       termsText: 'By continuing, you agree to our terms of service',
       invalidCredentials: 'Invalid email or password',
+      accountBlocked: 'Your account has been blocked. Please contact the admin.',
       accountExists: 'An account with this email already exists',
       accountCreated: 'Account created successfully!',
       signedIn: 'Signed in successfully!',
