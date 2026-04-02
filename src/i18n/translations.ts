@@ -1054,6 +1054,7 @@ export const translations = {
       creatingAccount: 'Ama iku akawunti...',
       termsText: 'Mi eco yi, mi yimu amateeka ama ni emiri',
       invalidCredentials: 'Email kani eli ni efisu si nyiri afa',
+      accountBlocked: 'Akawunti ni eri egenziwu. Ima admin.',
       accountExists: 'Akawunti ka email ni ezia emaze eco',
       accountCreated: 'Akawunti iku nyiri!',
       signedIn: 'Ifi mu nyiri!',
