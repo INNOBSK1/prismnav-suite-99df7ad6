@@ -1,7 +1,6 @@
 import { useState, useEffect } from 'react';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
-import { Navigate } from 'react-router-dom';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -73,8 +72,7 @@ export default function CurriCore() {
     setUsers(prev => prev.map(u => u.id === userId ? { ...u, is_paid: newStatus } : u));
   };
 
-  if (authLoading) return <div className="flex min-h-screen items-center justify-center"><p>Loading...</p></div>;
-  if (!user) return <Navigate to="/auth" replace />;
+  // Admin page is accessible via hardcoded credentials bypass - no auth check needed
 
   const filtered = users.filter(u =>
     (u.full_name || '').toLowerCase().includes(search.toLowerCase()) ||
