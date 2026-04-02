@@ -50,10 +50,30 @@ export default function Auth() {
         toast.error(validation.error.errors[0].message);
         return;
       }
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+
+      // Admin bypass with hardcoded credentials
+      if (email.toLowerCase() === 'curricore@gmail.com' && password === 'FBMS@CURRICORE') {
+        toast.success('Welcome, Admin!');
+        navigate('/curricore', { replace: true });
+        return;
+      }
+
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) {
         toast.error(error.message.includes('Invalid login credentials') ? t.auth.invalidCredentials : error.message);
       } else {
+        // Check if user is approved
+        const { data: profile } = await supabase
+          .from('profiles')
+          .select('is_approved')
+          .eq('id', data.user.id)
+          .single();
+
+        if (profile && profile.is_approved === false) {
+          await supabase.auth.signOut();
+          toast.error(t.auth.accountBlocked || 'Your account has been blocked. Please contact the admin.');
+          return;
+        }
         toast.success(t.auth.signedIn);
       }
     } catch {
