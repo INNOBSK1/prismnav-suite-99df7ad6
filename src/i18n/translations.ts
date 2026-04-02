@@ -449,6 +449,7 @@ export const translations = {
       creatingAccount: 'Tukola akawunti...',
       termsText: 'Bw\'okomeza, okkiriza amateeka gaife ag\'obuweereza',
       invalidCredentials: 'Email oba ekigambo eky\'okukuuma si kituufu',
+      accountBlocked: 'Akawunti yo eziyiziddwa. Tuula admin.',
       accountExists: 'Akawunti n\'email eno emaze okubaawo',
       accountCreated: 'Akawunti ekolebwe bulungi!',
       signedIn: 'Oyingidde bulungi!',
