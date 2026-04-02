@@ -570,6 +570,7 @@ export const translations = {
       creatingAccount: 'Wacwalo akawunti...',
       termsText: 'Ka imedo, iyee cik mewa me tic',
       invalidCredentials: 'Email onyo mung me donyo pe atir',
+      accountBlocked: 'Akawunti ni kigengo. Tim ber ikube admin.',
       accountExists: 'Akawunti ki email man dong tye',
       accountCreated: 'Akawunti ocwale maber!',
       signedIn: 'Idonyo maber!',
