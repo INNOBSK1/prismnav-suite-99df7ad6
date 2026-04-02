@@ -172,12 +172,12 @@ export default function Auth() {
       </div>
 
       {/* Right side - Auth form */}
-      <div className="flex items-center justify-center p-4 sm:p-6 lg:p-8 bg-background relative">
-        <div className="absolute top-3 right-3 sm:top-4 sm:right-4 flex items-center gap-1 sm:gap-2">
+      <div className="flex items-center justify-center p-8 bg-background relative">
+        <div className="absolute top-4 right-4 flex items-center gap-2">
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
-        <div className="w-full max-w-sm space-y-4 sm:space-y-6 mt-12 sm:mt-0">
+        <div className="w-full max-w-sm space-y-6">
           {/* Mobile logo */}
           <div className="lg:hidden text-center mb-4">
             <img src={fbmsLogo} alt="FBMS Logo" className="w-20 h-20 mx-auto mb-2" />
