@@ -10,7 +10,7 @@ import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Mail, Shield } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import fbmsLogo from '@/assets/fbms.png';
 
