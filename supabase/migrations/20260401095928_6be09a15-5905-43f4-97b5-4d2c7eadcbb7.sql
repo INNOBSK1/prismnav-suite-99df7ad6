@@ -1,1 +1,0 @@
-ALTER TABLE public.profiles ADD COLUMN is_approved boolean DEFAULT false;

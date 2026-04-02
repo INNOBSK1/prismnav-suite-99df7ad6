@@ -12,7 +12,6 @@ import Dashboard from "./pages/Dashboard";
 import SiteViewer from "./pages/SiteViewer";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
-import CurriCore from "./pages/CurriCore";
 
 const queryClient = new QueryClient();
 
@@ -47,7 +46,6 @@ const App = () => (
                     </ProtectedRoute>
                   }
                 />
-                <Route path="/curricore" element={<ProtectedRoute><CurriCore /></ProtectedRoute>} />
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />
               </Routes>

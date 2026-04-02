@@ -5,7 +5,6 @@ import { useAuth } from './useAuth';
 interface TrialStatus {
   isTrialActive: boolean;
   isPaid: boolean;
-  isApproved: boolean;
   daysRemaining: number;
   trialEndDate: Date | null;
   loading: boolean;
@@ -16,7 +15,6 @@ export function useTrialStatus(): TrialStatus {
   const [status, setStatus] = useState<TrialStatus>({
     isTrialActive: false,
     isPaid: false,
-    isApproved: false,
     daysRemaining: 0,
     trialEndDate: null,
     loading: true,
@@ -27,7 +25,6 @@ export function useTrialStatus(): TrialStatus {
       setStatus({
         isTrialActive: false,
         isPaid: false,
-        isApproved: false,
         daysRemaining: 0,
         trialEndDate: null,
         loading: false,
@@ -38,7 +35,7 @@ export function useTrialStatus(): TrialStatus {
     const fetchTrialStatus = async () => {
       const { data, error } = await supabase
         .from('profiles')
-        .select('trial_end_date, is_paid, is_approved, subscription_end_date')
+        .select('trial_end_date, is_paid, subscription_end_date')
         .eq('id', user.id)
         .maybeSingle();
 
@@ -46,7 +43,6 @@ export function useTrialStatus(): TrialStatus {
         setStatus({
           isTrialActive: false,
           isPaid: false,
-          isApproved: false,
           daysRemaining: 0,
           trialEndDate: null,
           loading: false,
@@ -64,7 +60,6 @@ export function useTrialStatus(): TrialStatus {
       setStatus({
         isTrialActive,
         isPaid: data.is_paid || false,
-        isApproved: (data as any).is_approved || false,
         daysRemaining,
         trialEndDate: trialEnd,
         loading: false,
