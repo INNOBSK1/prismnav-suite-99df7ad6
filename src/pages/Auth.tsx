@@ -71,7 +71,7 @@ export default function Auth() {
 
         if (profile && profile.is_approved === false) {
           await supabase.auth.signOut();
-          toast.error(t.auth.accountBlocked || 'Your account has been blocked. Please contact the admin.');
+          toast.error(t.auth.accountBlocked);
           return;
         }
         toast.success(t.auth.signedIn);
