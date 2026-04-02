@@ -812,6 +812,7 @@ export const translations = {
       creatingAccount: 'Inafungua akaunti...',
       termsText: 'Kwa kuendelea, unakubali masharti yetu ya huduma',
       invalidCredentials: 'Barua pepe au nywila si sahihi',
+      accountBlocked: 'Akaunti yako imezuiwa. Tafadhali wasiliana na msimamizi.',
       accountExists: 'Akaunti yenye barua pepe hii tayari ipo',
       accountCreated: 'Akaunti imefunguliwa!',
       signedIn: 'Umeingia!',
