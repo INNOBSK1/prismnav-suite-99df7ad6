@@ -328,19 +328,6 @@ export default function Auth() {
 
           <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
 
-          <button
-            type="button"
-            onClick={() => setIsAdminLogin(!isAdminLogin)}
-            className="flex items-center justify-center gap-1.5 mx-auto text-xs text-muted-foreground/60 hover:text-primary transition-colors"
-          >
-            <Shield className="w-3 h-3" />
-            {isAdminLogin ? 'Back to user login' : 'Login as Admin'}
-          </button>
-          {isAdminLogin && (
-            <p className="text-center text-xs text-primary font-medium animate-in fade-in">
-              Admin mode — you'll be redirected to CurriCore after login
-            </p>
-          )}
         </div>
       </div>
     </div>
