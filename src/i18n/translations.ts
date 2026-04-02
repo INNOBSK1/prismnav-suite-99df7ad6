@@ -691,6 +691,7 @@ export const translations = {
       creatingAccount: 'Kiyokia akawunti...',
       termsText: 'Iyeni iyadaun, iyeuni amateeka aijo nu obuweereza',
       invalidCredentials: 'Email onyo ekinyam nu ekuumit bo etia',
+      accountBlocked: 'Akawunti yesi egengo. Ilos admin.',
       accountExists: 'Akawunti ka email eno engyenikini epei',
       accountCreated: 'Akawunti eyokini ngaswam!',
       signedIn: 'Ija kide ngaswam!',
