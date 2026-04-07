@@ -145,3 +145,39 @@
   .stagger-3 { animation-delay: 0.3s; }
   .stagger-4 { animation-delay: 0.4s; }
 }
+
+/* Google Translate widget styling */
+.google-translate-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.google-translate-wrapper .goog-te-gadget {
+  font-size: 0 !important;
+  color: transparent !important;
+}
+
+.google-translate-wrapper .goog-te-gadget .goog-te-combo {
+  font-size: 13px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  border: 1px solid hsl(var(--border));
+  background: hsl(var(--background));
+  color: hsl(var(--foreground));
+  cursor: pointer;
+  outline: none;
+}
+
+.google-translate-wrapper .goog-te-gadget .goog-te-combo:focus {
+  ring: 2px solid hsl(var(--ring));
+}
+
+/* Hide Google Translate top bar */
+.goog-te-banner-frame,
+.skiptranslate {
+  display: none !important;
+}
+
+body {
+  top: 0 !important;
+}
