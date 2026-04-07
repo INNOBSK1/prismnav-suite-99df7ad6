@@ -55,7 +55,7 @@ export default function SiteViewer() {
   return (
     <div className="flex flex-col h-full">
       <div className="flex-1 relative">
-        <iframe src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
+        <iframe key={language} src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox"
           allow="camera; microphone; geolocation" />
       </div>
