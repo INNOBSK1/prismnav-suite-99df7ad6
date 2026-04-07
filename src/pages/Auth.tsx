@@ -9,6 +9,7 @@ import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
+import { GoogleTranslate } from '@/components/GoogleTranslate';
 import { toast } from 'sonner';
 import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
@@ -154,6 +155,7 @@ export default function Auth() {
       {/* Right side - Auth form */}
       <div className="flex items-center justify-center p-8 bg-background relative">
         <div className="absolute top-4 right-4 flex items-center gap-2">
+          <GoogleTranslate />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
