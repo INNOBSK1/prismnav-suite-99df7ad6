@@ -55,7 +55,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink to="/" className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
+                  <NavLink to="/" onClick={handleNavClick} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
                     <User className="h-4 w-4" />
                     {open && <span>{t.sidebar.dashboard}</span>}
                   </NavLink>
