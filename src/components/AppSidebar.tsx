@@ -38,7 +38,7 @@ export function AppSidebar() {
               {siteLinks.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
+                    <NavLink to={item.url} onClick={handleNavClick} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
                       <item.icon className="h-4 w-4" />
                       {open && <span>{item.title}</span>}
                     </NavLink>
