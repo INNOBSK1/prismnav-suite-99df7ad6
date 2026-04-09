@@ -1,6 +1,7 @@
 import { User, Store, Leaf, Tractor, Dog, BookOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
@@ -15,8 +16,17 @@ const siteLinks = [
 ];
 
 export function AppSidebar() {
-  const { open } = useSidebar();
+  const { open, setOpen, setOpenMobile } = useSidebar();
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
+
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    } else {
+      setOpen(false);
+    }
+  };
 
   return (
     <Sidebar collapsible="icon">
@@ -28,7 +38,7 @@ export function AppSidebar() {
               {siteLinks.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
-                    <NavLink to={item.url} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
+                    <NavLink to={item.url} onClick={handleNavClick} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
                       <item.icon className="h-4 w-4" />
                       {open && <span>{item.title}</span>}
                     </NavLink>
@@ -45,7 +55,7 @@ export function AppSidebar() {
             <SidebarMenu>
               <SidebarMenuItem>
                 <SidebarMenuButton asChild>
-                  <NavLink to="/" className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
+                  <NavLink to="/" onClick={handleNavClick} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
                     <User className="h-4 w-4" />
                     {open && <span>{t.sidebar.dashboard}</span>}
                   </NavLink>
