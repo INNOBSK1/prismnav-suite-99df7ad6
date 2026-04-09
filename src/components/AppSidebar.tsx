@@ -1,6 +1,7 @@
 import { User, Store, Leaf, Tractor, Dog, BookOpen } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { useLanguage } from "@/i18n/LanguageContext";
+import { useIsMobile } from "@/hooks/use-mobile";
 import {
   Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel,
   SidebarMenu, SidebarMenuButton, SidebarMenuItem, useSidebar,
