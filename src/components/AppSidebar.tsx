@@ -16,8 +16,17 @@ const siteLinks = [
 ];
 
 export function AppSidebar() {
-  const { open } = useSidebar();
+  const { open, setOpen, setOpenMobile } = useSidebar();
   const { t } = useLanguage();
+  const isMobile = useIsMobile();
+
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+    } else {
+      setOpen(false);
+    }
+  };
 
   return (
     <Sidebar collapsible="icon">
