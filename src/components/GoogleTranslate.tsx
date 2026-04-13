@@ -2,9 +2,37 @@ import { useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
-    gtranslateSettings?: Record<string, unknown>;
+    googleTranslateElementInit?: () => void;
+    google?: {
+      translate: {
+        TranslateElement: {
+          new (
+            options: {
+              pageLanguage: string;
+              includedLanguages: string;
+              layout: unknown;
+              autoDisplay: boolean;
+              multilanguagePage?: boolean;
+            },
+            elementId: string
+          ): void;
+          InlineLayout: { HORIZONTAL: unknown; SIMPLE: unknown };
+        };
+      };
+    };
   }
 }
+
+// Local/regional languages supported by Google Translate
+const LOCAL_LANGUAGES = [
+  'en',  // English
+  'lg',  // Luganda
+  'sw',  // Kiswahili
+  'ach', // Acholi (Luo)
+  'ny',  // Chichewa (Bantu family)
+  'rw',  // Kinyarwanda (close to Rukiga/Runyankole)
+  'rn',  // Kirundi
+].join(',');
 
 export function GoogleTranslate() {
   const initialized = useRef(false);
@@ -13,26 +41,36 @@ export function GoogleTranslate() {
     if (initialized.current) return;
     initialized.current = true;
 
-    // GTranslate settings – local/regional languages only
-    window.gtranslateSettings = {
-      default_language: 'en',
-      languages: ['en', 'lg', 'sw', 'ach', 'ny', 'rw', 'rn'],
-      wrapper_selector: '.gtranslate_wrapper',
-      switcher_horizontal_position: 'right',
-      switcher_vertical_position: 'top',
-      float_switcher_open_direction: 'bottom',
-      flag_style: 'circle',
-      alt_flags: { en: 'usa' },
+    window.googleTranslateElementInit = () => {
+      if (window.google?.translate) {
+        new window.google.translate.TranslateElement(
+          {
+            pageLanguage: 'en',
+            includedLanguages: LOCAL_LANGUAGES,
+            layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+            autoDisplay: false,
+            multilanguagePage: true,
+          },
+          'google_translate_element'
+        );
+      }
     };
 
-    if (!document.getElementById('gtranslate-script')) {
+    // Load Google Translate script
+    if (!document.getElementById('google-translate-script')) {
       const script = document.createElement('script');
-      script.id = 'gtranslate-script';
-      script.src = 'https://cdn.gtranslate.net/widgets/latest/float.js';
-      script.defer = true;
+      script.id = 'google-translate-script';
+      script.src =
+        '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      script.async = true;
       document.body.appendChild(script);
     }
   }, []);
 
-  return <div className="gtranslate_wrapper" />;
+  return (
+    <div
+      id="google_translate_element"
+      className="google-translate-container"
+    />
+  );
 }
