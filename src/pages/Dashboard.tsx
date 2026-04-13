@@ -4,10 +4,10 @@ import { Store, Leaf, Tractor, Dog, BookOpen } from "lucide-react";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const siteCards = [
-  { id: "fbms-store", icon: Store, titleKey: "FBMS Store", descKey: "siteStoreDesc" as const },
   { id: "plant-help", icon: Leaf, titleKey: "Plant Help", descKey: "sitePlantHelpDesc" as const },
-  { id: "farm-tracker", icon: Tractor, titleKey: "Farm Tracker", descKey: "siteFarmTrackerDesc" as const },
   { id: "fbms-ani", icon: Dog, titleKey: "FBMS Ani", descKey: "siteAniDesc" as const },
+  { id: "farm-tracker", icon: Tractor, titleKey: "Farm Tracker", descKey: "siteFarmTrackerDesc" as const },
+  { id: "fbms-store", icon: Store, titleKey: "FBMS Store", descKey: "siteStoreDesc" as const },
   { id: "fbms-blog", icon: BookOpen, titleKey: "FBMS Blog", descKey: "siteBlogDesc" as const },
 ];
 
