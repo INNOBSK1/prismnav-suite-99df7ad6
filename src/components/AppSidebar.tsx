@@ -8,10 +8,10 @@ import {
 } from "@/components/ui/sidebar";
 
 const siteLinks = [
-  { title: "FBMS Store", url: "/site/fbms-store", icon: Store, externalUrl: "https://fbmsstore.netlify.app/" },
   { title: "Plant Help", url: "/site/plant-help", icon: Leaf, externalUrl: "https://planthelp.netlify.app/" },
-  { title: "Farm Tracker", url: "/site/farm-tracker", icon: Tractor, externalUrl: "https://fbmsfarmtracker.netlify.app/" },
   { title: "FBMS Ani", url: "/site/fbms-ani", icon: Dog, externalUrl: "https://fbmsani.netlify.app/" },
+  { title: "Farm Tracker", url: "/site/farm-tracker", icon: Tractor, externalUrl: "https://fbmsfarmtracker.netlify.app/" },
+  { title: "FBMS Store", url: "/site/fbms-store", icon: Store, externalUrl: "https://fbmsstore.netlify.app/" },
   { title: "FBMS Blog", url: "/site/fbms-blog", icon: BookOpen, externalUrl: "https://fbmsblog.netlify.app/" },
 ];
 
