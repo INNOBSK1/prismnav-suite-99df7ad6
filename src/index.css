@@ -147,17 +147,19 @@
 }
 
 /* Google Translate widget styling */
-.google-translate-wrapper {
+/* Google Translate container */
+.google-translate-container {
   display: flex;
   align-items: center;
 }
 
-.google-translate-wrapper .goog-te-gadget {
+.google-translate-container .goog-te-gadget {
   font-size: 0 !important;
   color: transparent !important;
+  margin: 0 !important;
 }
 
-.google-translate-wrapper .goog-te-gadget .goog-te-combo {
+.google-translate-container .goog-te-gadget .goog-te-combo {
   font-size: 13px;
   padding: 4px 8px;
   border-radius: 6px;
@@ -166,18 +168,26 @@
   color: hsl(var(--foreground));
   cursor: pointer;
   outline: none;
+  max-width: 140px;
 }
 
-.google-translate-wrapper .goog-te-gadget .goog-te-combo:focus {
-  ring: 2px solid hsl(var(--ring));
+.google-translate-container .goog-te-gadget .goog-te-combo:focus {
+  box-shadow: 0 0 0 2px hsl(var(--ring));
 }
 
-/* Hide Google Translate top bar */
-.goog-te-banner-frame,
-.skiptranslate {
+/* Hide Google Translate top bar that shifts page down */
+.goog-te-banner-frame.skiptranslate,
+#goog-gt-tt,
+.goog-te-balloon-frame {
   display: none !important;
 }
 
 body {
   top: 0 !important;
+  position: static !important;
+}
+
+/* Make sure Google Translate translates iframe parent page fully */
+.VIpgJd-ZVi9od-ORHb-OEVmcd {
+  display: none !important;
 }
