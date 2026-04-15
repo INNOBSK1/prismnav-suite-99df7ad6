@@ -1,4 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Languages } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from '@/components/ui/popover';
 
 declare global {
   interface Window {
@@ -23,19 +30,13 @@ declare global {
   }
 }
 
-// Local/regional languages supported by Google Translate
 const LOCAL_LANGUAGES = [
-  'en',  // English
-  'lg',  // Luganda
-  'sw',  // Kiswahili
-  'ach', // Acholi (Luo)
-  'ny',  // Chichewa (Bantu family)
-  'rw',  // Kinyarwanda (close to Rukiga/Runyankole)
-  'rn',  // Kirundi
+  'en', 'lg', 'sw', 'ach', 'ny', 'rw', 'rn',
 ].join(',');
 
 export function GoogleTranslate() {
   const initialized = useRef(false);
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -47,7 +48,7 @@ export function GoogleTranslate() {
           {
             pageLanguage: 'en',
             includedLanguages: LOCAL_LANGUAGES,
-            layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+            layout: window.google.translate.TranslateElement.InlineLayout.SIMPLE,
             autoDisplay: false,
             multilanguagePage: true,
           },
@@ -56,7 +57,6 @@ export function GoogleTranslate() {
       }
     };
 
-    // Load Google Translate script
     if (!document.getElementById('google-translate-script')) {
       const script = document.createElement('script');
       script.id = 'google-translate-script';
@@ -68,9 +68,16 @@ export function GoogleTranslate() {
   }, []);
 
   return (
-    <div
-      id="google_translate_element"
-      className="google-translate-container"
-    />
+    <Popover open={open} onOpenChange={setOpen}>
+      <PopoverTrigger asChild>
+        <Button variant="ghost" size="icon" className="h-9 w-9">
+          <Languages className="h-4 w-4" />
+          <span className="sr-only">Translate</span>
+        </Button>
+      </PopoverTrigger>
+      <PopoverContent align="end" className="w-auto p-2">
+        <div id="google_translate_element" className="google-translate-container" />
+      </PopoverContent>
+    </Popover>
   );
 }
