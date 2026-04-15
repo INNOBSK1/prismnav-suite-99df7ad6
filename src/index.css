@@ -146,8 +146,15 @@
   .stagger-4 { animation-delay: 0.4s; }
 }
 
-/* Google Translate widget — compact version */
+/* Google Translate widget — hidden */
 .google-translate-container {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+  width: 0;
+  height: 0;
+  overflow: hidden;
+}
   display: flex;
   align-items: center;
 }
