@@ -146,14 +146,16 @@
   .stagger-4 { animation-delay: 0.4s; }
 }
 
-/* Google Translate widget — hidden */
+/* Google Translate widget — compact */
 .google-translate-container {
-  position: absolute;
-  opacity: 0;
-  pointer-events: none;
-  width: 0;
-  height: 0;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.google-translate-container .goog-te-gadget {
+  font-size: 0 !important;
+  color: transparent !important;
+  margin: 0 !important;
 }
 
 .google-translate-container .goog-te-gadget {
