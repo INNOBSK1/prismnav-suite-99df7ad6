@@ -146,8 +146,7 @@
   .stagger-4 { animation-delay: 0.4s; }
 }
 
-/* Google Translate widget styling */
-/* Google Translate container */
+/* Google Translate widget — compact version */
 .google-translate-container {
   display: flex;
   align-items: center;
@@ -160,22 +159,23 @@
 }
 
 .google-translate-container .goog-te-gadget .goog-te-combo {
-  font-size: 13px;
-  padding: 4px 8px;
-  border-radius: 6px;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 5px;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--background));
   color: hsl(var(--foreground));
   cursor: pointer;
   outline: none;
-  max-width: 140px;
+  max-width: 110px;
+  height: 28px;
 }
 
 .google-translate-container .goog-te-gadget .goog-te-combo:focus {
   box-shadow: 0 0 0 2px hsl(var(--ring));
 }
 
-/* Hide Google Translate top bar that shifts page down */
+/* Hide Google Translate top bar */
 .goog-te-banner-frame.skiptranslate,
 #goog-gt-tt,
 .goog-te-balloon-frame {
@@ -187,7 +187,6 @@ body {
   position: static !important;
 }
 
-/* Make sure Google Translate translates iframe parent page fully */
 .VIpgJd-ZVi9od-ORHb-OEVmcd {
   display: none !important;
 }
