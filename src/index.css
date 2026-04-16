@@ -146,7 +146,7 @@
   .stagger-4 { animation-delay: 0.4s; }
 }
 
-/* Google Translate widget — compact */
+/* Google Translate widget — compact version */
 .google-translate-container {
   display: flex;
   align-items: center;
@@ -159,17 +159,16 @@
 }
 
 .google-translate-container .goog-te-gadget .goog-te-combo {
-  font-size: 12px;
-  padding: 4px 8px;
-  border-radius: 6px;
+  font-size: 11px;
+  padding: 2px 4px;
+  border-radius: 5px;
   border: 1px solid hsl(var(--border));
-  background: hsl(var(--card));
+  background: hsl(var(--background));
   color: hsl(var(--foreground));
   cursor: pointer;
   outline: none;
-  width: 100%;
-  height: 32px;
-  appearance: auto;
+  max-width: 110px;
+  height: 28px;
 }
 
 .google-translate-container .goog-te-gadget .goog-te-combo:focus {

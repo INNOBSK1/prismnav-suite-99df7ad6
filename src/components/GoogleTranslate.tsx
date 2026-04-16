@@ -9,9 +9,9 @@ declare global {
           new (
             options: {
               pageLanguage: string;
-              includedLanguages?: string;
-              layout?: unknown;
-              autoDisplay?: boolean;
+              includedLanguages: string;
+              layout: unknown;
+              autoDisplay: boolean;
               multilanguagePage?: boolean;
             },
             elementId: string
@@ -22,6 +22,17 @@ declare global {
     };
   }
 }
+
+// Local/regional languages supported by Google Translate
+const LOCAL_LANGUAGES = [
+  'en',  // English
+  'lg',  // Luganda
+  'sw',  // Kiswahili
+  'ach', // Acholi (Luo)
+  'ny',  // Chichewa (Bantu family)
+  'rw',  // Kinyarwanda (close to Rukiga/Runyankole)
+  'rn',  // Kirundi
+].join(',');
 
 export function GoogleTranslate() {
   const initialized = useRef(false);
@@ -35,14 +46,17 @@ export function GoogleTranslate() {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
-            includedLanguages: 'lg,sw,ny,rw,rn,fr,am',
+            includedLanguages: LOCAL_LANGUAGES,
+            layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
             autoDisplay: false,
+            multilanguagePage: true,
           },
           'google_translate_element'
         );
       }
     };
 
+    // Load Google Translate script
     if (!document.getElementById('google-translate-script')) {
       const script = document.createElement('script');
       script.id = 'google-translate-script';
@@ -54,6 +68,9 @@ export function GoogleTranslate() {
   }, []);
 
   return (
-    <div id="google_translate_element" className="google-translate-container" />
+    <div
+      id="google_translate_element"
+      className="google-translate-container"
+    />
   );
 }

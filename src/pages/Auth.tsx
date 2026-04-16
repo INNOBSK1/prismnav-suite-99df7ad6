@@ -156,6 +156,7 @@ export default function Auth() {
       <div className="flex items-center justify-center p-8 bg-background relative">
         <div className="absolute top-4 right-4 flex items-center gap-2">
           <GoogleTranslate />
+          <LanguageSwitcher />
           <ThemeToggle />
         </div>
         <div className="w-full max-w-sm space-y-6">
