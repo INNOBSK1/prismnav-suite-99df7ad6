@@ -31,7 +31,7 @@ const LOCAL_LANGUAGES = [
 export function GoogleTranslate() {
   const initialized = useRef(false);
   const [open, setOpen] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -62,11 +62,11 @@ export function GoogleTranslate() {
     }
   }, []);
 
-  // Close dropdown when clicking outside
+  // Close when clicking outside
   useEffect(() => {
     if (!open) return;
     const handler = (e: MouseEvent) => {
-      if (containerRef.current && !containerRef.current.contains(e.target as Node)) {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
         setOpen(false);
       }
     };
@@ -75,13 +75,13 @@ export function GoogleTranslate() {
   }, [open]);
 
   return (
-    <div ref={containerRef} className="relative">
+    <div ref={wrapperRef} className="relative">
       <Button
         variant="outline"
         size="sm"
         className="h-8 gap-1.5 px-2.5 text-xs font-medium border-border/60 bg-background hover:bg-accent/50"
         title="Translate"
-        onClick={() => setOpen(!open)}
+        onClick={() => setOpen((v) => !v)}
       >
         <svg viewBox="0 0 24 24" width="16" height="16" className="shrink-0">
           <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 0 1-2.2 3.32v2.77h3.57c2.08-1.92 3.27-4.74 3.27-8.1z"/>
@@ -92,18 +92,16 @@ export function GoogleTranslate() {
         <span className="hidden sm:inline">Translate</span>
       </Button>
 
-      {open && (
-        <div className="absolute right-0 top-full mt-2 z-50 rounded-lg border border-border bg-popover p-3 shadow-md">
-          <p className="text-xs font-medium text-muted-foreground mb-2">Select language</p>
-          <div id="google_translate_element" className="google-translate-container" />
-        </div>
-      )}
-
-      {!open && (
-        <div style={{ position: 'absolute', width: 0, height: 0, overflow: 'hidden', opacity: 0, pointerEvents: 'none' }}>
-          <div id="google_translate_element" className="google-translate-container" />
-        </div>
-      )}
+      <div
+        className={`absolute right-0 top-full mt-2 z-50 rounded-lg border border-border bg-popover p-3 shadow-md transition-all ${
+          open
+            ? 'opacity-100 pointer-events-auto visible'
+            : 'opacity-0 pointer-events-none invisible h-0 overflow-hidden p-0 m-0 border-0'
+        }`}
+      >
+        <p className={`text-xs font-medium text-muted-foreground mb-2 ${open ? '' : 'hidden'}`}>Select language</p>
+        <div id="google_translate_element" className="google-translate-container" />
+      </div>
     </div>
   );
 }
