@@ -1,11 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
-import { Languages } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from '@/components/ui/popover';
+import { useEffect, useRef } from 'react';
 
 declare global {
   interface Window {
@@ -36,7 +29,6 @@ const LOCAL_LANGUAGES = [
 
 export function GoogleTranslate() {
   const initialized = useRef(false);
-  const [open, setOpen] = useState(false);
 
   useEffect(() => {
     if (initialized.current) return;
@@ -68,16 +60,6 @@ export function GoogleTranslate() {
   }, []);
 
   return (
-    <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
-        <Button variant="ghost" size="icon" className="h-9 w-9">
-          <Languages className="h-4 w-4" />
-          <span className="sr-only">Translate</span>
-        </Button>
-      </PopoverTrigger>
-      <PopoverContent align="end" className="w-auto p-2">
-        <div id="google_translate_element" className="google-translate-container" />
-      </PopoverContent>
-    </Popover>
+    <div id="google_translate_element" className="google-translate-container" />
   );
 }
