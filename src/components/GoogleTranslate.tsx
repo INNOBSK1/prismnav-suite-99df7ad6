@@ -25,7 +25,7 @@ declare global {
 }
 
 const LOCAL_LANGUAGES = [
-  'en', 'lg', 'sw', 'ach', 'ny', 'rw', 'rn',
+  'en', 'lg', 'sw', 'ny', 'rw', 'rn', 'fr', 'am',
 ].join(',');
 
 export function GoogleTranslate() {
