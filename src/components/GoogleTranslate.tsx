@@ -5,33 +5,30 @@ declare global {
     googleTranslateElementInit?: () => void;
     google?: {
       translate: {
-        TranslateElement: {
-          new (
-            options: {
-              pageLanguage: string;
-              includedLanguages: string;
-              layout: unknown;
-              autoDisplay: boolean;
-              multilanguagePage?: boolean;
-            },
-            elementId: string
-          ): void;
-          InlineLayout: { HORIZONTAL: unknown; SIMPLE: unknown };
-        };
+        TranslateElement: new (
+          options: {
+            pageLanguage: string;
+            includedLanguages: string;
+            layout: number;
+            autoDisplay: boolean;
+          },
+          elementId: string
+        ) => void;
       };
     };
   }
 }
 
-// Local/regional languages supported by Google Translate
+// Google Translate language codes for our local languages
+// Not all may be supported by Google Translate, but we include the ones that are
 const LOCAL_LANGUAGES = [
   'en',  // English
   'lg',  // Luganda
   'sw',  // Kiswahili
-  'ach', // Acholi (Luo)
-  'ny',  // Chichewa (Bantu family)
+  'ach', // Acholi
+  'ny',  // Chichewa (closest to some Bantu languages)
   'rw',  // Kinyarwanda (close to Rukiga/Runyankole)
-  'rn',  // Kirundi
+  'rn',  // Kirundi (close to regional languages)
 ].join(',');
 
 export function GoogleTranslate() {
@@ -41,22 +38,22 @@ export function GoogleTranslate() {
     if (initialized.current) return;
     initialized.current = true;
 
+    // Define the callback
     window.googleTranslateElementInit = () => {
       if (window.google?.translate) {
         new window.google.translate.TranslateElement(
           {
             pageLanguage: 'en',
             includedLanguages: LOCAL_LANGUAGES,
-            layout: window.google.translate.TranslateElement.InlineLayout.HORIZONTAL,
+            layout: 1, // HORIZONTAL layout
             autoDisplay: false,
-            multilanguagePage: true,
           },
           'google_translate_element'
         );
       }
     };
 
-    // Load Google Translate script
+    // Load the script if not already loaded
     if (!document.getElementById('google-translate-script')) {
       const script = document.createElement('script');
       script.id = 'google-translate-script';
@@ -70,7 +67,7 @@ export function GoogleTranslate() {
   return (
     <div
       id="google_translate_element"
-      className="google-translate-container"
+      className="google-translate-wrapper"
     />
   );
 }
