@@ -59,6 +59,31 @@ export default function Auth() {
     }
   };
 
+  const handleResendConfirmation = async () => {
+    const emailValidation = z.string().email().safeParse(email);
+    if (!emailValidation.success) {
+      toast.error('Please enter your email above first');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: { emailRedirectTo: `${window.location.origin}/` },
+      });
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success('Confirmation email sent! Check your inbox.');
+      }
+    } catch {
+      toast.error(t.auth.unexpectedError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -304,6 +329,16 @@ export default function Auth() {
                 >
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
+                <div className="text-center pt-1">
+                  <button
+                    type="button"
+                    onClick={handleResendConfirmation}
+                    disabled={isLoading}
+                    className="text-sm text-primary hover:underline font-medium disabled:opacity-50"
+                  >
+                    Didn't receive an email? Resend confirmation
+                  </button>
+                </div>
               </form>
             </TabsContent>
           </Tabs>
