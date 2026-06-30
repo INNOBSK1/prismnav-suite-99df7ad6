@@ -329,6 +329,16 @@ export default function Auth() {
                 >
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
+                <div className="text-center pt-1">
+                  <button
+                    type="button"
+                    onClick={handleResendConfirmation}
+                    disabled={isLoading}
+                    className="text-sm text-primary hover:underline font-medium disabled:opacity-50"
+                  >
+                    Didn't receive an email? Resend confirmation
+                  </button>
+                </div>
               </form>
             </TabsContent>
           </Tabs>
