@@ -59,6 +59,31 @@ export default function Auth() {
     }
   };
 
+  const handleResendConfirmation = async () => {
+    const emailValidation = z.string().email().safeParse(email);
+    if (!emailValidation.success) {
+      toast.error('Please enter your email above first');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email,
+        options: { emailRedirectTo: `${window.location.origin}/` },
+      });
+      if (error) {
+        toast.error(error.message);
+      } else {
+        toast.success('Confirmation email sent! Check your inbox.');
+      }
+    } catch {
+      toast.error(t.auth.unexpectedError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
