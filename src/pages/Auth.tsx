@@ -75,8 +75,22 @@ export default function Auth() {
       if (error) {
         toast.error(error.message);
       } else {
+        // Also send a friendly notification via Resend
+        await supabase.functions.invoke('send-email', {
+          body: {
+            to: email,
+            subject: 'Confirm your FBMS account',
+            html: `<div style="font-family:DM Sans,Arial,sans-serif;padding:24px;color:#1b1b1b">
+              <h2 style="color:#2E7D32;margin:0 0 12px">Welcome to FBMS 🌱</h2>
+              <p>We just re-sent your confirmation email. Please check your inbox (and spam folder) for the link to verify your account.</p>
+              <p>If you didn't request this, you can safely ignore this message.</p>
+              <p style="margin-top:24px;color:#666;font-size:13px">— The FBMS Team</p>
+            </div>`,
+          },
+        });
         toast.success('Confirmation email sent! Check your inbox.');
       }
+
     } catch {
       toast.error(t.auth.unexpectedError);
     } finally {
