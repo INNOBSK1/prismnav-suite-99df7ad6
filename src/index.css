@@ -95,22 +95,27 @@
 @layer base {
   * {
     @apply border-border;
+    box-sizing: border-box;
   }
 
   html {
     font-feature-settings: "cv02", "cv03", "cv04", "cv11";
     height: 100%;
+    width: 100%;
   }
 
   body {
     @apply bg-background text-foreground font-sans antialiased;
     margin: 0;
+    padding: 0;
     height: 100%;
+    width: 100%;
     overflow: hidden;
   }
 
   #root {
     height: 100%;
+    width: 100%;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -189,6 +194,7 @@
 body {
   top: 0 !important;
 }
+
 /* Hide Google Translate banner/tooltips */
 iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd { display: none !important; }
 .goog-text-highlight { background: none !important; box-shadow: none !important; }
