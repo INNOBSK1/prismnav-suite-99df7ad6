@@ -162,7 +162,7 @@ export default function Auth() {
     win.addEventListener('scroll', check);
   };
 
-  const inputCls = 'h-12 rounded-xl bg-muted/40 pl-10 focus-visible:ring-primary/30';
+  const inputCls = 'h-11 rounded-lg bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-border/50';
 
   const passwordField = (id: string, withPlaceholder: boolean) => (
     <div className="relative">
@@ -180,7 +180,7 @@ export default function Auth() {
         type="button"
         onClick={() => setShowPassword(!showPassword)}
         aria-label={showPassword ? 'Hide password' : 'Show password'}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
       >
         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
       </button>
@@ -196,99 +196,112 @@ export default function Auth() {
   );
 
   return (
-    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr] bg-background">
-      {/* Brand side */}
-      <aside className="relative hidden lg:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] p-12 text-primary-foreground">
+    <div className="h-screen w-screen flex overflow-hidden bg-background">
+      {/* Brand side - Left panel */}
+      <aside className="hidden lg:flex w-1/2 flex-col justify-between overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] p-12 text-primary-foreground relative">
         <div className="pointer-events-none absolute -right-24 -top-32 h-96 w-96 rounded-full border border-primary-foreground/10 shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
-        <div className="flex items-center gap-3">
-          <img src={logo} alt={`${BRAND} logo`} className="h-12 w-12 rounded-full" />
-          <span className="font-display text-xl font-bold tracking-[0.12em]">{BRAND}</span>
+        
+        {/* Header */}
+        <div className="flex items-center gap-3 z-10">
+          <img src={logo} alt={`${BRAND} logo`} className="h-10 w-10 rounded-full" />
+          <span className="font-display text-lg font-bold tracking-[0.12em]">{BRAND}</span>
         </div>
 
-        <div className="relative z-10 max-w-md space-y-8">
-          <img src={logo} alt="" className="h-40 w-40 rounded-full shadow-2xl" />
-          <div>
-            <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight">{t.auth.heroTitleMain}</h1>
-            <p className="mt-4 text-lg opacity-85">{t.auth.heroSubtitleMain}</p>
+        {/* Center content - balanced */}
+        <div className="relative z-10 flex flex-col items-center justify-center flex-1 gap-6 py-8">
+          <img src={logo} alt="" className="h-32 w-32 rounded-full shadow-2xl" />
+          <div className="text-center max-w-sm">
+            <h1 className="font-display text-4xl font-bold leading-[1.2] tracking-tight mb-3">{t.auth.heroTitleMain}</h1>
+            <p className="text-base opacity-85">{t.auth.heroSubtitleMain}</p>
           </div>
-          <ul className="space-y-2.5">
+          
+          {/* Features list - centered and compact */}
+          <ul className="w-full space-y-2 max-w-sm">
             {tools.map(({ icon: Icon, name, key }) => (
-              <li key={name} className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 px-4 py-2.5 backdrop-blur-sm">
-                <Icon className="h-5 w-5 shrink-0 opacity-90" />
-                <div>
-                  <span className="block text-sm font-semibold">{name}</span>
-                  <span className="text-xs opacity-75">{t.auth[key]}</span>
+              <li key={name} className="flex items-center gap-3 rounded-lg bg-primary-foreground/10 px-3 py-2 backdrop-blur-sm">
+                <Icon className="h-4 w-4 shrink-0 opacity-90" />
+                <div className="text-left">
+                  <span className="block text-xs font-semibold">{name}</span>
+                  <span className="text-[11px] opacity-75">{t.auth[key]}</span>
                 </div>
               </li>
             ))}
           </ul>
         </div>
 
-        <p className="text-xs opacity-60">© {new Date().getFullYear()} {BRAND}. {t.auth.authFooter}</p>
+        {/* Footer */}
+        <p className="text-xs opacity-60 z-10">© {new Date().getFullYear()} {BRAND}. {t.auth.authFooter}</p>
       </aside>
 
-      {/* Form side */}
-      <main className="relative flex items-center justify-center p-6 sm:p-10">
-        <div className="absolute right-4 top-4 flex items-center gap-2">
+      {/* Form side - Right panel */}
+      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center overflow-hidden bg-background p-4 sm:p-6 relative">
+        {/* Top controls */}
+        <div className="absolute right-4 top-4 flex items-center gap-2 z-20">
           <GoogleTranslate />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
 
-        <div className="w-full max-w-md space-y-7 pt-10">
-          <div className="flex items-center gap-3 lg:hidden">
-            <img src={logo} alt={`${BRAND} logo`} className="h-12 w-12 rounded-full" />
-            <span className="font-display text-xl font-bold tracking-[0.12em] text-primary">{BRAND}</span>
+        {/* Form container - centered and scrollable only if needed */}
+        <div className="w-full max-w-sm flex flex-col gap-5 max-h-full overflow-y-auto">
+          {/* Mobile logo */}
+          <div className="flex items-center gap-3 lg:hidden pt-2">
+            <img src={logo} alt={`${BRAND} logo`} className="h-10 w-10 rounded-full" />
+            <span className="font-display text-lg font-bold tracking-[0.12em] text-primary">{BRAND}</span>
           </div>
 
-          <div className="space-y-2">
-            <h2 className="font-display text-3xl font-semibold tracking-tight">{t.auth.getStarted}</h2>
+          {/* Title */}
+          <div className="space-y-1.5">
+            <h2 className="font-display text-2xl font-semibold tracking-tight">{t.auth.getStarted}</h2>
             <p className="text-sm text-muted-foreground">{t.auth.enterDetails}</p>
           </div>
 
+          {/* Tabs */}
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-primary/10 p-1">
-              <TabsTrigger value="signin" className="rounded-lg data-[state=active]:text-primary">{t.auth.signIn}</TabsTrigger>
-              <TabsTrigger value="signup" className="rounded-lg data-[state=active]:text-primary">{t.auth.signUp}</TabsTrigger>
+            <TabsList className="grid h-10 w-full grid-cols-2 rounded-lg bg-primary/10 p-0.5">
+              <TabsTrigger value="signin" className="rounded-md text-sm data-[state=active]:text-primary">{t.auth.signIn}</TabsTrigger>
+              <TabsTrigger value="signup" className="rounded-md text-sm data-[state=active]:text-primary">{t.auth.signUp}</TabsTrigger>
             </TabsList>
 
-            <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSignIn} className="space-y-4 rounded-3xl border border-border bg-card p-7 shadow-xl">
-                <div className="space-y-1.5">
-                  <Label htmlFor="signin-email">{t.auth.emailLabel}</Label>
+            {/* Sign In Tab */}
+            <TabsContent value="signin" className="mt-4">
+              <form onSubmit={handleSignIn} className="space-y-3 rounded-2xl border border-border bg-card p-5 shadow-lg">
+                <div className="space-y-1">
+                  <Label htmlFor="signin-email" className="text-sm">{t.auth.emailLabel}</Label>
                   {emailField('signin-email')}
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="signin-password">{t.auth.passwordLabel}</Label>
+                <div className="space-y-1">
+                  <Label htmlFor="signin-password" className="text-sm">{t.auth.passwordLabel}</Label>
                   {passwordField('signin-password', false)}
                 </div>
-                <Button type="submit" className="h-12 w-full rounded-xl font-semibold" disabled={isLoading}>
+                <Button type="submit" className="h-10 w-full rounded-lg font-semibold text-sm" disabled={isLoading}>
                   {isLoading ? t.auth.signingIn : t.auth.continueBtn}
                 </Button>
               </form>
             </TabsContent>
 
-            <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSignUp} className="space-y-4 rounded-3xl border border-border bg-card p-7 shadow-xl">
-                <div className="space-y-1.5">
-                  <Label htmlFor="signup-name">{t.auth.fullNameLabel}</Label>
+            {/* Sign Up Tab */}
+            <TabsContent value="signup" className="mt-4">
+              <form onSubmit={handleSignUp} className="space-y-3 rounded-2xl border border-border bg-card p-5 shadow-lg">
+                <div className="space-y-1">
+                  <Label htmlFor="signup-name" className="text-sm">{t.auth.fullNameLabel}</Label>
                   <div className="relative">
                     <User className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <Input id="signup-name" type="text" placeholder={t.auth.fullNamePlaceholder} value={fullName}
                       onChange={(e) => setFullName(e.target.value)} className={inputCls} />
                   </div>
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="signup-email">{t.auth.emailLabel}</Label>
+                <div className="space-y-1">
+                  <Label htmlFor="signup-email" className="text-sm">{t.auth.emailLabel}</Label>
                   {emailField('signup-email')}
                 </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="signup-password">{t.auth.passwordLabel}</Label>
+                <div className="space-y-1">
+                  <Label htmlFor="signup-password" className="text-sm">{t.auth.passwordLabel}</Label>
                   {passwordField('signup-password', true)}
                 </div>
 
                 {/* Terms agreement */}
-                <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/40 p-4 text-sm">
+                <div className="flex items-start gap-2 rounded-lg border border-border bg-muted/40 p-3 text-xs">
                   <Checkbox
                     id="terms"
                     checked={agreed}
@@ -300,35 +313,37 @@ export default function Auth() {
                       }
                       setAgreed(v === true);
                     }}
-                    className="mt-0.5"
+                    className="mt-0.5 shrink-0"
                   />
-                  <label htmlFor="terms" className="leading-relaxed text-muted-foreground">
+                  <label htmlFor="terms" className="leading-relaxed text-muted-foreground cursor-pointer">
                     I have read and agree to the{' '}
                     <button type="button" onClick={() => setTermsOpen(true)} className="font-semibold text-primary hover:underline">
-                      Terms of Service & Policies
+                      Terms & Policies
                     </button>{' '}
                     of {BRAND}.
-                    {!termsRead && <span className="mt-1 block text-xs">You must read them before you can agree.</span>}
+                    {!termsRead && <span className="mt-1 block text-[10px]">Must read before agreeing.</span>}
                   </label>
                 </div>
 
-                <Button type="submit" className="h-12 w-full rounded-xl font-semibold" disabled={isLoading || !agreed}>
+                <Button type="submit" className="h-10 w-full rounded-lg font-semibold text-sm" disabled={isLoading || !agreed}>
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
                 <div className="text-center">
                   <button type="button" onClick={handleResendConfirmation} disabled={isLoading}
-                    className="text-sm font-medium text-primary hover:underline disabled:opacity-50">
-                    Didn't receive an email? Resend confirmation
+                    className="text-xs font-medium text-primary hover:underline disabled:opacity-50">
+                    Didn't receive an email? Resend
                   </button>
                 </div>
               </form>
             </TabsContent>
           </Tabs>
 
+          {/* Footer text */}
           <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
         </div>
       </main>
 
+      {/* Terms Dialog */}
       <Dialog open={termsOpen} onOpenChange={setTermsOpen}>
         <DialogContent className="flex h-[90vh] max-w-4xl flex-col gap-3 p-4 sm:p-6">
           <DialogHeader>
