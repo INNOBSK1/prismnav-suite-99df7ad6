@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Terms of Service – NIMALUNDA</title>
+  <style>
+    :root{--green:#0b7a53;--green2:#13b77a;--mint:#dff8ee;--ink:#10241d;--muted:#71827b;--line:#dcebe5;--paper:#fff;--bg:#edf5f2;--dark:#071914;--gold:#d8b36a;}
+    *{margin:0;padding:0;box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{font-family:Inter,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;line-height:1.8;color:var(--ink);background:radial-gradient(circle at 10% 0%,rgba(19,183,122,.14),transparent 30%),radial-gradient(circle at 90% 15%,rgba(216,179,106,.10),transparent 25%),var(--bg);}
+    body:before{content:"";position:fixed;inset:0;pointer-events:none;background-image:linear-gradient(rgba(11,122,83,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(11,122,83,.025) 1px,transparent 1px);background-size:34px 34px;mask-image:linear-gradient(to bottom,black,transparent 75%);}
+    header{position:sticky;top:0;z-index:100;background:rgba(7,25,20,.88);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.09);box-shadow:0 12px 35px rgba(4,22,16,.16)}
+    .header-container{max-width:1120px;margin:auto;padding:15px 24px;display:flex;justify-content:space-between;align-items:center}
+    .logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font-weight:850;font-size:1.12rem;letter-spacing:.08em}.logo:before{content:"✦";display:grid;place-items:center;width:34px;height:34px;border-radius:11px;background:linear-gradient(135deg,var(--green2),var(--green));box-shadow:0 8px 24px rgba(19,183,122,.3);color:white}
+    .back-link{display:inline-flex;align-items:center;gap:8px;padding:9px 15px;border:1px solid rgba(255,255,255,.14);border-radius:999px;color:#dff8ee;text-decoration:none;font-size:.88rem;font-weight:700;transition:.25s}.back-link:hover{background:rgba(255,255,255,.08);transform:translateY(-1px)}
+    main{max-width:1120px;margin:auto;padding:42px 24px 140px;position:relative}
+    .page-header{position:relative;overflow:hidden;padding:56px 52px;margin-bottom:26px;border:1px solid rgba(255,255,255,.65);border-radius:30px;background:linear-gradient(135deg,#08251c 0%,#0c4935 58%,#0b7a53 100%);box-shadow:0 25px 70px rgba(7,38,28,.22);color:white}.page-header:after{content:"";position:absolute;width:320px;height:320px;border:1px solid rgba(255,255,255,.11);border-radius:50%;right:-80px;top:-140px;box-shadow:0 0 0 45px rgba(255,255,255,.025),0 0 0 90px rgba(255,255,255,.02)}
+    .page-header:before{content:"LEGAL • NIMALUNDA";display:inline-block;margin-bottom:15px;padding:7px 12px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(255,255,255,.07);font-size:.72rem;font-weight:800;letter-spacing:.16em;color:#dff8ee}
+    .page-header h1{font-size:clamp(2.3rem,5vw,4.1rem);line-height:1.02;letter-spacing:-.045em;margin-bottom:18px;position:relative;z-index:1}.meta{color:#cce7de;font-size:.92rem;position:relative;z-index:1}.meta strong{color:#fff}
+    .toc{padding:27px 30px;margin-bottom:26px;border:1px solid var(--line);border-radius:24px;background:rgba(255,255,255,.78);backdrop-filter:blur(16px);box-shadow:0 14px 45px rgba(21,66,51,.08)}.toc h2{font-size:.82rem;text-transform:uppercase;letter-spacing:.16em;color:var(--green);margin-bottom:17px}.toc ol{padding-left:1.3rem;columns:2;column-gap:50px}.toc li{margin:0 0 9px;break-inside:avoid;padding-left:5px}.toc a{color:#29463c;text-decoration:none;font-weight:600;transition:.2s}.toc a:hover{color:var(--green2);padding-left:3px}
+    section{position:relative;background:rgba(255,255,255,.94);border:1px solid var(--line);border-radius:25px;padding:42px 46px;margin-bottom:20px;scroll-margin-top:90px;box-shadow:0 12px 42px rgba(23,67,52,.07);transition:transform .25s,box-shadow .25s,border-color .25s}section:hover{transform:translateY(-2px);box-shadow:0 20px 55px rgba(23,67,52,.11);border-color:#c8e2d8}
+    section h2{display:flex;align-items:center;gap:14px;font-size:1.35rem;line-height:1.3;font-weight:850;color:var(--ink);margin-bottom:24px;padding-bottom:16px;border-bottom:1px solid var(--line)}section h2:before{content:"";width:5px;height:32px;border-radius:99px;background:linear-gradient(var(--green2),var(--green));box-shadow:0 5px 15px rgba(19,183,122,.25);flex:none}section p{margin-bottom:18px;color:#3d5149;font-size:.98rem}section ul,section ol{margin:14px 0 22px 1.4rem}section li{margin-bottom:8px;color:#3d5149}strong{color:var(--ink)}
+    footer{text-align:center;padding:55px 24px 125px;color:#9fb5ad;font-size:.88rem;background:var(--dark);border-top:1px solid rgba(255,255,255,.07)}
+    .terms-actions{
+  display:flex;
+  justify-content:flex-end;
+  align-items:center;
+  gap:10px;
+  margin:32px 0 8px;
+  padding:0;
+  border:0;
+  background:transparent;
+  box-shadow:none;
+  backdrop-filter:none;
+  -webkit-backdrop-filter:none;
+}
+    .terms-actions button{appearance:none;border:0;min-width:125px;padding:13px 20px;border-radius:13px;font:inherit;font-weight:800;letter-spacing:.01em;cursor:pointer;transition:transform .2s,box-shadow .2s,background .2s}.terms-actions button:hover{
+  background:#095b43;
+  border-color:#095b43!important;
+  transform:translateY(-1px);
+  box-shadow:0 5px 14px rgba(11,107,79,.18);
+}.accept-btn{
+  color:#ffffff;
+  background:#0b6b4f;
+  border:1px solid #0b6b4f!important;
+  box-shadow:none;
+  align-self:center;
+}.accept-btn:hover{box-shadow:0 12px 28px rgba(19,183,122,.38)}.decline-btn{
+  color:#ffffff;
+  background:#0b6b4f;
+  border:1px solid #0b6b4f!important;
+}.decline-btn:hover{background:rgba(184,52,52,.25)}.close-btn{
+  color:#ffffff;
+  background:#0b6b4f;
+  border:1px solid #0b6b4f!important;
+}.close-btn:hover{background:rgba(255,255,255,.13)}
+    @media(max-width:700px){.header-container{padding:12px 16px}.back-link{font-size:.8rem;padding:8px 11px}main{padding:25px 14px 130px}.page-header{padding:38px 27px;border-radius:23px}.toc{padding:22px;border-radius:20px}.toc ol{columns:1}section{padding:30px 23px;border-radius:20px}section h2{font-size:1.2rem}.terms-actions{width:calc(100% - 24px);bottom:12px;justify-content:stretch}.terms-actions button{min-width:0;flex:1;padding:12px 8px;font-size:.82rem}.page-header h1{font-size:2.45rem}}
+    @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*:before,*:after{transition:none!important}}
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="header-container">
+      <a class="logo">NIMALUNDA</a>
+    </div>
+  </header>
+
+  <main>
+    <div class="page-header">
+      <h1>Terms of Service</h1>
+      <p class="meta">
+        <strong>Last Updated:</strong> 7 October 2026 &nbsp;|&nbsp; 
+        <strong>Effective Date:</strong> 7 October 2026
+      </p>
+    </div>
+
+    <!-- Table of Contents -->
+    <div class="toc">
+      <h2>Contents</h2>
+      <ol>
+        <li><a href="#acceptance">Acceptance of Terms</a></li>
+        <li><a href="#about">About NIMALUNDA</a></li>
+        <li><a href="#eligibility">Eligibility and Accounts</a></li>
+        <li><a href="#acceptable-use">Acceptable Use</a></li>
+        <li><a href="#store">NIMALUNDA Store and Purchases</a></li>
+        <li><a href="#disclaimer">Plant Help, Farm Tracker & NIMALUNDA Ani Disclaimer</a></li>
+        <li><a href="#ip">Intellectual Property</a></li>
+        <li><a href="#user-content">User Content</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#liability">Limitation of Liability</a></li>
+        <li><a href="#termination">Termination</a></li>
+        <li><a href="#changes">Changes to These Terms</a></li>
+        <li><a href="#governing-law">Governing Law</a></li>
+        <li><a href="#contact">Contact Us</a></li>
+      </ol>
+    </div>
+
+    <!-- SECTION 1 -->
+    <section id="acceptance">
+      <h2>1. Acceptance of Terms</h2>
+      <p>By accessing, browsing, registering for, or otherwise using the NIMALUNDA Platform in any manner whatsoever, including but not limited to visiting the website located at https://nimilunda.netlify.app/, creating a user account, logging into an existing account, using any of the tools such as Plant Help, Farm Tracker, NIMALUNDA Ani, making purchases through the NIMALUNDA Store, reading or commenting on the NIMALUNDA Blog, downloading any related applications, or interacting with any feature offered under the Farm Based Management System brand, you expressly acknowledge that you have read, understood, and agree to be legally bound by these Terms of Service in their entirety. These Terms constitute a binding legal agreement between you, the individual user or entity accessing the Platform, and the operators of NIMALUNDA.</p>
+      <p>Your acceptance of these Terms is confirmed each time you access the Platform, whether through a web browser, mobile device, or any other means. If you do not agree with any part of these Terms, you are strictly prohibited from using the Platform and must immediately discontinue all access and use. Continued use after any updates or modifications to these Terms will constitute your acceptance of the revised version. We strongly encourage every user, especially first-time visitors and new account holders, to carefully review this entire document before proceeding.</p>
+      <p>These Terms apply to all users of the Platform without exception, including farmers, agricultural extension workers, input suppliers, students, researchers, and any other individuals or organizations that interact with NIMALUNDA services. The Platform is designed primarily to serve Ugandan farmers and the broader agricultural community within Uganda, and by using it you confirm that you understand the local context in which the services are offered. Acceptance of these Terms also means that you agree to comply with all applicable laws of the Republic of Uganda, including those related to data protection, electronic transactions, consumer protection, and agricultural regulations.</p>
+      <p>If you are accessing or using the Platform on behalf of a company, cooperative, NGO, government agency, or any other organization, you represent and warrant that you have the full legal authority to bind that organization to these Terms. In such cases, the terms “you” and “your” will refer to both you individually and the organization you represent. Failure to have such authority means that you personally accept responsibility for any breach of these Terms.</p>
+      <p>We reserve the right to refuse service, close accounts, or restrict access to any user who violates these Terms or who we reasonably believe is using the Platform in a manner inconsistent with its intended purpose of supporting responsible and productive farming practices. Your use of the Platform is a privilege, not a right, and is conditioned upon your ongoing compliance with every provision set out in this document. By clicking “Sign Up,” “Continue,” “I Agree,” or by simply continuing to use the services after being presented with these Terms, you create a legally enforceable contract with NIMALUNDA.</p>
+    </section>
+
+    <!-- SECTION 2 -->
+    <section id="about">
+      <h2>2. About NIMALUNDA</h2>
+      <p>NIMALUNDA, which stands for Farm Based Management System, is a digital agricultural platform specifically developed to support and empower farmers across Uganda through the use of simple, reliable, and accessible technology tools. The Platform brings together five core services under one unified system: the NIMALUNDA Store for purchasing quality farm inputs, tools and supplies; Plant Help for diagnosing plant diseases and receiving treatment recommendations; Farm Tracker for recording and monitoring crops, harvests, expenses and overall farm performance; NIMALUNDA Ani for managing livestock health, breeding cycles and feeding records; and the NIMALUNDA Blog for sharing practical farming tips, news, success stories and community knowledge.</p>
+      <p>The vision behind NIMALUNDA is to help Ugandan farmers move from traditional record-keeping methods to modern digital tools that improve decision-making, increase productivity, reduce losses, and ultimately contribute to better livelihoods. The Platform is built with the realities of smallholder and medium-scale farming in Uganda in mind, including challenges such as limited internet connectivity in some rural areas, varying levels of digital literacy, and the need for practical, actionable information rather than complex theoretical content.</p>
+      <p>NIMALUNDA is not merely a collection of separate applications; it is designed as an integrated ecosystem where data entered in one tool can support better outcomes in another. For example, records kept in Farm Tracker can help a farmer evaluate the financial impact of decisions made after using Plant Help, while livestock data in NIMALUNDA Ani can be reviewed alongside crop performance to give a fuller picture of the mixed farming enterprise that is common in many Ugandan households. The Blog serves as a knowledge-sharing space where farmers can learn from one another and from agricultural experts.</p>
+      <p>The operators of NIMALUNDA are committed to continuously improving the Platform based on feedback from users and developments in agricultural science and digital technology. We aim to keep the tools as straightforward as possible so that farmers with limited formal education or limited experience with smartphones and computers can still benefit. At the same time, we strive to offer enough depth and accuracy that progressive farmers, agribusinesses, and extension workers will find the Platform valuable in their daily work.</p>
+      <p>By using NIMALUNDA, you become part of a growing community of farmers who are adopting technology to cultivate success. The Platform is hosted and delivered through modern web technologies to ensure reasonable performance even on modest internet connections, and it is designed to work across a range of devices including basic smartphones, tablets, and desktop computers. While we make every effort to keep the services available and functional, the agricultural environment in Uganda presents unique challenges, and the Platform is offered with those practical realities in mind.</p>
+    </section>
+
+    <!-- SECTION 3 -->
+    <section id="eligibility">
+      <h2>3. Eligibility and Accounts</h2>
+      <p>To create an account and use the full range of features offered by the NIMALUNDA Platform, you must be at least eighteen (18) years of age. This age requirement is set to ensure that users have the legal capacity to enter into binding agreements under Ugandan law and to take responsibility for the accuracy of the information they enter and the decisions they make based on the tools provided. If you are under eighteen, you may only use the Platform under the direct supervision of a parent, guardian, or authorized adult who has agreed to these Terms on your behalf.</p>
+      <p>When you register for an account, you agree to provide true, accurate, current, and complete information about yourself. This includes, but is not limited to, your full name, a valid email address, and any other details requested during the sign-up process. You further agree to maintain and promptly update your account information so that it remains accurate at all times. Providing false or misleading information may result in the suspension or permanent termination of your account without notice.</p>
+      <p>You are solely responsible for safeguarding the confidentiality of your login credentials, including your email address and password. You must not share your password with any other person or allow anyone else to access your account. You accept full responsibility for all activities that occur under your account, whether or not you authorized those activities. If you become aware of any unauthorized use of your account or any other breach of security, you must notify NIMALUNDA immediately through the contact details provided in these Terms.</p>
+      <p>NIMALUNDA reserves the right to refuse registration, suspend accounts, or terminate access at any time if we have reasonable grounds to believe that the information provided is inaccurate, that the account is being used in violation of these Terms, or that continued access would pose a risk to the Platform, other users, or the integrity of the agricultural data ecosystem we are building. We may also require additional verification steps, such as phone number confirmation or identity checks, particularly for users who wish to make purchases through the NIMALUNDA Store or access certain advanced features.</p>
+      <p>Account holders are expected to use the Platform in good faith and in a manner consistent with its purpose of supporting productive and responsible farming. Creating multiple accounts for the purpose of abusing promotions, manipulating records, or circumventing restrictions is strictly prohibited. Each individual or legally recognized farming entity should maintain only one primary account unless expressly authorized otherwise by NIMALUNDA.</p>
+    </section>
+
+    <!-- SECTION 4 -->
+    <section id="acceptable-use">
+      <h2>4. Acceptable Use</h2>
+      <p>You agree to use the NIMALUNDA Platform only for lawful purposes and in a manner that does not infringe the rights of others, restrict or inhibit anyone else’s use of the Platform, or violate any applicable laws of Uganda or international standards that Uganda has adopted. Acceptable use means employing the tools for genuine farm management, learning, and agricultural improvement. You may enter accurate records of your crops and livestock, seek guidance on plant health issues, purchase legitimate farm inputs through the Store, and participate constructively in the Blog community.</p>
+      <p>Prohibited activities include, but are not limited to, the following: using the Platform to transmit or store any content that is illegal, harmful, threatening, abusive, harassing, defamatory, vulgar, obscene, or otherwise objectionable; attempting to gain unauthorized access to any part of the Platform, other users’ accounts, or any systems or networks connected to NIMALUNDA; introducing viruses, malware, or any other malicious code; scraping, data-mining, or using automated tools to extract information from the Platform without express written permission; impersonating any person or entity or falsely stating or misrepresenting your affiliation with any person or entity; and using the Platform to promote or engage in any form of fraud, pyramid schemes, or other deceptive practices.</p>
+      <p>In the specific context of Plant Help, Farm Tracker, and NIMALUNDA Ani, you agree not to enter deliberately false data for the purpose of testing, manipulating, or undermining the diagnostic or analytical functions. You also agree not to rely on the Platform’s outputs as the sole basis for decisions that could have serious consequences for animal welfare, food safety, or environmental compliance without seeking professional verification. On the Blog and any community features, you agree to engage respectfully, avoid personal attacks, hate speech, or content that could incite violence or discrimination, and refrain from posting commercial advertisements unless authorized.</p>
+      <p>NIMALUNDA reserves the right to investigate any suspected violation of these Acceptable Use provisions and to take appropriate action, which may include removing content, suspending or terminating accounts, reporting illegal activity to the relevant Ugandan authorities, and cooperating fully with law enforcement investigations. We may also use technical measures to detect and prevent prohibited activities. Your continued access to the Platform is conditioned on your ongoing compliance with these rules.</p>
+    </section>
+
+    <!-- SECTION 5 -->
+    <section id="store">
+      <h2>5. NIMALUNDA Store and Purchases</h2>
+      <p>The NIMALUNDA Store is an online marketplace that allows users to browse and purchase quality farm inputs, tools, equipment, and related supplies. Products available on the Store may be offered directly by NIMALUNDA or by third-party suppliers and vendors who have been onboarded onto the Platform. When you place an order, you enter into a purchase contract either with NIMALUNDA or with the relevant third-party seller, as clearly indicated at the time of purchase. Prices displayed on the Store are in Ugandan Shillings unless otherwise stated and are subject to change without prior notice until an order is confirmed.</p>
+      <p>All payments must be made through the secure payment methods made available on the Platform. By submitting payment information, you represent that you are authorized to use the selected payment method and that the information you provide is accurate and complete. NIMALUNDA does not store full payment card details on its servers; payment processing is handled by reputable third-party payment service providers who comply with applicable security standards. You are responsible for any fees charged by your bank or mobile money provider in connection with the transaction.</p>
+      <p>Delivery of physical products will be arranged according to the options selected at checkout and the delivery policies of the seller. Delivery times are estimates only and may be affected by factors beyond our control, including weather, road conditions, and logistical challenges common in various parts of Uganda. Risk of loss or damage to products passes to you upon delivery. Returns and refunds are governed by the specific return policy displayed at the time of purchase or in a separate Refund Policy document. Generally, products that have been opened, used, or customized may not be eligible for return unless they are defective.</p>
+      <p>NIMALUNDA acts as a facilitator for third-party sales and, except where NIMALUNDA is the direct seller, is not responsible for the quality, safety, legality, or delivery of products sold by third parties. We encourage users to review product descriptions carefully, check seller ratings where available, and contact the seller or NIMALUNDA support if issues arise. In the event of a dispute between a buyer and a third-party seller, NIMALUNDA may, at its sole discretion, assist in mediation but is under no obligation to resolve the dispute or provide compensation beyond what is required by applicable Ugandan consumer protection law.</p>
+    </section>
+
+    <!-- SECTION 6 -->
+    <section id="disclaimer">
+      <h2>6. Plant Help, Farm Tracker & NIMALUNDA Ani – Important Disclaimer</h2>
+      <p>The Plant Help, Farm Tracker, and NIMALUNDA Ani tools are provided solely as general informational and record-keeping aids to support farmers in managing their agricultural activities. Plant Help is designed to assist users in identifying possible plant diseases or nutrient deficiencies based on the symptoms and information they submit, and to suggest commonly recommended treatment approaches. Farm Tracker enables users to log crop activities, harvests, expenses, and performance metrics so they can review trends over time. NIMALUNDA Ani allows users to record livestock health observations, breeding events, and feeding schedules.</p>
+      <p>These tools do not constitute professional agricultural, veterinary, agronomic, or medical advice. The diagnostic suggestions generated by Plant Help are based on pattern matching and general knowledge and cannot account for all local variations in soil, climate, pest pressure, or crop varieties found across Uganda. Treatment recommendations are not prescriptions and should never be followed without confirmation from a qualified agricultural extension officer, plant pathologist, or veterinarian. Decisions regarding the application of pesticides, fertilizers, or animal medicines carry risks to human health, animal welfare, crop safety, and the environment; users must comply with all label instructions and national regulations.</p>
+      <p>Farm Tracker and NIMALUNDA Ani store the data that you enter. While we implement reasonable technical and organizational measures to protect that data, we do not guarantee that the records will be free from error, loss, or unauthorized access. You remain solely responsible for the accuracy of the information you record and for maintaining your own independent backup records if the information is critical to your farming operations or regulatory compliance. Any performance analysis, yield projections, or health trend insights generated by the tools are estimates only and should not be treated as definitive forecasts.</p>
+      <p>By using these tools, you acknowledge that farming involves inherent uncertainties and risks, including weather events, pest outbreaks, market fluctuations, and biological variability. NIMALUNDA and its operators shall not be liable for any loss of crops, livestock, income, or any other damages arising from reliance on information or suggestions provided by Plant Help, Farm Tracker, or NIMALUNDA Ani. Always seek the advice of competent local professionals before taking actions that could significantly affect your farm’s productivity or the health of your animals and plants.</p>
+    </section>
+
+    <!-- SECTION 7 -->
+    <section id="ip">
+      <h2>7. Intellectual Property</h2>
+      <p>All intellectual property rights in and to the NIMALUNDA Platform, including but not limited to the software code, database structures, user interface designs, graphics, logos, icons, text content created by NIMALUNDA, trademarks, service marks, trade names, and the overall look and feel of the Platform, are and shall remain the exclusive property of NIMALUNDA or its licensors. These rights are protected under the copyright laws of Uganda, international copyright treaties, and other applicable intellectual property laws.</p>
+      <p>You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Platform solely for your personal or internal business purposes of farm management in accordance with these Terms. This license does not include the right to copy, modify, distribute, sell, lease, reverse-engineer, decompile, or create derivative works based on any part of the Platform. You may not remove, obscure, or alter any copyright, trademark, or other proprietary notices displayed on the Platform.</p>
+      <p>The NIMALUNDA name, logo, and all related names, logos, product and service names, designs, and slogans are trademarks of NIMALUNDA or its affiliates. You may not use such marks without the prior written permission of NIMALUNDA. Any unauthorized use of the intellectual property of NIMALUNDA may result in legal action, including claims for damages and injunctive relief. Third-party trademarks, product names, and logos that may appear on the Platform, particularly in the NIMALUNDA Store or Blog, are the property of their respective owners and are used only for identification purposes.</p>
+      <p>If you believe that any content on the Platform infringes your intellectual property rights, you may submit a notice to the contact address provided in these Terms. We will investigate valid notices and take appropriate action in accordance with applicable law. Users who repeatedly post infringing content may have their accounts terminated.</p>
+    </section>
+
+    <!-- SECTION 8 -->
+    <section id="user-content">
+      <h2>8. User Content</h2>
+      <p>The NIMALUNDA Platform may allow you to submit, upload, publish, or otherwise make available content, including but not limited to text, photographs, farm records, comments on the Blog, feedback, suggestions, and any other materials (collectively, “User Content”). You retain ownership of any intellectual property rights that you hold in your User Content. However, by submitting User Content to the Platform, you grant NIMALUNDA a worldwide, non-exclusive, royalty-free, transferable, sub-licensable license to use, reproduce, modify, adapt, publish, translate, distribute, and display such User Content in connection with operating, promoting, and improving the Platform and for other legitimate business purposes.</p>
+      <p>You represent and warrant that you own or have obtained all necessary rights, licenses, and permissions to submit the User Content and to grant the license described above; that the User Content does not infringe the intellectual property, privacy, or other rights of any third party; and that the User Content is accurate and not misleading. You are solely responsible for your User Content and the consequences of posting or publishing it. NIMALUNDA does not endorse any User Content and has no obligation to monitor, edit, or control User Content, although we reserve the right to remove any User Content that violates these Terms or that we consider objectionable for any reason.</p>
+      <p>You understand that User Content you submit may be visible to other users of the Platform, depending on the settings and features you use. You should not submit sensitive personal information or confidential business information unless you are comfortable with the possibility of it being viewed by others. NIMALUNDA is not responsible for any use or misuse of User Content by other users. If you delete your account, we will make reasonable efforts to remove your User Content from active display, but residual copies may remain in our backup systems for a limited period in accordance with our data retention practices.</p>
+    </section>
+
+    <!-- SECTION 9 -->
+    <section id="privacy">
+      <h2>9. Privacy</h2>
+      <p>Your privacy is important to us. The collection, use, storage, and protection of personal information that you provide while using the NIMALUNDA Platform are governed by our separate Privacy Policy, which is incorporated into these Terms by reference. By using the Platform, you consent to the practices described in the Privacy Policy. We collect information such as your name, email address, farm-related data that you enter into the tools, and technical information about your device and usage patterns in order to provide and improve the services, process transactions, communicate with you, and ensure the security of the Platform.</p>
+      <p>We implement reasonable technical and organizational security measures to protect your personal information against unauthorized access, loss, or alteration. However, no method of transmission over the internet or electronic storage is completely secure, and we cannot guarantee absolute security. You are responsible for maintaining the confidentiality of your account credentials and for any activity that occurs under your account.</p>
+      <p>We may share your information with trusted service providers who assist us in operating the Platform, processing payments, or analyzing usage, subject to confidentiality obligations. We may also disclose information if required by law or to protect the rights, property, or safety of NIMALUNDA, our users, or the public. You have certain rights under applicable Ugandan data protection laws regarding access to, correction of, and deletion of your personal information. Details on how to exercise those rights are set out in the Privacy Policy.</p>
+    </section>
+
+    <!-- SECTION 10 -->
+    <section id="liability">
+      <h2>10. Limitation of Liability</h2>
+      <p>To the fullest extent permitted by the laws of the Republic of Uganda, the NIMALUNDA Platform and all content, tools, and services provided through it are offered on an “as is” and “as available” basis, without any warranties of any kind, whether express, implied, or statutory. This includes, without limitation, any implied warranties of merchantability, fitness for a particular purpose, title, non-infringement, accuracy, or reliability. We do not warrant that the Platform will be uninterrupted, error-free, secure, or free of viruses or other harmful components, or that any defects will be corrected.</p>
+      <p>In no event shall NIMALUNDA, its operators, officers, employees, agents, partners, or licensors be liable for any indirect, incidental, special, consequential, punitive, or exemplary damages, including but not limited to damages for loss of profits, loss of crops, loss of livestock, loss of data, loss of goodwill, business interruption, or any other intangible losses, arising out of or in connection with your use of or inability to use the Platform, even if we have been advised of the possibility of such damages.</p>
+      <p>Our total aggregate liability to you for any claims arising out of or related to these Terms or the Platform shall not exceed the amount you have paid to NIMALUNDA, if any, in the twelve (12) months preceding the claim, or one hundred thousand Ugandan Shillings (UGX 100,000), whichever is greater. Some jurisdictions do not allow the exclusion or limitation of certain warranties or liabilities; in such cases, the limitations in this section shall apply to the maximum extent permitted by applicable law.</p>
+      <p>You acknowledge that the limitations of liability set out in this section are a fundamental element of the agreement between you and NIMALUNDA and that the Platform would not be provided without these limitations.</p>
+    </section>
+
+    <!-- SECTION 11 -->
+    <section id="termination">
+      <h2>11. Termination</h2>
+      <p>These Terms remain in effect until terminated by either you or NIMALUNDA. You may terminate your agreement with us at any time by discontinuing use of the Platform and, if you have an account, by requesting deletion of your account through the contact methods provided. NIMALUNDA may suspend or terminate your access to the Platform, or any part of it, at any time, with or without notice, for any reason, including but not limited to violation of these Terms, extended periods of inactivity, requests by law enforcement or other government agencies, or discontinuation of the Platform or any of its features.</p>
+      <p>Upon termination, your right to use the Platform will immediately cease. We may delete or deactivate your account and all related information and files. Provisions of these Terms that by their nature should survive termination (including but not limited to ownership provisions, warranty disclaimers, limitations of liability, and indemnification) shall survive. Termination does not relieve you of any obligations incurred prior to termination, including payment obligations for purchases made through the NIMALUNDA Store.</p>
+      <p>We reserve the right to refuse future registration or access to any individual whose account has been terminated for violation of these Terms. If you believe your account was terminated in error, you may contact us to request a review.</p>
+    </section>
+
+    <!-- SECTION 12 -->
+    <section id="changes">
+      <h2>12. Changes to These Terms</h2>
+      <p>NIMALUNDA reserves the right to modify, update, or replace these Terms at any time at our sole discretion. When we make material changes, we will post the updated Terms on the Platform and update the “Last Updated” date at the top of this document. We may also provide notice through the Platform interface, by email to the address associated with your account, or by other reasonable means.</p>
+      <p>Your continued use of the Platform after the effective date of any revised Terms constitutes your acceptance of the changes. If you do not agree to the new Terms, you must stop using the Platform and, if applicable, close your account. It is your responsibility to review these Terms periodically for changes. We encourage you to check this page regularly so that you are aware of any updates.</p>
+      <p>Minor changes that do not materially affect your rights or obligations may be made without specific notice. Material changes will be highlighted where reasonably practicable. The version of the Terms that is in effect at the time of any dispute or claim shall govern that dispute or claim.</p>
+    </section>
+
+    <!-- SECTION 13 -->
+    <section id="governing-law">
+      <h2>13. Governing Law</h2>
+      <p>These Terms of Service and any dispute, claim, or controversy arising out of or relating to these Terms, the Platform, or the relationship between you and NIMALUNDA shall be governed by and construed in accordance with the laws of the Republic of Uganda, without regard to its conflict of law principles.</p>
+      <p>Any legal action or proceeding arising under these Terms shall be brought exclusively in the courts located in Uganda, and you hereby consent to the personal jurisdiction and venue of such courts. You agree that any dispute resolution proceedings will be conducted only on an individual basis and not in a class, consolidated, or representative action. If any provision of these Terms is found to be unenforceable or invalid by a court of competent jurisdiction, that provision shall be limited or eliminated to the minimum extent necessary so that these Terms shall otherwise remain in full force and effect and enforceable.</p>
+      <p>The failure of NIMALUNDA to enforce any right or provision of these Terms shall not constitute a waiver of such right or provision. The section titles in these Terms are for convenience only and have no legal or contractual effect.</p>
+    </section>
+
+    <!-- SECTION 14 -->
+    <section id="contact">
+      <h2>14. Contact Us</h2>
+      <p>If you have any questions, concerns, complaints, or feedback regarding these Terms of Service, the NIMALUNDA Platform, or any related matter, you may contact us using the following details:</p>
+      <p>
+        <strong>Email:</strong> [Insert your official support or legal email address here]<br>
+        <strong>Phone:</strong> [Insert your official contact phone number here]<br>
+        <strong>Physical / Postal Address:</strong> [Insert your official business address in Uganda here]
+      </p>
+      <p>We will make reasonable efforts to respond to legitimate inquiries within a reasonable time. For account-related requests such as data access, correction, or deletion, please include sufficient information to allow us to verify your identity and locate your account. For legal notices, please mark the communication clearly as a formal notice.</p>
+      <p>By providing contact information, you consent to receive communications from us regarding your account, these Terms, updates to the Platform, and other relevant matters. You may update your contact preferences through your account settings where available.</p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>© 2026 NIMALUNDA – Farm Based Management System. All rights reserved.</p>
+  </footer>
+
+  <div class="terms-actions" role="group" aria-label="Terms actions">
+    <button class="accept-btn" onclick="acceptTerms()">✓ &nbsp;Accept</button>
+    <button class="decline-btn" onclick="declineTerms()">✕ &nbsp;Decline</button>
+    <button class="close-btn" onclick="closeTerms()">Close</button>
+  </div>
+
+  <script>
+    function sendDecision(type){
+      if(window.parent && window.parent!==window){
+        window.parent.postMessage({type:type}, window.location.origin); return;
+      }
+      if(window.opener && !window.opener.closed){
+        window.opener.postMessage({type:type}, window.location.origin);
+        window.close();
+      }else{
+        history.back();
+      }
+    }
+    function acceptTerms(){sendDecision('termsAccepted')}
+    function declineTerms(){sendDecision('termsDeclined')}
+    function closeTerms(){
+      if(window.parent && window.parent!==window){window.parent.postMessage({type:'termsClosed'}, window.location.origin);return;}
+      if(window.opener && !window.opener.closed) window.close();
+      else history.back();
+    }
+  </script>
+
+</body>
+</html>
