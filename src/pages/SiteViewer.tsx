@@ -54,8 +54,11 @@ export default function SiteViewer() {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 relative">
-        <iframe key={language} src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
+      <div className="flex-1 relative notranslate" translate="no">
+        <iframe data-fbms-tool src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
+          onLoad={(e) => {
+            try { e.currentTarget.contentWindow?.postMessage({ type: 'FBMS_LANG', lang: language }, new URL(site.url).origin); } catch { /* ignore */ }
+          }}
           sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox"
           allow="camera; microphone; geolocation" />
       </div>

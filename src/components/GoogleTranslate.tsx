@@ -19,17 +19,8 @@ declare global {
   }
 }
 
-// Google Translate language codes for our local languages
-// Not all may be supported by Google Translate, but we include the ones that are
-const LOCAL_LANGUAGES = [
-  'en',  // English
-  'lg',  // Luganda
-  'sw',  // Kiswahili
-  'ach', // Acholi
-  'ny',  // Chichewa (closest to some Bantu languages)
-  'rw',  // Kinyarwanda (close to Rukiga/Runyankole)
-  'rn',  // Kirundi (close to regional languages)
-].join(',');
+// Only languages Google Translate supports; others use the app's own strings
+const LOCAL_LANGUAGES = ['en', 'lg', 'sw', 'ach', 'cgg'].join(',');
 
 export function GoogleTranslate() {
   const initialized = useRef(false);

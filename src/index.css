@@ -181,3 +181,6 @@
 body {
   top: 0 !important;
 }
+/* Hide Google Translate banner/tooltips */
+iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd { display: none !important; }
+.goog-text-highlight { background: none !important; box-shadow: none !important; }
