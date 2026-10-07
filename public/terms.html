@@ -239,6 +239,9 @@
 
   <script>
     function sendDecision(type){
+      if(window.parent && window.parent!==window){
+        window.parent.postMessage({type:type}, window.location.origin); return;
+      }
       if(window.opener && !window.opener.closed){
         window.opener.postMessage({type:type}, window.location.origin);
         window.close();
@@ -249,6 +252,7 @@
     function acceptTerms(){sendDecision('termsAccepted')}
     function declineTerms(){sendDecision('termsDeclined')}
     function closeTerms(){
+      if(window.parent && window.parent!==window){window.parent.postMessage({type:'termsClosed'}, window.location.origin);return;}
       if(window.opener && !window.opener.closed) window.close();
       else history.back();
     }
