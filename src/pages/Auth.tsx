@@ -4,22 +4,34 @@ import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Checkbox } from '@/components/ui/checkbox';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from '@/components/ui/dialog';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { GoogleTranslate } from '@/components/GoogleTranslate';
-import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail } from 'lucide-react';
 import { ThemeToggle } from '@/components/ThemeToggle';
-import fbmsLogo from '@/assets/fbms.png';
+import { toast } from 'sonner';
+import { Eye, EyeOff, User, Lock, Mail, ShieldCheck, Sprout, Leaf, LineChart, Store, BookOpen } from 'lucide-react';
+import logo from '@/assets/nimalunda-logo.png';
+
+const BRAND = 'NIMALUNDA';
 
 const authSchema = z.object({
-  email: z.string().email({ message: 'Please enter a valid email address' }),
-  password: z.string().min(6, { message: 'Password must be at least 6 characters' }),
-  fullName: z.string().optional(),
+  email: z.string().trim().email({ message: 'Please enter a valid email address' }).max(255),
+  password: z.string().min(6, { message: 'Password must be at least 6 characters' }).max(72),
+  fullName: z.string().trim().max(100).optional(),
 });
+
+const tools = [
+  { icon: Sprout, name: 'Plant Help', key: 'sitePlantHelpDesc' },
+  { icon: Leaf, name: `${BRAND} Ani`, key: 'siteAniDesc' },
+  { icon: LineChart, name: 'Farm Tracker', key: 'siteFarmTrackerDesc' },
+  { icon: Store, name: 'Farm Market', key: 'siteStoreDesc' },
+  { icon: BookOpen, name: `${BRAND} Blog`, key: 'siteBlogDesc' },
+] as const;
 
 export default function Auth() {
   const [isLoading, setIsLoading] = useState(false);
@@ -27,70 +39,48 @@ export default function Auth() {
   const [password, setPassword] = useState('');
   const [fullName, setFullName] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const [termsOpen, setTermsOpen] = useState(false);
+  const [termsRead, setTermsRead] = useState(false);
+  const [agreed, setAgreed] = useState(false);
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
 
   useEffect(() => {
-    if (user) {
-      navigate('/', { replace: true });
-    }
+    if (user) navigate('/', { replace: true });
   }, [user, navigate]);
+
+  // Listen to Accept / Decline / Close buttons inside the terms page
+  useEffect(() => {
+    const onMsg = (e: MessageEvent) => {
+      if (e.origin !== window.location.origin) return;
+      const type = e.data?.type;
+      if (type === 'termsAccepted') {
+        setTermsRead(true);
+        setAgreed(true);
+        setTermsOpen(false);
+        toast.success('Thanks — you agreed to the Terms & Policies.');
+      } else if (type === 'termsDeclined') {
+        setAgreed(false);
+        setTermsOpen(false);
+        toast.error('You must accept the Terms & Policies to create an account.');
+      } else if (type === 'termsClosed') {
+        setTermsOpen(false);
+      }
+    };
+    window.addEventListener('message', onMsg);
+    return () => window.removeEventListener('message', onMsg);
+  }, []);
 
   const handleSignIn = async (e: React.FormEvent) => {
     e.preventDefault();
+    const v = authSchema.safeParse({ email, password });
+    if (!v.success) return toast.error(v.error.errors[0].message);
     setIsLoading(true);
     try {
-      const validation = authSchema.safeParse({ email, password });
-      if (!validation.success) {
-        toast.error(validation.error.errors[0].message);
-        return;
-      }
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) {
-        toast.error(error.message.includes('Invalid login credentials') ? t.auth.invalidCredentials : error.message);
-      } else {
-        toast.success(t.auth.signedIn);
-      }
-    } catch {
-      toast.error(t.auth.unexpectedError);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  const handleResendConfirmation = async () => {
-    const emailValidation = z.string().email().safeParse(email);
-    if (!emailValidation.success) {
-      toast.error('Please enter your email above first');
-      return;
-    }
-    setIsLoading(true);
-    try {
-      const { error } = await supabase.auth.resend({
-        type: 'signup',
-        email,
-        options: { emailRedirectTo: `${window.location.origin}/` },
-      });
-      if (error) {
-        toast.error(error.message);
-      } else {
-        // Also send a friendly notification via Resend
-        await supabase.functions.invoke('send-email', {
-          body: {
-            to: email,
-            subject: 'Confirm your FBMS account',
-            html: `<div style="font-family:DM Sans,Arial,sans-serif;padding:24px;color:#1b1b1b">
-              <h2 style="color:#2E7D32;margin:0 0 12px">Welcome to FBMS 🌱</h2>
-              <p>We just re-sent your confirmation email. Please check your inbox (and spam folder) for the link to verify your account.</p>
-              <p>If you didn't request this, you can safely ignore this message.</p>
-              <p style="margin-top:24px;color:#666;font-size:13px">— The FBMS Team</p>
-            </div>`,
-          },
-        });
-        toast.success('Confirmation email sent! Check your inbox.');
-      }
-
+      const { error } = await supabase.auth.signInWithPassword({ email: email.trim(), password });
+      if (error) toast.error(error.message.includes('Invalid login credentials') ? t.auth.invalidCredentials : error.message);
+      else toast.success(t.auth.signedIn);
     } catch {
       toast.error(t.auth.unexpectedError);
     } finally {
@@ -100,25 +90,60 @@ export default function Auth() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!termsRead || !agreed) {
+      toast.error('Please read and agree to the Terms & Policies first.');
+      setTermsOpen(true);
+      return;
+    }
+    const v = authSchema.safeParse({ email, password, fullName });
+    if (!v.success) return toast.error(v.error.errors[0].message);
     setIsLoading(true);
     try {
-      const validation = authSchema.safeParse({ email, password, fullName });
-      if (!validation.success) {
-        toast.error(validation.error.errors[0].message);
-        return;
-      }
       const { error } = await supabase.auth.signUp({
-        email,
+        email: email.trim(),
         password,
         options: {
           emailRedirectTo: `${window.location.origin}/`,
-          data: { full_name: fullName },
+          data: { full_name: fullName.trim(), terms_accepted_at: new Date().toISOString() },
         },
       });
+      if (error) toast.error(error.message.includes('already registered') ? t.auth.accountExists : error.message);
+      else toast.success(`${t.auth.accountCreated} Check your email to confirm.`);
+    } catch {
+      toast.error(t.auth.unexpectedError);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResendConfirmation = async () => {
+    if (!z.string().email().safeParse(email.trim()).success) {
+      toast.error('Please enter your email above first');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const { error } = await supabase.auth.resend({
+        type: 'signup',
+        email: email.trim(),
+        options: { emailRedirectTo: `${window.location.origin}/` },
+      });
       if (error) {
-        toast.error(error.message.includes('already registered') ? t.auth.accountExists : error.message);
+        toast.error(error.message);
       } else {
-        toast.success(t.auth.accountCreated);
+        await supabase.functions.invoke('send-email', {
+          body: {
+            to: email.trim(),
+            subject: `Confirm your ${BRAND} account`,
+            html: `<div style="font-family:DM Sans,Arial,sans-serif;padding:24px;color:#1b1b1b">
+              <h2 style="color:#166534;margin:0 0 12px">Welcome to ${BRAND} 🌱</h2>
+              <p>We just re-sent your confirmation email. Please check your inbox (and spam folder) for the link to verify your account.</p>
+              <p>If you didn't request this, you can safely ignore this message.</p>
+              <p style="margin-top:24px;color:#666;font-size:13px">— The ${BRAND} Team</p>
+            </div>`,
+          },
+        });
+        toast.success('Confirmation email sent! Check your inbox.');
       }
     } catch {
       toast.error(t.auth.unexpectedError);
@@ -127,229 +152,172 @@ export default function Auth() {
     }
   };
 
-  return (
-    <div className="min-h-screen grid lg:grid-cols-2">
-      {/* Left side - Green farm background overlay */}
-      <div
-        className="hidden lg:flex flex-col justify-center items-center p-12 text-white relative overflow-hidden"
-        style={{
-          background: 'linear-gradient(135deg, rgba(27, 94, 32, 0.92) 0%, rgba(46, 125, 50, 0.85) 50%, rgba(76, 175, 80, 0.78) 100%)',
-        }}
+  const onTermsScroll = (e: React.SyntheticEvent<HTMLIFrameElement>) => {
+    const win = e.currentTarget.contentWindow;
+    if (!win) return;
+    const check = () => {
+      const d = win.document.documentElement;
+      if (d.scrollTop + win.innerHeight >= d.scrollHeight - 60) setTermsRead(true);
+    };
+    win.addEventListener('scroll', check);
+  };
+
+  const inputCls = 'h-12 rounded-xl bg-muted/40 pl-10 focus-visible:ring-primary/30';
+
+  const passwordField = (id: string, withPlaceholder: boolean) => (
+    <div className="relative">
+      <Lock className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Input
+        id={id}
+        type={showPassword ? 'text' : 'password'}
+        placeholder={withPlaceholder ? t.auth.passwordPlaceholder : undefined}
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+        className={`${inputCls} pr-10`}
+        required
+      />
+      <button
+        type="button"
+        onClick={() => setShowPassword(!showPassword)}
+        aria-label={showPassword ? 'Hide password' : 'Show password'}
+        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
       >
-        {/* Decorative circles */}
-        <div className="absolute -top-20 -left-20 w-72 h-72 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.3), transparent)' }} />
-        <div className="absolute -bottom-32 -right-32 w-96 h-96 rounded-full opacity-10" style={{ background: 'radial-gradient(circle, rgba(255,255,255,0.2), transparent)' }} />
+        {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+      </button>
+    </div>
+  );
 
-        <div className="relative z-10 text-center space-y-6 max-w-md">
-          <img src={fbmsLogo} alt="FBMS Logo" className="w-32 h-32 mx-auto drop-shadow-2xl" />
-          <div>
-            <h1 className="text-4xl font-display font-bold tracking-tight">
-              {t.auth.heroTitleMain}
-            </h1>
-            <p className="mt-3 text-lg opacity-90 font-light">
-              {t.auth.heroSubtitleMain}
-            </p>
-          </div>
-          <div className="space-y-3 pt-4">
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
-              <div>
-                <span className="text-sm font-semibold block">FBMS Store</span>
-                <span className="text-xs opacity-80">{t.auth.siteStoreDesc}</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
-              <div>
-                <span className="text-sm font-semibold block">Plant Help</span>
-                <span className="text-xs opacity-80">{t.auth.sitePlantHelpDesc}</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
-              <div>
-                <span className="text-sm font-semibold block">Farm Tracker</span>
-                <span className="text-xs opacity-80">{t.auth.siteFarmTrackerDesc}</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
-              <div>
-                <span className="text-sm font-semibold block">FBMS Ani</span>
-                <span className="text-xs opacity-80">{t.auth.siteAniDesc}</span>
-              </div>
-            </div>
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 text-left">
-              <img src={fbmsLogo} alt="FBMS" className="w-8 h-8 rounded-md" />
-              <div>
-                <span className="text-sm font-semibold block">FBMS Blog</span>
-                <span className="text-xs opacity-80">{t.auth.siteBlogDesc}</span>
-              </div>
-            </div>
-          </div>
-          <p className="text-xs opacity-60 pt-6">{t.auth.authFooter}</p>
+  const emailField = (id: string) => (
+    <div className="relative">
+      <Mail className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+      <Input id={id} type="email" placeholder={t.auth.emailPlaceholder} value={email}
+        onChange={(e) => setEmail(e.target.value)} className={inputCls} required />
+    </div>
+  );
+
+  return (
+    <div className="min-h-screen grid lg:grid-cols-[1.1fr_1fr] bg-background">
+      {/* Brand side */}
+      <aside className="relative hidden lg:flex flex-col justify-between overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] p-12 text-primary-foreground">
+        <div className="pointer-events-none absolute -right-24 -top-32 h-96 w-96 rounded-full border border-primary-foreground/10 shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
+        <div className="flex items-center gap-3">
+          <img src={logo} alt={`${BRAND} logo`} className="h-12 w-12 rounded-full" />
+          <span className="font-display text-xl font-bold tracking-[0.12em]">{BRAND}</span>
         </div>
-      </div>
 
-      {/* Right side - Auth form */}
-      <div className="flex items-center justify-center p-8 bg-background relative">
-        <div className="absolute top-4 right-4 flex items-center gap-2">
+        <div className="relative z-10 max-w-md space-y-8">
+          <img src={logo} alt="" className="h-40 w-40 rounded-full shadow-2xl" />
+          <div>
+            <h1 className="font-display text-5xl font-bold leading-[1.05] tracking-tight">{t.auth.heroTitleMain}</h1>
+            <p className="mt-4 text-lg opacity-85">{t.auth.heroSubtitleMain}</p>
+          </div>
+          <ul className="space-y-2.5">
+            {tools.map(({ icon: Icon, name, key }) => (
+              <li key={name} className="flex items-center gap-3 rounded-xl bg-primary-foreground/10 px-4 py-2.5 backdrop-blur-sm">
+                <Icon className="h-5 w-5 shrink-0 opacity-90" />
+                <div>
+                  <span className="block text-sm font-semibold">{name}</span>
+                  <span className="text-xs opacity-75">{t.auth[key]}</span>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <p className="text-xs opacity-60">© {new Date().getFullYear()} {BRAND}. {t.auth.authFooter}</p>
+      </aside>
+
+      {/* Form side */}
+      <main className="relative flex items-center justify-center p-6 sm:p-10">
+        <div className="absolute right-4 top-4 flex items-center gap-2">
           <GoogleTranslate />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
-        <div className="w-full max-w-sm space-y-6">
-          {/* Mobile logo */}
-          <div className="lg:hidden text-center mb-4">
-            <img src={fbmsLogo} alt="FBMS Logo" className="w-20 h-20 mx-auto mb-2" />
-            <h1 className="font-display text-xl font-bold text-primary">Farm Based Management System</h1>
-            <p className="text-sm text-primary/70">Cultivating Success Through Technology</p>
+
+        <div className="w-full max-w-md space-y-7 pt-10">
+          <div className="flex items-center gap-3 lg:hidden">
+            <img src={logo} alt={`${BRAND} logo`} className="h-12 w-12 rounded-full" />
+            <span className="font-display text-xl font-bold tracking-[0.12em] text-primary">{BRAND}</span>
           </div>
 
-          <div className="space-y-1">
-            <h2 className="font-display text-2xl font-semibold tracking-tight text-primary">
-              {t.auth.getStarted}
-            </h2>
-            <p className="text-muted-foreground text-sm">{t.auth.enterDetails}</p>
+          <div className="space-y-2">
+            <h2 className="font-display text-3xl font-semibold tracking-tight">{t.auth.getStarted}</h2>
+            <p className="text-sm text-muted-foreground">{t.auth.enterDetails}</p>
           </div>
 
           <Tabs defaultValue="signin" className="w-full">
-            <TabsList className="grid w-full grid-cols-2 h-11 p-1" style={{ background: 'rgba(76, 175, 80, 0.1)', border: '1px solid rgba(76, 175, 80, 0.2)' }}>
-              <TabsTrigger
-                value="signin"
-                className="data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary rounded-md text-sm font-medium"
-              >
-                {t.auth.signIn}
-              </TabsTrigger>
-              <TabsTrigger
-                value="signup"
-                className="data-[state=active]:bg-background data-[state=active]:shadow-sm data-[state=active]:text-primary rounded-md text-sm font-medium"
-              >
-                {t.auth.signUp}
-              </TabsTrigger>
+            <TabsList className="grid h-11 w-full grid-cols-2 rounded-xl bg-primary/10 p-1">
+              <TabsTrigger value="signin" className="rounded-lg data-[state=active]:text-primary">{t.auth.signIn}</TabsTrigger>
+              <TabsTrigger value="signup" className="rounded-lg data-[state=active]:text-primary">{t.auth.signUp}</TabsTrigger>
             </TabsList>
 
             <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSignIn} className="space-y-4 bg-card p-6 rounded-2xl shadow-lg border border-primary/20">
+              <form onSubmit={handleSignIn} className="space-y-4 rounded-3xl border border-border bg-card p-7 shadow-xl">
                 <div className="space-y-1.5">
-                  <Label htmlFor="signin-email" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
-                    <Mail className="w-4 h-4 text-primary" />
-                    {t.auth.emailLabel}
-                  </Label>
-                  <Input
-                    id="signin-email"
-                    type="email"
-                    placeholder={t.auth.emailPlaceholder}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
-                    required
-                  />
+                  <Label htmlFor="signin-email">{t.auth.emailLabel}</Label>
+                  {emailField('signin-email')}
                 </div>
                 <div className="space-y-1.5">
-                  <Label htmlFor="signin-password" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
-                    <Lock className="w-4 h-4 text-primary" />
-                    {t.auth.passwordLabel}
-                  </Label>
-                  <div className="relative">
-                    <Input
-                      id="signin-password"
-                      type={showPassword ? 'text' : 'password'}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg pr-10"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
-                  </div>
+                  <Label htmlFor="signin-password">{t.auth.passwordLabel}</Label>
+                  {passwordField('signin-password', false)}
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full h-11 font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all"
-                  style={{ background: 'linear-gradient(135deg, #2E7D32, #4CAF50)' }}
-                  disabled={isLoading}
-                >
+                <Button type="submit" className="h-12 w-full rounded-xl font-semibold" disabled={isLoading}>
                   {isLoading ? t.auth.signingIn : t.auth.continueBtn}
                 </Button>
               </form>
             </TabsContent>
 
             <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSignUp} className="space-y-4 bg-card p-6 rounded-2xl shadow-lg border border-primary/20">
+              <form onSubmit={handleSignUp} className="space-y-4 rounded-3xl border border-border bg-card p-7 shadow-xl">
                 <div className="space-y-1.5">
-                  <Label htmlFor="signup-name" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
-                    <User className="w-4 h-4 text-primary" />
-                    {t.auth.fullNameLabel}
-                  </Label>
-                  <Input
-                    id="signup-name"
-                    type="text"
-                    placeholder={t.auth.fullNamePlaceholder}
-                    value={fullName}
-                    onChange={(e) => setFullName(e.target.value)}
-                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="signup-email" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
-                    <Mail className="w-4 h-4 text-primary" />
-                    {t.auth.emailLabel}
-                  </Label>
-                  <Input
-                    id="signup-email"
-                    type="email"
-                    placeholder={t.auth.emailPlaceholder}
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg"
-                    required
-                  />
-                </div>
-                <div className="space-y-1.5">
-                  <Label htmlFor="signup-password" className="text-sm font-medium flex items-center gap-2 text-foreground/80">
-                    <Lock className="w-4 h-4 text-primary" />
-                    {t.auth.passwordLabel}
-                  </Label>
+                  <Label htmlFor="signup-name">{t.auth.fullNameLabel}</Label>
                   <div className="relative">
-                    <Input
-                      id="signup-password"
-                      type={showPassword ? 'text' : 'password'}
-                      placeholder={t.auth.passwordPlaceholder}
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      className="h-11 bg-muted/30 border-border focus:border-primary focus:ring-primary/20 transition-colors rounded-lg pr-10"
-                      required
-                    />
-                    <button
-                      type="button"
-                      onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground"
-                    >
-                      {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
-                    </button>
+                    <User className="absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+                    <Input id="signup-name" type="text" placeholder={t.auth.fullNamePlaceholder} value={fullName}
+                      onChange={(e) => setFullName(e.target.value)} className={inputCls} />
                   </div>
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full h-11 font-semibold text-white rounded-lg shadow-md hover:shadow-lg transition-all"
-                  style={{ background: 'linear-gradient(135deg, #2E7D32, #4CAF50)' }}
-                  disabled={isLoading}
-                >
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-email">{t.auth.emailLabel}</Label>
+                  {emailField('signup-email')}
+                </div>
+                <div className="space-y-1.5">
+                  <Label htmlFor="signup-password">{t.auth.passwordLabel}</Label>
+                  {passwordField('signup-password', true)}
+                </div>
+
+                {/* Terms agreement */}
+                <div className="flex items-start gap-3 rounded-xl border border-border bg-muted/40 p-4 text-sm">
+                  <Checkbox
+                    id="terms"
+                    checked={agreed}
+                    onCheckedChange={(v) => {
+                      if (!termsRead) {
+                        toast.info('Please open and read the Terms & Policies first.');
+                        setTermsOpen(true);
+                        return;
+                      }
+                      setAgreed(v === true);
+                    }}
+                    className="mt-0.5"
+                  />
+                  <label htmlFor="terms" className="leading-relaxed text-muted-foreground">
+                    I have read and agree to the{' '}
+                    <button type="button" onClick={() => setTermsOpen(true)} className="font-semibold text-primary hover:underline">
+                      Terms of Service & Policies
+                    </button>{' '}
+                    of {BRAND}.
+                    {!termsRead && <span className="mt-1 block text-xs">You must read them before you can agree.</span>}
+                  </label>
+                </div>
+
+                <Button type="submit" className="h-12 w-full rounded-xl font-semibold" disabled={isLoading || !agreed}>
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
-                <div className="text-center pt-1">
-                  <button
-                    type="button"
-                    onClick={handleResendConfirmation}
-                    disabled={isLoading}
-                    className="text-sm text-primary hover:underline font-medium disabled:opacity-50"
-                  >
+                <div className="text-center">
+                  <button type="button" onClick={handleResendConfirmation} disabled={isLoading}
+                    className="text-sm font-medium text-primary hover:underline disabled:opacity-50">
                     Didn't receive an email? Resend confirmation
                   </button>
                 </div>
@@ -359,7 +327,33 @@ export default function Auth() {
 
           <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
         </div>
-      </div>
+      </main>
+
+      <Dialog open={termsOpen} onOpenChange={setTermsOpen}>
+        <DialogContent className="flex h-[90vh] max-w-4xl flex-col gap-3 p-4 sm:p-6">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 font-display">
+              <ShieldCheck className="h-5 w-5 text-primary" /> {BRAND} Terms & Policies
+            </DialogTitle>
+            <DialogDescription>Scroll to the end, then press Accept to continue creating your account.</DialogDescription>
+          </DialogHeader>
+          <iframe
+            src="/terms.html"
+            title="Terms of Service"
+            onLoad={onTermsScroll}
+            className="w-full flex-1 rounded-xl border border-border"
+          />
+          <div className="flex justify-end gap-2">
+            <Button variant="outline" onClick={() => setTermsOpen(false)}>Close</Button>
+            <Button
+              disabled={!termsRead}
+              onClick={() => { setAgreed(true); setTermsOpen(false); }}
+            >
+              {termsRead ? 'I agree' : 'Scroll to the end to agree'}
+            </Button>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
