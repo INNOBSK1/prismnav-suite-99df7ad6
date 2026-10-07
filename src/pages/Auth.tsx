@@ -204,7 +204,7 @@ export default function Auth() {
   return (
     <div className="flex h-screen w-screen overflow-hidden bg-background">
       {/* LEFT PANEL - Brand & Features */}
-      <aside className="hidden lg:flex w-1/2 flex-col items-center justify-center px-8 py-12 overflow-y-auto bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-primary-foreground relative">
+      <aside className="hidden lg:flex w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-primary-foreground relative">
         {/* Decorative background circle */}
         <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full border border-primary-foreground/10 shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
 
@@ -220,7 +220,7 @@ export default function Auth() {
           {/* Main hero section */}
           <div className="space-y-4 w-full">
             {/* Logo/image - proportional size */}
-            <img src={logo} alt="Farm-based management" className="h-28 w-28 rounded-full shadow-2xl mx-auto" />
+            <img src={logo} alt="NIMALUNDA" className="h-28 w-28 rounded-full shadow-2xl mx-auto" />
 
             {/* Heading and subtitle */}
             <div className="space-y-3">
@@ -255,7 +255,7 @@ export default function Auth() {
       </aside>
 
       {/* RIGHT PANEL - Authentication Form */}
-      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 py-8 overflow-y-auto bg-background relative">
+      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 py-8 overflow-hidden bg-background relative">
         
         {/* Top right controls */}
         <div className="absolute right-6 sm:right-8 top-6 flex items-center gap-2 z-20">
@@ -265,7 +265,7 @@ export default function Auth() {
         </div>
 
         {/* Form container - max-width 450px centered */}
-        <div className="w-full max-w-[450px] flex flex-col gap-6">
+        <div className="w-full max-w-[450px] flex flex-col gap-6 overflow-hidden">
           
           {/* Mobile header - only visible on small screens */}
           <div className="flex lg:hidden items-center gap-3 pt-2">
