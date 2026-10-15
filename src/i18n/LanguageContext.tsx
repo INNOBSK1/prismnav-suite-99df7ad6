@@ -34,6 +34,12 @@ function setGoogTransCookie(value: string | null) {
 function applyGoogleTranslate(lang: Language) {
   const useGoogle = GOOGLE_LANGS.includes(lang) && lang !== 'en';
   setGoogTransCookie(useGoogle ? `/en/${lang}` : null);
+  const translatedByGoogle = document.documentElement.classList.contains('translated-ltr') || document.documentElement.classList.contains('translated-rtl');
+  // Google can't cleanly undo a translation in place — reload once so our own strings show
+  if (!useGoogle && translatedByGoogle) {
+    window.location.reload();
+    return;
+  }
   const combo = document.querySelector<HTMLSelectElement>('.goog-te-combo');
   if (combo) {
     const target = useGoogle ? lang : 'en';
