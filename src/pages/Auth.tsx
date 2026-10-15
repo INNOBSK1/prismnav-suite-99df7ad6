@@ -98,7 +98,7 @@ export default function Auth() {
     if (!v.success) return toast.error(v.error.errors[0].message);
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
         password,
         options: {
@@ -107,7 +107,7 @@ export default function Auth() {
         },
       });
       if (error) toast.error(error.message.includes('already registered') ? t.auth.accountExists : error.message);
-      else toast.success(`${t.auth.accountCreated} Check your email to confirm.`);
+      else toast.success(data.session ? t.auth.accountCreated : `${t.auth.accountCreated} Check your email to confirm.`);
     } catch {
       toast.error(t.auth.unexpectedError);
     } finally {
