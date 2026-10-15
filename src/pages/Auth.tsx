@@ -206,12 +206,12 @@ export default function Auth() {
   return (
     <div className="flex min-h-screen w-full bg-background">
       {/* LEFT PANEL - Brand & Features */}
-      <aside className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-primary-foreground relative">
+      <aside className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-[hsl(150_25%_96%)] relative">
         {/* Decorative background circle */}
-        <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full border border-primary-foreground/10 shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
+        <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full border border-[hsl(150_25%_96%/0.1)] shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
 
         {/* Content container - max-width 520px centered */}
-        <div className="relative z-10 w-full max-w-[520px] flex flex-col items-center text-center space-y-6">
+        <div className="relative z-10 w-full max-w-[520px] flex flex-col items-center text-center space-y-8">
           
           {/* Header with logo - pinned to top of content */}
           <div className="flex items-center justify-center gap-3 w-full">
@@ -220,16 +220,16 @@ export default function Auth() {
           </div>
 
           {/* Main hero section */}
-          <div className="space-y-4 w-full">
+          <div className="space-y-5 w-full">
             {/* Logo/image - proportional size */}
-            <img src={logo} alt="NIMALUNDA" className="h-28 w-28 rounded-full shadow-2xl mx-auto" />
+            <img src={logo} alt="NIMALUNDA" className="h-28 w-28 rounded-full shadow-2xl mx-auto ring-2 ring-[hsl(150_25%_96%/0.15)]" />
 
             {/* Heading and subtitle */}
             <div className="space-y-3">
-              <h1 className="font-display text-4xl font-bold leading-[1.15] tracking-tight">
+              <h1 className="font-display text-4xl xl:text-5xl font-bold leading-[1.15] tracking-tight">
                 {t.auth.heroTitleMain}
               </h1>
-              <p className="text-base opacity-85 leading-relaxed">
+              <p className="text-base opacity-85 leading-relaxed max-w-md mx-auto">
                 {t.auth.heroSubtitleMain}
               </p>
             </div>
@@ -240,12 +240,12 @@ export default function Auth() {
             {tools.map(({ icon: Icon, name, key }) => (
               <li
                 key={name}
-                className="flex items-start gap-3 rounded-lg bg-primary-foreground/10 px-4 py-3 backdrop-blur-sm hover:bg-primary-foreground/15 transition-colors"
+                className="flex items-start gap-3 rounded-lg bg-[hsl(150_25%_96%/0.1)] px-4 py-3 backdrop-blur-sm hover:bg-[hsl(150_25%_96%/0.15)] transition-colors"
               >
                 <Icon className="h-5 w-5 shrink-0 opacity-90 mt-0.5" />
                 <div className="text-left">
                   <span className="block text-sm font-semibold">{name}</span>
-                  <span className="text-xs opacity-75">{t.auth[key]}</span>
+                  <span className="text-xs opacity-80">{t.auth[key]}</span>
                 </div>
               </li>
             ))}
