@@ -98,7 +98,7 @@ export default function Auth() {
     if (!v.success) return toast.error(v.error.errors[0].message);
     setIsLoading(true);
     try {
-      const { error } = await supabase.auth.signUp({
+      const { data, error } = await supabase.auth.signUp({
         email: email.trim(),
         password,
         options: {
@@ -107,7 +107,7 @@ export default function Auth() {
         },
       });
       if (error) toast.error(error.message.includes('already registered') ? t.auth.accountExists : error.message);
-      else toast.success(`${t.auth.accountCreated} Check your email to confirm.`);
+      else toast.success(data.session ? t.auth.accountCreated : `${t.auth.accountCreated} Check your email to confirm.`);
     } catch {
       toast.error(t.auth.unexpectedError);
     } finally {
@@ -155,10 +155,12 @@ export default function Auth() {
     const win = e.currentTarget.contentWindow;
     if (!win) return;
     const check = () => {
-      const d = win.document.documentElement;
-      if (d.scrollTop + win.innerHeight >= d.scrollHeight - 60) setTermsRead(true);
+      const d = win.document.scrollingElement || win.document.documentElement;
+      if (d.scrollTop + win.innerHeight >= d.scrollHeight - 80) setTermsRead(true);
     };
-    win.addEventListener('scroll', check);
+    win.addEventListener('scroll', check, { passive: true });
+    win.document.addEventListener('scroll', check, { passive: true });
+    check();
   };
 
   const inputCls = 'h-11 rounded-lg bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-border/50 text-sm';
@@ -202,9 +204,9 @@ export default function Auth() {
   );
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-background">
+    <div className="flex min-h-screen w-full bg-background">
       {/* LEFT PANEL - Brand & Features */}
-      <aside className="hidden lg:flex w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-primary-foreground relative">
+      <aside className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-primary-foreground relative">
         {/* Decorative background circle */}
         <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full border border-primary-foreground/10 shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
 
@@ -255,7 +257,7 @@ export default function Auth() {
       </aside>
 
       {/* RIGHT PANEL - Authentication Form */}
-      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 py-8 overflow-hidden bg-background relative">
+      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 pt-20 pb-10 min-h-screen bg-background relative">
         
         {/* Top right controls */}
         <div className="absolute right-6 sm:right-8 top-6 flex items-center gap-2 z-20">
@@ -265,7 +267,7 @@ export default function Auth() {
         </div>
 
         {/* Form container - max-width 450px centered */}
-        <div className="w-full max-w-[450px] flex flex-col gap-6 overflow-hidden">
+        <div className="w-full max-w-[450px] flex flex-col gap-6">
           
           {/* Mobile header - only visible on small screens */}
           <div className="flex lg:hidden items-center gap-3 pt-2">
@@ -425,25 +427,43 @@ export default function Auth() {
               Scroll to the end, then press Accept to continue creating your account.
             </DialogDescription>
           </DialogHeader>
+          <ul className="grid gap-2 rounded-xl bg-primary/5 p-3 text-xs sm:grid-cols-2 sm:text-sm">
+            {[
+              'Your farm records belong to you. We never sell your data.',
+              'You must give true details and keep your password private.',
+              'New accounts are reviewed and approved before full access.',
+              'Market sales are between buyers and sellers; pay safely.',
+              'Plant and animal advice is guidance, not a vet or expert visit.',
+              'You can ask us to delete your account at any time.',
+            ].map((p) => (
+              <li key={p} className="flex gap-2"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{p}</li>
+            ))}
+          </ul>
           <iframe
             src="/terms.html"
             title="Terms of Service"
             onLoad={onTermsScroll}
-            className="w-full flex-1 rounded-xl border border-border"
+            className="w-full flex-1 rounded-xl border border-border bg-background"
           />
-          <div className="flex justify-end gap-2">
-            <Button variant="outline" onClick={() => setTermsOpen(false)}>
-              Close
-            </Button>
-            <Button
-              disabled={!termsRead}
-              onClick={() => {
-                setAgreed(true);
-                setTermsOpen(false);
-              }}
-            >
-              {termsRead ? 'I agree' : 'Scroll to the end to agree'}
-            </Button>
+          <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <span className="text-xs text-muted-foreground">
+              {termsRead ? 'Thank you for reading.' : 'Please scroll the full text to the end.'}
+            </span>
+            <div className="flex gap-2">
+              <Button variant="outline" onClick={() => { setAgreed(false); setTermsOpen(false); }}>
+                Decline
+              </Button>
+              <Button
+                disabled={!termsRead}
+                onClick={() => {
+                  setAgreed(true);
+                  setTermsOpen(false);
+                  toast.success('Thanks — you agreed to the Terms & Policies.');
+                }}
+              >
+                {termsRead ? 'I agree' : 'Scroll to the end to agree'}
+              </Button>
+            </div>
           </div>
         </DialogContent>
       </Dialog>

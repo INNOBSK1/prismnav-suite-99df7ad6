@@ -25,10 +25,10 @@ export const translations = {
   en: {
     // Auth page
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Farm Business Management System',
       heroTitle: 'Helping farmers grow smarter, not harder.',
-      heroDescription: 'FBMS gives you the tools to track your farm\'s performance, manage resources, and make better decisions — all in one place.',
+      heroDescription: 'NIMALUNDA gives you the tools to track your farm\'s performance, manage resources, and make better decisions — all in one place.',
       feature1: 'Track crops, livestock & inventory',
       feature2: 'Monitor expenses & revenue',
       feature3: 'Access reports & insights anytime',
@@ -53,7 +53,7 @@ export const translations = {
       accountCreated: 'Account created successfully!',
       signedIn: 'Signed in successfully!',
       unexpectedError: 'An unexpected error occurred',
-      heroTitleMain: 'Farm Based Management System',
+      heroTitleMain: 'NIMALUNDA',
       heroSubtitleMain: 'Cultivating Success Through Technology',
       siteStoreDesc: 'Buy quality farm inputs, tools & supplies online',
       sitePlantHelpDesc: 'Diagnose plant diseases & get treatment advice',
@@ -164,10 +164,10 @@ export const translations = {
   lg: {
     // Auth page
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Enkola y\'Okuddukanya Ebizinensi by\'Obulimi',
       heroTitle: 'Tuyamba abalimi okulima n\'amagezi, si n\'amaanyi.',
-      heroDescription: 'FBMS ekuwa ebikozesebwa eby\'okugoberera emirimu gy\'okulima, okukozesa obulungi ebyetaagisa, n\'okukola ebisalawo ebirungi — byonna mu kifo kimu.',
+      heroDescription: 'NIMALUNDA ekuwa ebikozesebwa eby\'okugoberera emirimu gy\'okulima, okukozesa obulungi ebyetaagisa, n\'okukola ebisalawo ebirungi — byonna mu kifo kimu.',
       feature1: 'Goberera ebirime, ebisolo n\'ebintu',
       feature2: 'Kebera ebisasulirizibwa n\'ensimbi ezijja',
       feature3: 'Funa lipooti n\'amakubo buli kiseera',
@@ -302,10 +302,10 @@ export const translations = {
 
   nyn: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Enkora y\'Okutungya Ebishegenyi by\'Obuhiingi',
       heroTitle: 'Tukuteerana abahiingi kuhiinga n\'obumanyiri.',
-      heroDescription: 'FBMS ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
+      heroDescription: 'NIMALUNDA ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
       feature1: 'Shuuruza ebirime, ebishumba n\'ebintu',
       feature2: 'Kebera eby\'okushashura n\'ensimbi ezija',
       feature3: 'Bone lipooti n\'amakuru buri kiseera',
@@ -422,10 +422,10 @@ export const translations = {
 
   xog: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Enkola y\'Okufuga Ebizinensi by\'Obulimi',
       heroTitle: 'Tuyamba abalimi okulima n\'amagezi.',
-      heroDescription: 'FBMS ekuwa ebikozesebwa eby\'okugoberera emirimu gy\'okulima, okukozesa obulungi ebyetaagisa, n\'okukola ebisalawo ebirungi — byonna mu kifo kimu.',
+      heroDescription: 'NIMALUNDA ekuwa ebikozesebwa eby\'okugoberera emirimu gy\'okulima, okukozesa obulungi ebyetaagisa, n\'okukola ebisalawo ebirungi — byonna mu kifo kimu.',
       feature1: 'Goberera ebirime, ebisolo n\'ebintu',
       feature2: 'Kebera ebisasulirizibwa n\'ensimbi ezijja',
       feature3: 'Funa lipooti n\'amakubo buli kiseera',
@@ -542,10 +542,10 @@ export const translations = {
 
   ach: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Kit me Loyo Bisinec me Pur',
       heroTitle: 'Wakonyo lulwak me pur maber.',
-      heroDescription: 'FBMS miyi gin tic me lubo kor pur, tiyo ki jami maber, ki yero tam maber — weng i kabedo acel.',
+      heroDescription: 'NIMALUNDA miyi gin tic me lubo kor pur, tiyo ki jami maber, ki yero tam maber — weng i kabedo acel.',
       feature1: 'Lub kor cam, lee ki gin',
       feature2: 'Nen cente ma kitiyo kwede ki ma bino',
       feature3: 'Nong ripot ki ngec i kare weng',
@@ -662,10 +662,10 @@ export const translations = {
 
   teo: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Akonye nu Alotoma Bisinesi nu Akwap',
       heroTitle: 'Kikonyi itunga nu alotomari ke ejunait.',
-      heroDescription: 'FBMS iyeni ejaa nu alosikinit emonguroi nu akwap, akozesa mzuri ebintu, ka eyarere ekisalawo ebirungi — kere kanuka.',
+      heroDescription: 'NIMALUNDA iyeni ejaa nu alosikinit emonguroi nu akwap, akozesa mzuri ebintu, ka eyarere ekisalawo ebirungi — kere kanuka.',
       feature1: 'Losikini ebirime, ebitunganan ka ebintu',
       feature2: 'Keng ekasasulirizibwa ka esente nu ebo',
       feature3: 'Gela lipoti ka ekiro kere kiseera',
@@ -782,10 +782,10 @@ export const translations = {
 
   sw: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Mfumo wa Usimamizi wa Biashara ya Kilimo',
       heroTitle: 'Tunasaidia wakulima kulima kwa akili.',
-      heroDescription: 'FBMS inakupa zana za kufuatilia utendaji wa shamba lako, kusimamia rasilimali, na kufanya maamuzi bora — yote katika sehemu moja.',
+      heroDescription: 'NIMALUNDA inakupa zana za kufuatilia utendaji wa shamba lako, kusimamia rasilimali, na kufanya maamuzi bora — yote katika sehemu moja.',
       feature1: 'Fuatilia mazao, mifugo na bidhaa',
       feature2: 'Fuatilia gharama na mapato',
       feature3: 'Pata ripoti na maarifa wakati wowote',
@@ -902,10 +902,10 @@ export const translations = {
 
   nyo: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Enkora y\'Okutungya Ebizinensi by\'Obuhiingi',
       heroTitle: 'Tukuteerana abahiingi kuhiinga n\'obumanyiri.',
-      heroDescription: 'FBMS ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
+      heroDescription: 'NIMALUNDA ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
       feature1: 'Shuuruza ebirime, ebishumba n\'ebintu',
       feature2: 'Kebera ebyokushashura n\'ensimbi ezija',
       feature3: 'Bone lipooti n\'amakuru buri kiseera',
@@ -1022,10 +1022,10 @@ export const translations = {
 
   lgg: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Azi ni Ecodria Bisinesi ni Aku',
       heroTitle: 'Ama asu aku dri aku nyiri.',
-      heroDescription: 'FBMS fe mi inzi ni ecobi emiri ni aku, ecokozesa afa nyiri, pi ecokola ebisakupo ebirungi — dria mu pari alu.',
+      heroDescription: 'NIMALUNDA fe mi inzi ni ecobi emiri ni aku, ecokozesa afa nyiri, pi ecokola ebisakupo ebirungi — dria mu pari alu.',
       feature1: 'Ecobi ebirime, enyama pi alanzi',
       feature2: 'Ndre sente ni ereti pi ni eco',
       feature3: 'Isu ripoti pi amvu mu ejekere dria',
@@ -1142,10 +1142,10 @@ export const translations = {
 
   laj: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Kit me Loyo Bisinec me Pur',
       heroTitle: 'Wakonyo jo pur me pur maber.',
-      heroDescription: 'FBMS miyi gin tic me lubo kor pur, tiyo ki jami maber, ki yero tam maber — weng i kabedo acel.',
+      heroDescription: 'NIMALUNDA miyi gin tic me lubo kor pur, tiyo ki jami maber, ki yero tam maber — weng i kabedo acel.',
       feature1: 'Lub kor cam, lee ki jami',
       feature2: 'Nen cente ma kitiyo kwede ki ma bino',
       feature3: 'Nong ripot ki ngec i kare weng',
@@ -1262,10 +1262,10 @@ export const translations = {
 
   cgg: {
     auth: {
-      brandName: '🌿 FBMS',
+      brandName: '🌿 NIMALUNDA',
       brandSubtitle: 'Enkora y\'Okutungya Ebizinensi by\'Obuhiingi',
       heroTitle: 'Tukuteerana abahiingi kuhiinga n\'obumanyiri.',
-      heroDescription: 'FBMS ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
+      heroDescription: 'NIMALUNDA ekuha ebikoresho by\'okushuuruuza emirimu y\'obuhiingi, okukozesa ebyeetaagisibwa, n\'okukora ebishamurikizo ebirungi — byoona ahantu hamwe.',
       feature1: 'Shuuruza ebirime, ebishumba n\'ebintu',
       feature2: 'Kebera eby\'okushashura n\'ensimbi ezija',
       feature3: 'Bone lipooti n\'amakuru buri kiseera',

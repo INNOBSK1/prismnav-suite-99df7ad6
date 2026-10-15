@@ -5,11 +5,11 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const siteMap: Record<string, { title: string; url: string }> = {
-  "fbms-store": { title: "FBMS Store", url: "https://fbmsstore.netlify.app/" },
+  "fbms-store": { title: "Farm Market", url: "https://fbmsstore.netlify.app/" },
   "plant-help": { title: "Plant Help", url: "https://planthelp.netlify.app/" },
   "farm-tracker": { title: "Farm Tracker", url: "https://fbmsfarmtracker.netlify.app/" },
-  "fbms-ani": { title: "FBMS Ani", url: "https://fbmsani.netlify.app/" },
-  "fbms-blog": { title: "FBMS Blog", url: "https://fbmsblog.netlify.app/" },
+  "fbms-ani": { title: "NIMALUNDA Ani", url: "https://fbmsani.netlify.app/" },
+  "fbms-blog": { title: "NIMALUNDA Blog", url: "https://fbmsblog.netlify.app/" },
 };
 
 export default function SiteViewer() {
