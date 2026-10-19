@@ -14,7 +14,8 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { GoogleTranslate } from '@/components/GoogleTranslate';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail, ShieldCheck, Sprout, Leaf, LineChart, Store, BookOpen } from 'lucide-react';
+import { Eye, EyeOff, User, Lock, Mail, ShieldCheck } from 'lucide-react';
+import landscape from '@/assets/auth-landscape.jpg';
 import logo from '@/assets/nimalunda-logo.png';
 
 const BRAND = 'NIMALUNDA';
@@ -24,14 +25,6 @@ const authSchema = z.object({
   password: z.string().min(6, { message: 'Password must be at least 6 characters' }).max(72),
   fullName: z.string().trim().max(100).optional(),
 });
-
-const tools = [
-  { icon: Sprout, name: 'Plant Help', key: 'sitePlantHelpDesc' },
-  { icon: Leaf, name: `${BRAND} Ani`, key: 'siteAniDesc' },
-  { icon: LineChart, name: 'Farm Tracker', key: 'siteFarmTrackerDesc' },
-  { icon: Store, name: 'Farm Market', key: 'siteStoreDesc' },
-  { icon: BookOpen, name: `${BRAND} Blog`, key: 'siteBlogDesc' },
-] as const;
 
 export default function Auth() {
   const [isLoading, setIsLoading] = useState(false);
@@ -177,14 +170,16 @@ export default function Auth() {
         className={`${inputCls} pr-10`}
         required
       />
-      <button
+      <Button
+        variant="ghost"
+        size="icon"
         type="button"
         onClick={() => setShowPassword(!showPassword)}
         aria-label={showPassword ? 'Hide password' : 'Show password'}
-        className="absolute right-3 top-1/2 -translate-y-1/2 text-muted-foreground hover:text-foreground cursor-pointer"
+        className="absolute right-1 top-1/2 -translate-y-1/2 text-muted-foreground"
       >
         {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-      </button>
+      </Button>
     </div>
   );
 
@@ -204,85 +199,22 @@ export default function Auth() {
   );
 
   return (
-    <div className="flex min-h-screen w-full bg-background">
-      {/* LEFT PANEL - Brand & Features */}
-      <aside className="hidden lg:flex lg:sticky lg:top-0 lg:h-screen w-1/2 flex-col items-center justify-center px-8 py-12 overflow-hidden bg-gradient-to-br from-[hsl(160_70%_7%)] via-[hsl(158_70%_14%)] to-[hsl(158_84%_26%)] text-[hsl(150_25%_96%)] relative">
-        {/* Decorative background circle */}
-        <div className="pointer-events-none absolute -right-32 -top-40 h-96 w-96 rounded-full border border-[hsl(150_25%_96%/0.1)] shadow-[0_0_0_45px_hsl(0_0%_100%/0.025),0_0_0_90px_hsl(0_0%_100%/0.02)]" />
-
-        {/* Content container - max-width 520px centered */}
-        <div className="relative z-10 w-full max-w-[520px] flex flex-col items-center text-center space-y-8">
-          
-          {/* Header with logo - pinned to top of content */}
-          <div className="flex items-center justify-center gap-3 w-full">
-            <img src={logo} alt={`${BRAND} logo`} className="h-10 w-10 rounded-full" />
-            <span className="font-display text-lg font-bold tracking-[0.12em]">{BRAND}</span>
-          </div>
-
-          {/* Main hero section */}
-          <div className="space-y-5 w-full">
-            {/* Logo/image - proportional size */}
-            <img src={logo} alt="NIMALUNDA" className="h-28 w-28 rounded-full shadow-2xl mx-auto ring-2 ring-[hsl(150_25%_96%/0.15)]" />
-
-            {/* Heading and subtitle */}
-            <div className="space-y-3">
-              <h1 className="font-display text-4xl xl:text-5xl font-bold leading-[1.15] tracking-tight">
-                {t.auth.heroTitleMain}
-              </h1>
-              <p className="text-base opacity-85 leading-relaxed max-w-md mx-auto">
-                {t.auth.heroSubtitleMain}
-              </p>
-            </div>
-          </div>
-
-          {/* Feature cards list - consistent spacing */}
-          <ul className="w-full space-y-2.5">
-            {tools.map(({ icon: Icon, name, key }) => (
-              <li
-                key={name}
-                className="flex items-start gap-3 rounded-lg bg-[hsl(150_25%_96%/0.1)] px-4 py-3 backdrop-blur-sm hover:bg-[hsl(150_25%_96%/0.15)] transition-colors"
-              >
-                <Icon className="h-5 w-5 shrink-0 opacity-90 mt-0.5" />
-                <div className="text-left">
-                  <span className="block text-sm font-semibold">{name}</span>
-                  <span className="text-xs opacity-80">{t.auth[key]}</span>
-                </div>
-              </li>
-            ))}
-          </ul>
-
-          {/* Footer - pinned to bottom of content */}
-          <p className="text-xs opacity-60 pt-2">© {new Date().getFullYear()} {BRAND}. {t.auth.authFooter}</p>
-        </div>
-      </aside>
-
-      {/* RIGHT PANEL - Authentication Form */}
-      <main className="w-full lg:w-1/2 flex flex-col items-center justify-center px-6 sm:px-8 pt-20 pb-10 min-h-screen bg-background relative">
-        
-        {/* Top right controls */}
-        <div className="absolute right-6 sm:right-8 top-6 flex items-center gap-2 z-20">
+    <div className="auth-page relative isolate h-dvh w-full overflow-y-auto bg-background">
+      <img src={landscape} alt="" width={1536} height={1024} className="fixed inset-0 -z-20 h-full w-full object-cover" />
+      <div className="auth-backdrop fixed inset-0 -z-10" />
+      <header className="flex justify-end px-5 py-4 sm:px-8">
+        <div className="flex items-center gap-2 rounded-lg bg-background/90 p-1 backdrop-blur-md">
           <GoogleTranslate />
           <LanguageSwitcher />
           <ThemeToggle />
         </div>
-
-        {/* Form container - max-width 450px centered */}
-        <div className="w-full max-w-[450px] flex flex-col gap-6">
-          
-          {/* Mobile header - only visible on small screens */}
-          <div className="flex lg:hidden items-center gap-3 pt-2">
-            <img src={logo} alt={`${BRAND} logo`} className="h-10 w-10 rounded-full" />
-            <span className="font-display text-lg font-bold tracking-[0.12em] text-primary">{BRAND}</span>
-          </div>
-
-          {/* Form title and subtitle */}
-          <div className="space-y-2">
-            <h2 className="font-display text-2xl sm:text-3xl font-semibold tracking-tight">
-              {t.auth.getStarted}
-            </h2>
-            <p className="text-sm text-muted-foreground">
-              {t.auth.enterDetails}
-            </p>
+      </header>
+      <main className="mx-auto flex w-full max-w-lg flex-col px-6 pb-10 pt-2 sm:px-8">
+        <div className="w-full flex flex-col gap-5">
+          <div className="text-center space-y-3">
+            <img src={logo} alt="NIMALUNDA logo" className="mx-auto h-20 w-20 rounded-full shadow-lg" />
+            <h1 className="font-display text-3xl font-semibold text-foreground">{BRAND}</h1>
+            <p className="text-sm text-muted-foreground">Digitally Ensuring Prosperity</p>
           </div>
 
           {/* Auth Tabs */}
@@ -298,7 +230,7 @@ export default function Auth() {
 
             {/* SIGN IN TAB */}
             <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSignIn} className="space-y-4 rounded-xl border border-border bg-card p-5 sm:p-6 shadow-lg">
+              <form onSubmit={handleSignIn} className="space-y-4 rounded-lg border border-border bg-card/95 p-5 sm:p-6 shadow-lg backdrop-blur-md">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email" className="text-sm font-medium">
                     {t.auth.emailLabel}
@@ -325,7 +257,7 @@ export default function Auth() {
 
             {/* SIGN UP TAB */}
             <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSignUp} className="space-y-4 rounded-xl border border-border bg-card p-5 sm:p-6 shadow-lg">
+              <form onSubmit={handleSignUp} className="space-y-4 rounded-lg border border-border bg-card/95 p-5 sm:p-6 shadow-lg backdrop-blur-md">
                 
                 <div className="space-y-2">
                   <Label htmlFor="signup-name" className="text-sm font-medium">
@@ -375,13 +307,14 @@ export default function Auth() {
                   />
                   <label htmlFor="terms" className="leading-relaxed text-muted-foreground cursor-pointer">
                     I have read and agree to the{' '}
-                    <button
+                    <Button
+                      variant="link"
                       type="button"
                       onClick={() => setTermsOpen(true)}
-                      className="font-semibold text-primary hover:underline"
+                      className="h-auto p-0 whitespace-normal text-left font-semibold"
                     >
                       Terms of Service & Policies
-                    </button>{' '}
+                    </Button>{' '}
                     of {BRAND}.
                     {!termsRead && (
                       <span className="mt-1 block text-xs">You must read them before you can agree.</span>
@@ -392,27 +325,28 @@ export default function Auth() {
                 <Button
                   type="submit"
                   className="h-11 w-full rounded-lg font-semibold text-sm"
-                  disabled={isLoading || !agreed}
+                  disabled={isLoading || !termsRead || !agreed}
                 >
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
 
                 <div className="text-center">
-                  <button
+                  <Button
+                    variant="link"
                     type="button"
                     onClick={handleResendConfirmation}
                     disabled={isLoading}
-                    className="text-sm font-medium text-primary hover:underline disabled:opacity-50"
+                    className="h-auto whitespace-normal p-0 text-sm"
                   >
                     Didn't receive an email? Resend confirmation
-                  </button>
+                  </Button>
                 </div>
               </form>
             </TabsContent>
           </Tabs>
 
           {/* Footer text */}
-          <p className="text-center text-xs text-muted-foreground">{t.auth.termsText}</p>
+          <Button variant="link" className="h-auto self-center whitespace-normal text-xs text-muted-foreground" onClick={() => setTermsOpen(true)}>NIMALUNDA · Terms & Policies</Button>
         </div>
       </main>
 
@@ -427,14 +361,14 @@ export default function Auth() {
               Scroll to the end, then press Accept to continue creating your account.
             </DialogDescription>
           </DialogHeader>
-          <ul className="grid gap-2 rounded-xl bg-primary/5 p-3 text-xs sm:grid-cols-2 sm:text-sm">
+          <ul className="grid gap-2 rounded-lg bg-primary/5 p-3 text-xs sm:grid-cols-2 sm:text-sm">
             {[
-              'Your farm records belong to you. We never sell your data.',
-              'You must give true details and keep your password private.',
-              'New accounts are reviewed and approved before full access.',
-              'Market sales are between buyers and sellers; pay safely.',
-              'Plant and animal advice is guidance, not a vet or expert visit.',
-              'You can ask us to delete your account at any time.',
+              'Account details & password security',
+              'Privacy & use of personal information',
+              'Responsible use of farm tools & guidance',
+              'Marketplace transactions & responsibilities',
+              'Your content & intellectual property',
+              'Account termination & changes to these terms',
             ].map((p) => (
               <li key={p} className="flex gap-2"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{p}</li>
             ))}
@@ -443,7 +377,7 @@ export default function Auth() {
             src="/terms.html"
             title="Terms of Service"
             onLoad={onTermsScroll}
-            className="w-full flex-1 rounded-xl border border-border bg-background"
+            className="w-full flex-1 min-h-0 rounded-lg border border-border bg-background"
           />
           <div className="flex flex-col-reverse gap-2 sm:flex-row sm:items-center sm:justify-between">
             <span className="text-xs text-muted-foreground">

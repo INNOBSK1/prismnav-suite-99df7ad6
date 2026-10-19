@@ -198,3 +198,8 @@ body {
 /* Hide Google Translate banner/tooltips */
 iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .VIpgJd-ZVi9od-ORHb-OEVmcd { display: none !important; }
 .goog-text-highlight { background: none !important; box-shadow: none !important; }
+
+/* The landscape stays visible while the central form follows the chosen theme. */
+:root { --auth-overlay: 160 20% 97% / 0.88; }
+.dark { --auth-overlay: 210 22% 8% / 0.86; }
+.auth-backdrop { background: hsl(var(--auth-overlay)); }
