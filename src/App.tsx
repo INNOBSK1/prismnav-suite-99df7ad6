@@ -11,6 +11,7 @@ import { AppLayout } from "@/components/AppLayout";
 import Dashboard from "./pages/Dashboard";
 import SiteViewer from "./pages/SiteViewer";
 import Auth from "./pages/Auth";
+import Policies from "./pages/Policies";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -26,6 +27,7 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/policies" element={<Policies />} />
                 <Route
                   path="/"
                   element={
