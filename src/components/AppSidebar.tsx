@@ -1,4 +1,4 @@
-import { User, Store, Leaf, Tractor, Dog, BookOpen, Info, LogOut } from "lucide-react";
+import { User, Store, Leaf, Tractor, Dog, BookOpen, Info, LogOut, ShieldCheck } from "lucide-react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
@@ -69,6 +69,14 @@ export function AppSidebar() {
                   <NavLink to="/site/about-us" onClick={handleNavClick} className={({ isActive }) => isActive ? "bg-sidebar-accent text-sidebar-accent-foreground" : ""}>
                     <Info className="h-4 w-4" />
                     <span>About Us</span>
+                  </NavLink>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild tooltip="Terms & Policies">
+                  <NavLink to="/policies" onClick={handleNavClick}>
+                    <ShieldCheck className="h-4 w-4" />
+                    <span>Terms & Policies</span>
                   </NavLink>
                 </SidebarMenuButton>
               </SidebarMenuItem>
