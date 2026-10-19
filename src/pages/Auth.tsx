@@ -210,7 +210,7 @@ export default function Auth() {
         </div>
       </header>
       <main className="mx-auto flex w-full max-w-lg flex-col px-6 pb-10 pt-2 sm:px-8">
-        <div className="w-full flex flex-col gap-5">
+        <div className="w-full flex flex-col gap-5 rounded-2xl border-2 border-primary/40 bg-background/70 p-5 shadow-2xl ring-1 ring-border backdrop-blur-md sm:p-7">
           <div className="text-center space-y-3">
             <img src={logo} alt="NIMALUNDA logo" className="mx-auto h-20 w-20 rounded-full shadow-lg" />
             <h1 className="font-display text-3xl font-semibold text-foreground">{BRAND}</h1>
@@ -363,12 +363,14 @@ export default function Auth() {
           </DialogHeader>
           <ul className="grid gap-2 rounded-lg bg-primary/5 p-3 text-xs sm:grid-cols-2 sm:text-sm">
             {[
-              'Account details & password security',
-              'Privacy & use of personal information',
-              'Responsible use of farm tools & guidance',
-              'Marketplace transactions & responsibilities',
-              'Your content & intellectual property',
-              'Account termination & changes to these terms',
+              'By creating an account you accept these Terms',
+              'Keep your account details accurate and your password safe',
+              'Use the tools lawfully — no misuse, spam or harm to others',
+              'Store purchases are between you and the seller; check before you pay',
+              'Plant Help, Farm Tracker & Ani give guidance, not professional advice',
+              'NIMALUNDA content and branding are protected; your content stays yours',
+              'Your personal information is handled as described in the Privacy section',
+              'We may suspend accounts that break these Terms, and may update them',
             ].map((p) => (
               <li key={p} className="flex gap-2"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{p}</li>
             ))}
