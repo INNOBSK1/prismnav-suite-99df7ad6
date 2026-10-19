@@ -5,6 +5,7 @@ import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/i18n/LanguageContext";
 
 const siteMap: Record<string, { title: string; url: string }> = {
+  "about-us": { title: "About Us", url: "https://curricore.netlify.app/" },
   "fbms-store": { title: "Farm Market", url: "https://fbmsstore.netlify.app/" },
   "plant-help": { title: "Plant Help", url: "https://planthelp.netlify.app/" },
   "farm-tracker": { title: "Farm Tracker", url: "https://fbmsfarmtracker.netlify.app/" },
@@ -22,7 +23,7 @@ export default function SiteViewer() {
     const handleMessage = async (event: MessageEvent) => {
       const trustedOrigins = Object.values(siteMap).map(s => new URL(s.url).origin);
       if (!trustedOrigins.includes(event.origin)) return;
-      if (event.data.type === 'download' && user && siteId) {
+      if (event.data?.type === 'download' && user && siteId) {
         try {
           await supabase.from('downloads').insert({
             user_id: user.id, site_id: siteId, site_name: site?.title || 'Unknown',
@@ -53,7 +54,7 @@ export default function SiteViewer() {
   })();
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-[calc(100dvh-4rem)]">
       <div className="flex-1 relative notranslate" translate="no">
         <iframe data-fbms-tool src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
           onLoad={(e) => {
