@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShieldCheck } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import logo from '@/assets/nimalunda-logo.png';
 
 // Reuses the exact wording of public/terms.html so the policies page and the signup terms never drift apart.
 export default function Policies() {
@@ -26,15 +25,6 @@ export default function Policies() {
         <Button asChild variant="ghost" size="sm" className="mb-6">
           <Link to="/"><ArrowLeft className="mr-1 h-4 w-4" /> Back</Link>
         </Button>
-        <header className="mb-8 flex items-center gap-4 rounded-2xl border-2 border-primary/30 bg-card p-6">
-          <img src={logo} alt="NIMALUNDA logo" className="h-14 w-14 rounded-full" />
-          <div>
-            <h1 className="flex items-center gap-2 text-3xl font-semibold">
-              <ShieldCheck className="h-6 w-6 text-primary" /> Terms & Policies
-            </h1>
-            <p className="text-sm text-muted-foreground">Effective 7 October 2026 · How NIMALUNDA works with you</p>
-          </div>
-        </header>
         <article
           className="space-y-4 text-sm leading-relaxed text-foreground/90 sm:text-base
             [&_h2]:mt-8 [&_h2]:border-b [&_h2]:border-border [&_h2]:pb-2 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-semibold [&_h2]:text-foreground

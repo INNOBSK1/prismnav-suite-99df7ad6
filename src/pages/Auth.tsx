@@ -12,7 +12,6 @@ import { useAuth } from '@/hooks/useAuth';
 import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { GoogleTranslate } from '@/components/GoogleTranslate';
-import { ThemeToggle } from '@/components/ThemeToggle';
 import { toast } from 'sonner';
 import { Eye, EyeOff, User, Lock, Mail, ShieldCheck } from 'lucide-react';
 import landscape from '@/assets/auth-landscape.jpg';
@@ -195,14 +194,13 @@ export default function Auth() {
   );
 
   return (
-    <div className="auth-page relative isolate h-dvh w-full overflow-y-auto bg-background">
+    <div className="dark auth-page relative isolate text-foreground h-dvh w-full overflow-y-auto bg-background">
       <img src={landscape} alt="" width={1536} height={1024} className="fixed inset-0 -z-20 h-full w-full object-cover" />
       <div className="auth-backdrop fixed inset-0 -z-10" />
       <header className="flex justify-end px-5 py-4 sm:px-8">
         <div className="flex items-center gap-2 rounded-lg bg-background/90 p-1 backdrop-blur-md">
           <GoogleTranslate />
           <LanguageSwitcher />
-          <ThemeToggle />
         </div>
       </header>
       <main className="mx-auto flex w-full max-w-lg flex-col px-6 pb-10 pt-2 sm:px-8">
@@ -356,7 +354,7 @@ export default function Auth() {
 
       {/* TERMS DIALOG */}
       <Dialog open={termsOpen} onOpenChange={setTermsOpen}>
-        <DialogContent className="flex h-[90vh] max-w-4xl flex-col gap-3 p-4 sm:p-6">
+        <DialogContent className="dark bg-background text-foreground flex h-[90vh] max-w-4xl flex-col gap-3 p-4 sm:p-6">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 font-display">
               <ShieldCheck className="h-5 w-5 text-primary" /> {BRAND} Terms & Policies
@@ -365,20 +363,6 @@ export default function Auth() {
               Scroll to the end, then press Accept to continue creating your account.
             </DialogDescription>
           </DialogHeader>
-          <ul className="grid gap-2 rounded-lg bg-primary/5 p-3 text-xs sm:grid-cols-2 sm:text-sm">
-            {[
-              'By creating an account you accept these Terms',
-              'Keep your account details accurate and your password safe',
-              'Use the tools lawfully — no misuse, spam or harm to others',
-              'Store purchases are between you and the seller; check before you pay',
-              'Plant Help, Farm Tracker & Ani give guidance, not professional advice',
-              'NIMALUNDA content and branding are protected; your content stays yours',
-              'Your personal information is handled as described in the Privacy section',
-              'We may suspend accounts that break these Terms, and may update them',
-            ].map((p) => (
-              <li key={p} className="flex gap-2"><ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-primary" />{p}</li>
-            ))}
-          </ul>
           <div
             onScroll={(e) => {
               const d = e.currentTarget;
