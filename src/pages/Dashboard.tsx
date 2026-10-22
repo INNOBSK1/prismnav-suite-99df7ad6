@@ -18,7 +18,7 @@ export default function Dashboard() {
   return (
     <div className="container py-10 space-y-8">
       <header className="animate-in text-center">
-        <h1 className="text-4xl font-semibold mb-2 text-balance text-primary">Welcome to NIMALUNDA</h1>
+        <h1 className="text-4xl font-semibold mb-2 text-balance text-primary">Welcome to <span translate="no" className="notranslate">NIMALUNDA</span></h1>
         <p className="text-lg italic text-muted-foreground">Digitally Ensuring Prosperity</p>
       </header>
 
@@ -34,7 +34,7 @@ export default function Dashboard() {
                 <site.icon className="h-7 w-7 text-primary" />
               </div>
               <div>
-                <h3 className="text-lg font-semibold mb-1">{site.titleKey}</h3>
+                <h3 translate="no" className="notranslate text-lg font-semibold mb-1">{site.titleKey}</h3>
                 <p className="text-sm text-muted-foreground">{t.auth[site.descKey]}</p>
               </div>
             </CardContent>
