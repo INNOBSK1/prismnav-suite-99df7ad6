@@ -200,6 +200,6 @@ iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .
 .goog-text-highlight { background: none !important; box-shadow: none !important; }
 
 /* The landscape stays visible while the central form follows the chosen theme. */
-:root { --auth-overlay: 160 20% 97% / 0.88; }
+:root { --auth-overlay: 140 30% 96% / 0.72; }
 .dark { --auth-overlay: 210 22% 8% / 0.86; }
 .auth-backdrop { background: hsl(var(--auth-overlay)); }
