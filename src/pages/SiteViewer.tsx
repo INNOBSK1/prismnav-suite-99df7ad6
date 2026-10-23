@@ -21,6 +21,13 @@ export default function SiteViewer() {
   const { user } = useAuth();
   const { t, language } = useLanguage();
   const site = siteId ? siteMap[siteId] : null;
+  const isAbout = siteId === "about-us";
+  const [aboutTab, setAboutTab] = useState<"about" | "contact">("about");
+
+  useEffect(() => {
+    setAboutTab("about");
+  }, [siteId]);
+
 
   useEffect(() => {
     const handleMessage = async (event: MessageEvent) => {
