@@ -65,13 +65,42 @@ export default function SiteViewer() {
 
   return (
     <div className="flex flex-col h-[calc(100dvh-4rem)]">
+      {isAbout && (
+        <div className="flex justify-center gap-1 p-2 border-b bg-background/80 backdrop-blur">
+          {(["about", "contact"] as const).map((tab) => (
+            <button
+              key={tab}
+              type="button"
+              onClick={() => setAboutTab(tab)}
+              className={
+                "px-4 py-1.5 text-sm rounded-md transition-colors " +
+                (aboutTab === tab
+                  ? "bg-primary text-primary-foreground"
+                  : "text-muted-foreground hover:text-foreground hover:bg-muted")
+              }
+            >
+              {tab === "about" ? "About Us" : "Contact Us"}
+            </button>
+          ))}
+        </div>
+      )}
       <div className="flex-1 relative notranslate" translate="no">
-        <iframe data-fbms-tool src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
-          onLoad={(e) => {
-            try { e.currentTarget.contentWindow?.postMessage({ type: 'FBMS_LANG', lang: language }, new URL(site.url).origin); } catch { /* ignore */ }
-          }}
-          sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox"
-          allow="camera; microphone; geolocation" />
+        {isAbout && aboutTab === "contact" ? (
+          <iframe
+            src={CONTACT_FORM_URL}
+            className="absolute inset-0 w-full h-full border-0 bg-background"
+            title="NIMALUNDA Contact Form"
+            loading="lazy"
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-popups-to-escape-sandbox"
+          />
+        ) : (
+          <iframe data-fbms-tool src={siteUrlWithLang} className="absolute inset-0 w-full h-full border-0" title={site.title}
+            onLoad={(e) => {
+              try { e.currentTarget.contentWindow?.postMessage({ type: 'FBMS_LANG', lang: language }, new URL(site.url).origin); } catch { /* ignore */ }
+            }}
+            sandbox="allow-same-origin allow-scripts allow-popups allow-forms allow-downloads allow-popups-to-escape-sandbox"
+            allow="camera; microphone; geolocation" />
+        )}
       </div>
     </div>
   );
