@@ -1,8 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/hooks/useAuth";
 import { useLanguage } from "@/i18n/LanguageContext";
+
+const CONTACT_FORM_URL =
+  "https://docs.google.com/forms/d/e/1FAIpQLSf_d_ruAEGNF7pJjMbP3a09mNH1oN9YoJQT7k82VW9biBayOA/viewform?embedded=true";
 
 const siteMap: Record<string, { title: string; url: string }> = {
   "about-us": { title: "About Us", url: "https://curricore.netlify.app/" },
