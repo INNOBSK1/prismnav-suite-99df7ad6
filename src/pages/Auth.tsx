@@ -13,11 +13,12 @@ import { useLanguage } from '@/i18n/LanguageContext';
 import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { GoogleTranslate } from '@/components/GoogleTranslate';
 import { toast } from 'sonner';
-import { Eye, EyeOff, User, Lock, Mail, ShieldCheck } from 'lucide-react';
-import landscape from '@/assets/auth-landscape.jpg';
+import { Eye, EyeOff, User, Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
+import landscape from '@/assets/green-horizon.jpg';
 import { lovable } from '@/integrations/lovable/index';
 import { useTermsHtml, termsArticleCls } from '@/components/TermsText';
 import logo from '@/assets/nimalunda-logo.png';
+import { canCreateAccount } from '@/lib/signup-agreement';
 
 const BRAND = 'NIMALUNDA';
 
@@ -36,6 +37,7 @@ export default function Auth() {
   const [termsOpen, setTermsOpen] = useState(false);
   const [termsRead, setTermsRead] = useState(false);
   const [agreed, setAgreed] = useState(false);
+  const [authMode, setAuthMode] = useState('signin');
   const navigate = useNavigate();
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -84,7 +86,7 @@ export default function Auth() {
 
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!termsRead || !agreed) {
+    if (!canCreateAccount(termsRead, agreed)) {
       toast.error('Please read and agree to the Terms & Policies first.');
       setTermsOpen(true);
       return;
@@ -147,11 +149,26 @@ export default function Auth() {
   };
 
   const handleGoogle = async () => {
-    const result = await lovable.auth.signInWithOAuth('google', { redirect_uri: window.location.origin });
-    if (result.error) toast.error(t.auth.unexpectedError);
+    if (authMode === 'signup' && !canCreateAccount(termsRead, agreed)) {
+      setTermsOpen(true);
+      toast.info('Please read and agree to the Terms & Policies first.');
+      return;
+    }
+    setIsLoading(true);
+    try {
+      const result = await lovable.auth.signInWithOAuth('google', {
+        redirect_uri: window.location.origin,
+        extraParams: { prompt: 'select_account' },
+      });
+      if (result.error) toast.error(result.error.message || t.auth.unexpectedError);
+    } catch {
+      toast.error(t.auth.unexpectedError);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const inputCls = 'h-11 rounded-lg bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-border/50 text-sm';
+  const inputCls = 'h-12 rounded-md bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-input text-sm placeholder:text-muted-foreground';
 
   const passwordField = (id: string, withPlaceholder: boolean) => (
     <div className="relative">
@@ -195,7 +212,7 @@ export default function Auth() {
 
   return (
     <div className="dark auth-page relative isolate text-foreground h-dvh w-full overflow-y-auto bg-background">
-      <img src={landscape} alt="" width={1536} height={1024} className="fixed inset-0 -z-20 h-full w-full object-cover" />
+      <img src={landscape} alt="" width={1264} height={848} className="fixed inset-0 -z-20 h-full w-full object-cover" />
       <div className="auth-backdrop fixed inset-0 -z-10" />
       <header className="flex justify-end px-5 py-4 sm:px-8">
         <div className="flex items-center gap-2 rounded-lg bg-background/90 p-1 backdrop-blur-md">
@@ -203,16 +220,16 @@ export default function Auth() {
           <LanguageSwitcher />
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-lg flex-col px-6 pb-10 pt-2 sm:px-8">
-        <div className="w-full flex flex-col gap-5 rounded-2xl border-2 border-primary/40 bg-card/85 p-5 shadow-2xl ring-1 ring-primary/10 backdrop-blur-md sm:p-7">
+      <main className="mx-auto flex w-full max-w-lg flex-col px-5 pb-10 pt-2 sm:px-8">
+        <div className="auth-frame w-full flex flex-col gap-5 rounded-lg border border-border bg-card/95 p-6 backdrop-blur-md sm:p-8">
           <div className="text-center space-y-3">
-            <img src={logo} alt="NIMALUNDA logo" className="mx-auto h-20 w-20 rounded-full shadow-lg ring-4 ring-primary/20" />
-            <h1 translate="no" className="notranslate font-display text-3xl font-semibold text-primary dark:text-foreground">{BRAND}</h1>
+            <img src={logo} alt="NIMALUNDA logo" className="mx-auto h-16 w-16 rounded-full ring-1 ring-primary/40" />
+            <h1 translate="no" className="notranslate font-display text-3xl font-semibold text-foreground tracking-normal">{BRAND}</h1>
             <p className="text-sm text-muted-foreground">Digitally Ensuring Prosperity</p>
           </div>
 
           {/* Auth Tabs */}
-          <Tabs defaultValue="signin" className="w-full">
+          <Tabs value={authMode} onValueChange={setAuthMode} className="w-full">
             <TabsList className="grid h-10 w-full grid-cols-2 rounded-lg bg-primary/10 p-0.5">
               <TabsTrigger value="signin" className="rounded-md text-sm font-medium data-[state=active]:text-primary">
                 {t.auth.signIn}
@@ -224,7 +241,7 @@ export default function Auth() {
 
             {/* SIGN IN TAB */}
             <TabsContent value="signin" className="mt-5">
-              <form onSubmit={handleSignIn} className="space-y-4 rounded-lg border border-border bg-card/95 p-5 sm:p-6 shadow-lg backdrop-blur-md">
+              <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
                   <Label htmlFor="signin-email" className="text-sm font-medium">
                     {t.auth.emailLabel}
@@ -241,17 +258,18 @@ export default function Auth() {
                 
                 <Button
                   type="submit"
-                  className="h-11 w-full rounded-lg font-semibold text-sm"
+                  className="auth-submit h-12 w-full rounded-md font-semibold text-sm"
                   disabled={isLoading}
                 >
                   {isLoading ? t.auth.signingIn : t.auth.continueBtn}
+                  <ArrowRight className="ml-2 h-4 w-4" />
                 </Button>
               </form>
             </TabsContent>
 
             {/* SIGN UP TAB */}
             <TabsContent value="signup" className="mt-5">
-              <form onSubmit={handleSignUp} className="space-y-4 rounded-lg border border-border bg-card/95 p-5 sm:p-6 shadow-lg backdrop-blur-md">
+              <form onSubmit={handleSignUp} className="space-y-4">
                 
                 <div className="space-y-2">
                   <Label htmlFor="signup-name" className="text-sm font-medium">
@@ -318,8 +336,8 @@ export default function Auth() {
 
                 <Button
                   type="submit"
-                  className="h-11 w-full rounded-lg font-semibold text-sm"
-                  disabled={isLoading || !termsRead || !agreed}
+                  className="auth-submit h-12 w-full rounded-md font-semibold text-sm"
+                  disabled={isLoading || !canCreateAccount(termsRead, agreed)}
                 >
                   {isLoading ? t.auth.creatingAccount : t.auth.createAccount}
                 </Button>
@@ -342,7 +360,7 @@ export default function Auth() {
           <div className="flex items-center gap-3 text-xs text-muted-foreground">
             <span className="h-px flex-1 bg-border" /> or <span className="h-px flex-1 bg-border" />
           </div>
-          <Button type="button" variant="outline" className="h-11 w-full gap-2 rounded-lg bg-card font-semibold" onClick={handleGoogle} disabled={isLoading}>
+          <Button type="button" variant="outline" className="h-12 w-full gap-2 rounded-md border-border bg-muted/30 font-semibold" onClick={handleGoogle} disabled={isLoading || (authMode === 'signup' && !canCreateAccount(termsRead, agreed))}>
             <svg viewBox="0 0 24 24" className="h-4 w-4" aria-hidden="true"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
             Continue with Google
           </Button>

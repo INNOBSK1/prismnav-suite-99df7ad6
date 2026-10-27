@@ -203,3 +203,27 @@ iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .
 :root { --auth-overlay: 140 30% 96% / 0.72; }
 .dark { --auth-overlay: 210 22% 8% / 0.86; }
 .auth-backdrop { background: hsl(var(--auth-overlay)); }
+
+.auth-page {
+  --background: 158 52% 7%;
+  --foreground: 150 20% 96%;
+  --card: 158 45% 9%;
+  --card-foreground: 150 20% 96%;
+  --muted: 157 29% 14%;
+  --muted-foreground: 152 15% 72%;
+  --primary: 87 62% 64%;
+  --primary-foreground: 158 52% 7%;
+  --border: 150 23% 30%;
+  --input: 150 23% 30%;
+  --ring: 87 62% 64%;
+  --auth-overlay: 158 52% 7% / 0.58;
+  --auth-shadow: 158 65% 3% / 0.55;
+}
+.auth-frame {
+  box-shadow: 0 24px 80px hsl(var(--auth-shadow));
+}
+.auth-submit {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.8));
+  color: hsl(var(--foreground));
+  border: 1px solid hsl(var(--primary) / 0.5);
+}
