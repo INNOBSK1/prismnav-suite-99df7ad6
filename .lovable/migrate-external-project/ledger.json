@@ -1,0 +1,8 @@
+{
+  "source": "NIMALUNDA_Login_Page.zip",
+  "scope": "Login presentation only; preserve the current app and authentication",
+  "capabilities": [
+    {"capability":"Login design and logo","source":"login.html and logo1(1).png","outcome":"Adapt into existing single-panel authentication","status":"implemented","next_action":"Verify compact signup"},
+    {"capability":"Demo email and Google buttons","source":"login.html inline script","outcome":"Keep existing real Lovable Cloud authentication, not demo redirects or Firebase placeholder","status":"preserved","next_action":null}
+  ]
+}
