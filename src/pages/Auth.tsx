@@ -14,7 +14,7 @@ import { LanguageSwitcher } from '@/components/LanguageSwitcher';
 import { GoogleTranslate } from '@/components/GoogleTranslate';
 import { toast } from 'sonner';
 import { Eye, EyeOff, User, Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-react';
-import landscape from '@/assets/auth-landscape.jpg';
+import landscape from '@/assets/green-horizon.jpg';
 import { lovable } from '@/integrations/lovable/index';
 import { useTermsHtml, termsArticleCls } from '@/components/TermsText';
 import logo from '@/assets/nimalunda-logo.png';
@@ -212,7 +212,7 @@ export default function Auth() {
 
   return (
     <div className="dark auth-page relative isolate text-foreground h-dvh w-full overflow-y-auto bg-background">
-      <img src={landscape} alt="" width={1536} height={1024} className="fixed inset-0 -z-20 h-full w-full object-cover" />
+      <img src={landscape} alt="" width={1264} height={848} className="fixed inset-0 -z-20 h-full w-full object-cover" />
       <div className="auth-backdrop fixed inset-0 -z-10" />
       <header className="flex justify-end px-5 py-4 sm:px-8">
         <div className="flex items-center gap-2 rounded-lg bg-background/90 p-1 backdrop-blur-md">
