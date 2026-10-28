@@ -7,3 +7,4 @@
 - [ ] Adapt uploaded ZIP styling with a compact, non-full-screen signup panel.
 - [ ] Check Google login and signup agreement controls.
 - [ ] Explain secure setup of the uploaded Google credentials.
+- [ ] Add emailed reset-code recovery and a public new-password page.
