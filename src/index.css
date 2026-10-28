@@ -216,6 +216,9 @@ iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .
   --border: 150 23% 30%;
   --input: 150 23% 30%;
   --ring: 87 62% 64%;
+  --accent: 103 41% 44%;
+  --accent-foreground: 150 20% 96%;
+  --auth-gold: 43 75% 63%;
   --auth-overlay: 158 52% 7% / 0.58;
   --auth-shadow: 158 65% 3% / 0.55;
 }
@@ -223,7 +226,7 @@ iframe.goog-te-banner-frame, .goog-te-banner-frame.skiptranslate, #goog-gt-tt, .
   box-shadow: 0 24px 80px hsl(var(--auth-shadow));
 }
 .auth-submit {
-  background: linear-gradient(180deg, hsl(var(--primary) / 0.8), hsl(var(--accent) / 0.8));
+  background: linear-gradient(135deg, hsl(var(--accent) / 0.65), hsl(var(--accent)));
   color: hsl(var(--foreground));
-  border: 1px solid hsl(var(--primary) / 0.5);
+  border: 1px solid hsl(var(--auth-gold) / 0.8);
 }

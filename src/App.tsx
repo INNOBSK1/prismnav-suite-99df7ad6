@@ -13,6 +13,7 @@ import SiteViewer from "./pages/SiteViewer";
 import Auth from "./pages/Auth";
 import Policies from "./pages/Policies";
 import NotFound from "./pages/NotFound";
+import PasswordRecovery from "./pages/PasswordRecovery";
 
 const queryClient = new QueryClient();
 
@@ -27,6 +28,8 @@ const App = () => (
             <BrowserRouter>
               <Routes>
                 <Route path="/auth" element={<Auth />} />
+                <Route path="/forgot-password" element={<PasswordRecovery />} />
+                <Route path="/reset-password" element={<PasswordRecovery />} />
                 <Route path="/policies" element={<Policies />} />
                 <Route
                   path="/"

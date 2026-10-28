@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useSearchParams } from 'react-router-dom';
 import { z } from 'zod';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -17,7 +17,7 @@ import { Eye, EyeOff, User, Lock, Mail, ShieldCheck, ArrowRight } from 'lucide-r
 import landscape from '@/assets/green-horizon.jpg';
 import { lovable } from '@/integrations/lovable/index';
 import { useTermsHtml, termsArticleCls } from '@/components/TermsText';
-import logo from '@/assets/nimalunda-logo.png';
+import logoAsset from '@/assets/nimalunda-login-logo.asset.json';
 import { canCreateAccount } from '@/lib/signup-agreement';
 
 const BRAND = 'NIMALUNDA';
@@ -39,6 +39,7 @@ export default function Auth() {
   const [agreed, setAgreed] = useState(false);
   const [authMode, setAuthMode] = useState('signin');
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { t } = useLanguage();
   const termsHtml = useTermsHtml();
@@ -168,7 +169,7 @@ export default function Auth() {
     }
   };
 
-  const inputCls = 'h-12 rounded-md bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-input text-sm placeholder:text-muted-foreground';
+  const inputCls = 'h-11 rounded-md bg-muted/50 pl-10 focus-visible:ring-primary/40 border border-input text-sm placeholder:text-muted-foreground';
 
   const passwordField = (id: string, withPlaceholder: boolean) => (
     <div className="relative">
@@ -220,13 +221,14 @@ export default function Auth() {
           <LanguageSwitcher />
         </div>
       </header>
-      <main className="mx-auto flex w-full max-w-lg flex-col px-5 pb-10 pt-2 sm:px-8">
-        <div className="auth-frame w-full flex flex-col gap-5 rounded-lg border border-border bg-card/95 p-6 backdrop-blur-md sm:p-8">
+      <main className="mx-auto flex w-full max-w-md flex-col px-5 pb-10 pt-2 sm:px-4">
+        <div className="auth-frame w-full flex flex-col gap-4 rounded-lg border border-border bg-card/95 p-5 backdrop-blur-md sm:p-7">
           <div className="text-center space-y-3">
-            <img src={logo} alt="NIMALUNDA logo" className="mx-auto h-16 w-16 rounded-full ring-1 ring-primary/40" />
+            <img src={logoAsset.url} alt="NIMALUNDA logo" className="mx-auto h-14 w-14 rounded-full ring-1 ring-primary/40" />
             <h1 translate="no" className="notranslate font-display text-3xl font-semibold text-foreground tracking-normal">{BRAND}</h1>
             <p className="text-sm text-muted-foreground">Digitally Ensuring Prosperity</p>
           </div>
+          {searchParams.get('password') === 'updated' && <p role="status" className="text-center text-sm text-primary">Your password has been updated. Sign in with your new password.</p>}
 
           {/* Auth Tabs */}
           <Tabs value={authMode} onValueChange={setAuthMode} className="w-full">
@@ -250,9 +252,10 @@ export default function Auth() {
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="signin-password" className="text-sm font-medium">
-                    {t.auth.passwordLabel}
-                  </Label>
+                  <div className="flex items-center justify-between gap-2">
+                    <Label htmlFor="signin-password" className="text-sm font-medium">{t.auth.passwordLabel}</Label>
+                    <Button asChild variant="link" className="h-auto p-0 text-xs"><Link to="/forgot-password">Forgot password?</Link></Button>
+                  </div>
                   {passwordField('signin-password', false)}
                 </div>
                 
